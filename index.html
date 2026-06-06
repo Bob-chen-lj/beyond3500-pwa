@@ -217,6 +217,20 @@ function renderCards() {
   pagDiv.innerHTML = pagHtml;
 }
 
+
+function _showAudioHint(msg) {
+  _hideAudioHint();
+  var d = document.createElement('div');
+  d.id = 'audio-hint';
+  d.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(79,70,229,0.9);color:#fff;padding:8px 20px;border-radius:20px;font-size:0.85rem;z-index:9998;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.2)';
+  d.textContent = msg;
+  document.body.appendChild(d);
+}
+function _hideAudioHint() {
+  var d = document.getElementById('audio-hint');
+  if (d) d.remove();
+}
+
 var _autoQueue = [];
 var _autoIdx = 0;
 var _loopCount = 0;
@@ -240,7 +254,18 @@ function _playNext() {
       setTimeout(function() { _playNext(); }, 1500);
     }
   };
-  audio.play();
+  audio.play().catch(function(e) {
+    console.error('Play failed:', e);
+    // If play failed, show a hint
+    var sub = document.querySelector('.loader-sub');
+    if (!sub) {
+      var hint = document.createElement('div');
+      hint.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#EF4444;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.85rem;z-index:9999';
+      hint.textContent = '播放失败，请点击页面任意位置后重试';
+      document.body.appendChild(hint);
+      setTimeout(function(){ hint.remove(); }, 3000);
+    }
+  });
   document.getElementById('stopBtn').style.display = 'inline-block';
 }
 
@@ -267,19 +292,21 @@ function stopPlay() {
 // Load audio on demand
 function _loadWaudIfNeeded(callback) {
   if (_waudLoaded) { callback(); return; }
+  _showAudioHint('正在加载单词发音…');
   var s = document.createElement('script');
   s.src = 'waud.js';
-  s.onload = function() { _waudLoaded = true; callback(); };
-  s.onerror = function() { alert('单词发音加载失败，请检查网络'); };
+  s.onload = function() { _waudLoaded = true; _hideAudioHint(); callback(); };
+  s.onerror = function() { _hideAudioHint(); alert('单词发音加载失败，请检查网络'); };
   document.head.appendChild(s);
 }
 
 function _loadEaudIfNeeded(callback) {
   if (_eaudLoaded) { callback(); return; }
+  _showAudioHint('正在加载例句发音（首次约10秒）…');
   var s = document.createElement('script');
   s.src = 'eaud.js';
-  s.onload = function() { _eaudLoaded = true; callback(); };
-  s.onerror = function() { alert('例句发音加载失败，请检查网络'); };
+  s.onload = function() { _eaudLoaded = true; _hideAudioHint(); callback(); };
+  s.onerror = function() { _hideAudioHint(); alert('例句发音加载失败，请检查网络'); };
   document.head.appendChild(s);
 }
 
