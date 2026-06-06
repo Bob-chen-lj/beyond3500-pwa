@@ -282,7 +282,10 @@ function renderCards() {
 var _autoQueue = [];
 var _autoIdx = 0;
 var _loopCount = 0;
-var _loopMax = 5;
+var _wordLoopMax = 5;
+var _exLoopMax = 3;
+var _wordInterval = 1000;
+var _exInterval = 2000;
 
 function _playNext() {
   var audio = document.getElementById('audioPlayer');
@@ -294,8 +297,10 @@ function _playNext() {
   _highlightBtn(item);
   audio.onended = function() {
     _loopCount++;
-    if (_loopCount < _loopMax) {
-      setTimeout(function() { audio.currentTime = 0; audio.play(); }, 1000);
+    var maxLoop = item.src === 'word' ? _wordLoopMax : _exLoopMax;
+    var interval = item.src === 'word' ? _wordInterval : _exInterval;
+    if (_loopCount < maxLoop) {
+      setTimeout(function() { audio.currentTime = 0; audio.play(); }, interval);
     } else {
       _loopCount = 0;
       _autoIdx++;
