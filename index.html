@@ -292,7 +292,23 @@ function _playNext() {
   if (_autoIdx >= _autoQueue.length) { document.getElementById('stopBtn').style.display = 'none'; _highlightBtn(null); return; }
   var item = _autoQueue[_autoIdx];
   var b64 = item.src === 'word' ? waud[item.key] : eaud[item.key];
-  if (!b64) { _autoIdx++; _loopCount = 0; _playNext(); return; }
+  if (!b64) {
+    // Audio not loaded yet, load the page first
+    var idx = item.src === 'word' ? parseInt(item.key.substring(1)) : parseInt(item.key.split('_')[0].substring(1));
+    var pg = pageForIdx(idx);
+    var loader = item.src === 'word' ? loadWaudPage : loadEaudPage;
+    loader(pg, function() {
+      // Retry after loading
+      var b64retry = item.src === 'word' ? waud[item.key] : eaud[item.key];
+      if (!b64retry) { _autoIdx++; _loopCount = 0; _playNext(); return; }
+      _playAudio(audio, item, b64retry);
+    });
+    return;
+  }
+  _playAudio(audio, item, b64);
+}
+
+function _playAudio(audio, item, b64) {
   audio.src = 'data:audio/mp3;base64,' + b64;
   _highlightBtn(item);
   audio.onended = function() {
@@ -346,12 +362,16 @@ function _hideHint() {
 
 function playWord(idx) {
   var pg = pageForIdx(idx);
-  if (!_waudPages[pg]) {
+  var needWaud = !_waudPages[pg];
+  var needEaud = !_eaudPages[pg];
+  if (needWaud || needEaud) {
     _showHint('⏳ 加载发音中，请稍候…');
-    loadWaudPage(pg, function() {
-      _hideHint();
-      _doPlayWord(idx);
-    });
+    var done = 0, total = 0;
+    if (needWaud) total++;
+    if (needEaud) total++;
+    function check() { done++; if (done >= total) { _hideHint(); _doPlayWord(idx); } }
+    if (needWaud) loadWaudPage(pg, check);
+    if (needEaud) loadEaudPage(pg, check);
     return;
   }
   _doPlayWord(idx);
