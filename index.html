@@ -125,9 +125,26 @@
 <div class="pagination" id="pagination"></div>
 <audio id="audioPlayer" preload="auto"></audio>
 
-<!-- Load data files synchronously - browser handles caching natively -->
 <script src="cards.js"></script>
-<script src="waud.js"></script>
+<script>
+// Load waud.js asynchronously - page renders first, audio available after load
+var _waudLoaded = false;
+function _loadWaud() {
+  var s = document.createElement('script');
+  s.src = 'waud.js';
+  s.onload = function() {
+    _waudLoaded = true;
+    _hideHint();
+    // Preload eaud in background after waud is ready
+    setTimeout(function(){ _loadEaud(); }, 2000);
+  };
+  s.onerror = function() {
+    _hideHint();
+    _showHint('单词发音加载失败，请刷新重试');
+  };
+  document.head.appendChild(s);
+}
+</script>
 <script>
 // Data is now available: CARDS, waud are loaded
 var _eaudLoaded = false;
@@ -275,6 +292,10 @@ function _hideHint() {
 }
 
 function playWord(idx) {
+  if (!_waudLoaded) {
+    _showHint('⏳ 正在加载单词发音，请稍候…');
+    return;
+  }
   var audio = document.getElementById('audioPlayer');
   audio.onended = null; audio.pause();
   _autoQueue = [];
@@ -293,8 +314,12 @@ function playWord(idx) {
 }
 
 function playEx(key) {
+  if (!_waudLoaded) {
+    _showHint('⏳ 正在加载发音数据，请稍候…');
+    return;
+  }
   if (!_eaudLoaded) {
-    _showHint('正在加载例句发音…');
+    _showHint('⏳ 正在加载例句发音…');
     var oldOnload = _eaudOnload;
     _eaudOnload = function() {
       _hideHint();
@@ -334,13 +359,19 @@ function _doPlayEx(key) {
   _playNext();
 }
 
+var _eaudLoading = false;
 function _loadEaud() {
-  if (_eaudLoaded) return;
+  if (_eaudLoaded || _eaudLoading) return;
+  _eaudLoading = true;
   var s = document.createElement('script');
   s.src = 'eaud.js';
   s.onload = function() {
     _eaudLoaded = true;
+    _eaudLoading = false;
     if (_eaudOnload) _eaudOnload();
+  };
+  s.onerror = function() {
+    _eaudLoading = false;
   };
   document.head.appendChild(s);
 }
@@ -366,13 +397,13 @@ function onSearchChange() {
 }
 
 // === Init ===
-// Data already loaded via <script> tags above
 renderCards();
-// Hide loader
+// Hide loader - cards are ready, show page immediately
 var overlay = document.getElementById('loader-overlay');
 if (overlay) { overlay.classList.add('fade-out'); setTimeout(function(){ overlay.remove(); }, 500); }
-// Preload eaud in background
-setTimeout(function(){ _loadEaud(); }, 1000);
+// Start loading waud.js in background
+_showHint('⏳ 正在加载单词发音…');
+_loadWaud();
 
 // === Service Worker Registration ===
 if ('serviceWorker' in navigator) {
