@@ -10,7 +10,6 @@
 <link rel="manifest" href="manifest.json">
 <title>《走遍美国》超纲词汇表</title>
 <style>
-
   :root { --primary: #4F46E5; --primary-light: #E0E7FF; --bg: #F8FAFC; --card: #FFFFFF; --text: #1E293B; --text2: #64748B; --border: #E2E8F0; --high: #EF4444; --mid: #F59E0B; --low: #3B82F6; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
@@ -100,7 +99,6 @@
   border-radius: 20px; font-size: 0.85rem; z-index: 9998;
   white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,.2);
 }
-
 </style>
 </head>
 <body>
@@ -127,32 +125,17 @@
 
 <script src="cards.js"></script>
 <script>
-// Load waud.js asynchronously - page renders first, audio available after load
-var _waudLoaded = false;
-function _loadWaud() {
-  var s = document.createElement('script');
-  s.src = 'waud.js';
-  s.onload = function() {
-    _waudLoaded = true;
-    _hideHint();
-    // Preload eaud in background after waud is ready
-    setTimeout(function(){ _loadEaud(); }, 2000);
-  };
-  s.onerror = function() {
-    _hideHint();
-    _showHint('单词发音加载失败，请刷新重试');
-  };
-  document.head.appendChild(s);
-}
-</script>
-<script>
-// Data is now available: CARDS, waud are loaded
-var _eaudLoaded = false;
 var PER_PAGE = 15;
 var curPage = 1;
 var curFilter = "all";
 var curSearch = "";
 var filteredCards = [];
+var waud = {};  // word audio data, loaded per-page
+var eaud = {};  // example audio data, loaded per-page
+var _waudPages = {};   // track which pages' waud is loaded
+var _eaudPages = {};   // track which pages' eaud is loaded
+var _waudLoading = 0;
+var _eaudLoading = 0;
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
@@ -165,6 +148,49 @@ function getFiltered() {
 
 function escHtml(s) {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// Load waud chunk for a specific page
+function loadWaudPage(page, callback) {
+  if (_waudPages[page]) { if (callback) callback(); return; }
+  _waudPages[page] = true;
+  _waudLoading++;
+  var s = document.createElement('script');
+  s.src = 'waud_p' + page + '.js';
+  s.onload = function() {
+    _waudLoading--;
+    _hideHint();
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _waudPages[page] = false;
+    _waudLoading--;
+    _hideHint();
+  };
+  document.head.appendChild(s);
+}
+
+// Load eaud chunk for a specific page
+function loadEaudPage(page, callback) {
+  if (_eaudPages[page]) { if (callback) callback(); return; }
+  _eaudPages[page] = true;
+  _eaudLoading++;
+  var s = document.createElement('script');
+  s.src = 'eaud_p' + page + '.js';
+  s.onload = function() {
+    _eaudLoading--;
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _eaudPages[page] = false;
+    _eaudLoading--;
+  };
+  document.head.appendChild(s);
+}
+
+// Get page number for a card index
+function pageForIdx(idx) {
+  return Math.floor(idx / PER_PAGE) + 1;
 }
 
 function renderCards() {
@@ -190,7 +216,7 @@ function renderCards() {
       for (var j = 0; j < c.examples.length; j++) {
         var ek = 'w' + origIdx + '_ex' + j;
         exHtml += '<div class="example"><span class="ex-text">' + escHtml(c.examples[j]) + '</span>';
-        exHtml += '<button class="play-btn ex-play" data-ek="' + ek + '" onclick="playEx(this.dataset.ek)">&#9654;</button></div>';
+        exHtml += '<button class="play-btn ex-play" data-ek="' + ek + '" data-pidx="' + origIdx + '" onclick="playEx(this.dataset.ek,parseInt(this.dataset.pidx))">&#9654;</button></div>';
       }
       h += '<div class="card">';
       h += '<div class="card-header">';
@@ -207,6 +233,16 @@ function renderCards() {
       h += '</div>';
     }
     container.innerHTML = h;
+  }
+
+  // Load waud for current page if not loaded
+  if (pageCards.length > 0) {
+    var firstIdx = pageCards[0].idx - 1;
+    var pg = pageForIdx(firstIdx);
+    if (!_waudPages[pg]) {
+      _showHint('⏳ 加载发音中…');
+      loadWaudPage(pg, function() { _hideHint(); });
+    }
   }
 
   var pagDiv = document.getElementById("pagination");
@@ -292,10 +328,19 @@ function _hideHint() {
 }
 
 function playWord(idx) {
-  if (!_waudLoaded) {
-    _showHint('⏳ 正在加载单词发音，请稍候…');
+  var pg = pageForIdx(idx);
+  if (!_waudPages[pg]) {
+    _showHint('⏳ 加载发音中，请稍候…');
+    loadWaudPage(pg, function() {
+      _hideHint();
+      _doPlayWord(idx);
+    });
     return;
   }
+  _doPlayWord(idx);
+}
+
+function _doPlayWord(idx) {
   var audio = document.getElementById('audioPlayer');
   audio.onended = null; audio.pause();
   _autoQueue = [];
@@ -309,30 +354,31 @@ function playWord(idx) {
   }
   _autoIdx = 0; _loopCount = 0;
   _playNext();
-  // Trigger eaud preload
-  if (!_eaudLoaded) _loadEaud();
 }
 
-function playEx(key) {
-  if (!_waudLoaded) {
-    _showHint('⏳ 正在加载发音数据，请稍候…');
-    return;
-  }
-  if (!_eaudLoaded) {
-    _showHint('⏳ 正在加载例句发音…');
-    var oldOnload = _eaudOnload;
-    _eaudOnload = function() {
-      _hideHint();
-      _doPlayEx(key);
-      _eaudOnload = null;
-    };
-    _loadEaud();
+function playEx(key, idx) {
+  var pg = pageForIdx(idx);
+  // Make sure both waud and eaud for this page are loaded
+  if (!_waudPages[pg] || !_eaudPages[pg]) {
+    var pending = [];
+    if (!_waudPages[pg]) pending.push(function(cb) { loadWaudPage(pg, cb); });
+    if (!_eaudPages[pg]) pending.push(function(cb) { loadEaudPage(pg, cb); });
+    _showHint('⏳ 加载例句发音中…');
+    var done = 0;
+    var total = pending.length;
+    pending.forEach(function(fn) {
+      fn(function() {
+        done++;
+        if (done >= total) {
+          _hideHint();
+          _doPlayEx(key);
+        }
+      });
+    });
     return;
   }
   _doPlayEx(key);
 }
-
-var _eaudOnload = null;
 
 function _doPlayEx(key) {
   var audio = document.getElementById('audioPlayer');
@@ -359,23 +405,6 @@ function _doPlayEx(key) {
   _playNext();
 }
 
-var _eaudLoading = false;
-function _loadEaud() {
-  if (_eaudLoaded || _eaudLoading) return;
-  _eaudLoading = true;
-  var s = document.createElement('script');
-  s.src = 'eaud.js';
-  s.onload = function() {
-    _eaudLoaded = true;
-    _eaudLoading = false;
-    if (_eaudOnload) _eaudOnload();
-  };
-  s.onerror = function() {
-    _eaudLoading = false;
-  };
-  document.head.appendChild(s);
-}
-
 function goPage(p) {
   curPage = p;
   renderCards();
@@ -398,12 +427,9 @@ function onSearchChange() {
 
 // === Init ===
 renderCards();
-// Hide loader - cards are ready, show page immediately
+// Hide loader
 var overlay = document.getElementById('loader-overlay');
 if (overlay) { overlay.classList.add('fade-out'); setTimeout(function(){ overlay.remove(); }, 500); }
-// Start loading waud.js in background
-_showHint('⏳ 正在加载单词发音…');
-_loadWaud();
 
 // === Service Worker Registration ===
 if ('serviceWorker' in navigator) {
