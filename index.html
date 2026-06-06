@@ -63,7 +63,6 @@
   .page-info { font-size:0.85rem; color:var(--text2); margin:0 0.5rem; }
   @media(max-width:600px) { .hero h1{font-size:1.4rem;} .stats{gap:0.5rem;} .stat-card{min-width:90px;padding:0.7rem;} .card{padding:1rem;} .word{font-size:1.15rem;} .phonetic{font-size:1.15rem;} }
 
-
 /* === Loading Overlay === */
 #loader-overlay {
   position: fixed; top:0; left:0; width:100%; height:100%;
@@ -100,7 +99,6 @@
   background: rgba(79,70,229,0.92); color: #fff; padding: 8px 20px;
   border-radius: 20px; font-size: 0.85rem; z-index: 9998;
   white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,.2);
-  transition: opacity 0.3s;
 }
 
 </style>
@@ -127,18 +125,17 @@
 <div class="pagination" id="pagination"></div>
 <audio id="audioPlayer" preload="auto"></audio>
 
+<!-- Load data files synchronously - browser handles caching natively -->
+<script src="cards.js"></script>
+<script src="waud.js"></script>
 <script>
-// === App Logic ===
+// Data is now available: CARDS, waud are loaded
+var _eaudLoaded = false;
 var PER_PAGE = 15;
 var curPage = 1;
 var curFilter = "all";
 var curSearch = "";
 var filteredCards = [];
-var CARDS = [];
-var waud = {};
-var eaud = {};
-var _waudLoaded = false;
-var _eaudLoaded = false;
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
@@ -221,7 +218,6 @@ var _autoQueue = [];
 var _autoIdx = 0;
 var _loopCount = 0;
 var _loopMax = 5;
-var _pendingPlay = null; // Store pending play action for after eaud loads
 
 function _playNext() {
   var audio = document.getElementById('audioPlayer');
@@ -279,7 +275,6 @@ function _hideHint() {
 }
 
 function playWord(idx) {
-  // waud is always loaded (preloaded before page shows)
   var audio = document.getElementById('audioPlayer');
   audio.onended = null; audio.pause();
   _autoQueue = [];
@@ -292,25 +287,29 @@ function playWord(idx) {
     }
   }
   _autoIdx = 0; _loopCount = 0;
-  // If eaud not loaded, load it now but play word audio immediately
-  if (!_eaudLoaded) {
-    _loadEaud();
-  }
   _playNext();
+  // Trigger eaud preload
+  if (!_eaudLoaded) _loadEaud();
 }
 
 function playEx(key) {
   if (!_eaudLoaded) {
     _showHint('正在加载例句发音…');
-    _pendingPlay = function() { _doPlayEx(key); };
+    var oldOnload = _eaudOnload;
+    _eaudOnload = function() {
+      _hideHint();
+      _doPlayEx(key);
+      _eaudOnload = null;
+    };
     _loadEaud();
     return;
   }
   _doPlayEx(key);
 }
 
+var _eaudOnload = null;
+
 function _doPlayEx(key) {
-  _hideHint();
   var audio = document.getElementById('audioPlayer');
   audio.onended = null; audio.pause();
   var parts = key.split('_ex');
@@ -336,15 +335,13 @@ function _doPlayEx(key) {
 }
 
 function _loadEaud() {
-  if (_eaudLoaded) { if (_pendingPlay) { _pendingPlay(); _pendingPlay = null; } return; }
+  if (_eaudLoaded) return;
   var s = document.createElement('script');
   s.src = 'eaud.js';
   s.onload = function() {
     _eaudLoaded = true;
-    if (_pendingPlay) { _pendingPlay(); _pendingPlay = null; }
-    else { _hideHint(); }
+    if (_eaudOnload) _eaudOnload();
   };
-  s.onerror = function() { _hideHint(); alert('例句发音加载失败，请检查网络'); _pendingPlay = null; };
   document.head.appendChild(s);
 }
 
@@ -368,94 +365,14 @@ function onSearchChange() {
   renderCards();
 }
 
-// === Progressive Loading ===
-// Step 1: Load cards.js (0.1MB) + waud.js (6MB) before showing page
-// This ensures audio.play() works within user gesture context on mobile
-function updateProgress(pct) {
-  var bar = document.getElementById('loader-bar');
-  var pctEl = document.getElementById('loader-pct');
-  if (bar) bar.style.width = pct + '%';
-  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
-}
-function hideLoader() {
-  var overlay = document.getElementById('loader-overlay');
-  if (overlay) {
-    overlay.classList.add('fade-out');
-    setTimeout(function() { overlay.remove(); }, 500);
-  }
-}
-
-function fetchWithProgress(url, onProgress) {
-  return fetch(url).then(function(r) {
-    if (!r.ok) throw new Error(url + ' load failed');
-    var total = r.headers.get('content-length');
-    if (!total) { onProgress(50); return r.text(); }
-    var loaded = 0, totalN = parseInt(total);
-    var reader = r.body.getReader();
-    var decoder = new TextDecoder();
-    var chunks = [];
-    return reader.read().then(function process(result) {
-      if (result.done) return chunks.join('');
-      chunks.push(decoder.decode(result.value, {stream:true}));
-      loaded += result.value.length;
-      onProgress(Math.min(95, (loaded / totalN) * 100));
-      return reader.read().then(process);
-    });
-  });
-}
-
-function execScript(text) {
-  var s = document.createElement('script');
-  s.textContent = text;
-  document.head.appendChild(s);
-}
-
-// Load cards.js + waud.js in parallel, then show page
-updateProgress(2);
-var cardsLoaded = false;
-var waudLoaded = false;
-
-fetchWithProgress('cards.js', function(p) {
-  if (!waudLoaded) updateProgress(p * 0.05); // cards is tiny, 5% weight
-  else updateProgress(5 + p * 0.95);
-}).then(function(text) {
-  execScript(text);
-  cardsLoaded = true;
-  updateProgress(5);
-  checkReady();
-}).catch(function(e) {
-  document.getElementById('loader-msg').textContent = '加载失败，请刷新重试';
-  document.getElementById('loader-msg').style.color = '#ff6b6b';
-});
-
-document.getElementById('loader-msg').textContent = '正在加载词汇和单词发音…';
-fetchWithProgress('waud.js', function(p) {
-  if (!cardsLoaded) return;
-  updateProgress(5 + p * 0.95);
-}).then(function(text) {
-  execScript(text);
-  _waudLoaded = true;
-  waudLoaded = true;
-  checkReady();
-}).catch(function(e) {
-  document.getElementById('loader-msg').textContent = '单词发音加载失败，请刷新重试';
-  document.getElementById('loader-msg').style.color = '#ff6b6b';
-});
-
-function checkReady() {
-  if (cardsLoaded && waudLoaded) {
-    updateProgress(100);
-    setTimeout(function() {
-      renderCards();
-      hideLoader();
-      // Preload eaud in background (23MB)
-      var s = document.createElement('script');
-      s.src = 'eaud.js';
-      s.onload = function() { _eaudLoaded = true; };
-      document.head.appendChild(s);
-    }, 300);
-  }
-}
+// === Init ===
+// Data already loaded via <script> tags above
+renderCards();
+// Hide loader
+var overlay = document.getElementById('loader-overlay');
+if (overlay) { overlay.classList.add('fade-out'); setTimeout(function(){ overlay.remove(); }, 500); }
+// Preload eaud in background
+setTimeout(function(){ _loadEaud(); }, 1000);
 
 // === Service Worker Registration ===
 if ('serviceWorker' in navigator) {
