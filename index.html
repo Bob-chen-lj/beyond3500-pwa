@@ -94,6 +94,14 @@
   font-size: 3rem; margin-bottom: 1rem;
 }
 
+/* === Audio status indicator === */
+.audio-status {
+  font-size: 0.75rem; color: var(--text2); padding: 0.2rem 0.6rem;
+  background: var(--primary-light); border-radius: 4px; display: inline-block;
+  margin-left: 0.3rem; vertical-align: middle;
+}
+.audio-status.ready { background: #D1FAE5; color: #065F46; }
+
 </style>
 </head>
 <body>
@@ -101,7 +109,7 @@
 <div id="loader-overlay">
   <div class="loader-icon">📖</div>
   <div class="loader-title">《走遍美国》超纲词汇表</div>
-  <div class="loader-sub">正在加载音频数据…</div>
+  <div class="loader-sub">正在加载词汇数据…</div>
   <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
   <div class="loader-pct" id="loader-pct">0%</div>
 </div>
@@ -119,12 +127,19 @@
 <audio id="audioPlayer"></audio>
 
 <script>
-// === App Logic (loaded first, small) ===
+// === App Logic ===
 var PER_PAGE = 15;
 var curPage = 1;
 var curFilter = "all";
 var curSearch = "";
 var filteredCards = [];
+
+// Audio data objects (loaded progressively)
+var CARDS = [];
+var waud = {};
+var eaud = {};
+var _waudLoaded = false;
+var _eaudLoaded = false;
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
@@ -231,6 +246,7 @@ function _playNext() {
 
 function _highlightBtn(item) {
   document.querySelectorAll('.play-btn.active-play').forEach(function(b){b.classList.remove('active-play');});
+  if (!item) return;
   var sel = item.src === 'word'
     ? '.play-btn.word-play[data-idx="' + item.dataIdx + '"]'
     : '.play-btn.ex-play[data-ek="' + item.key + '"]';
@@ -248,45 +264,70 @@ function stopPlay() {
   document.getElementById('stopBtn').style.display = 'none';
 }
 
-function playWord(idx) {
-  var audio = document.getElementById('audioPlayer');
-  audio.onended = null; audio.pause();
-  _autoQueue = [];
-  for (var i = idx; i < CARDS.length; i++) {
-    var c = CARDS[i];
-    if (!c) continue;
-    _autoQueue.push({src:'word', key:'w'+i, dataIdx:i});
-    for (var j = 0; j < c.examples.length; j++) {
-      _autoQueue.push({src:'ex', key:'w'+i+'_ex'+j});
-    }
-  }
-  _autoIdx = 0; _loopCount = 0;
-  _playNext();
+// Load audio on demand
+function _loadWaudIfNeeded(callback) {
+  if (_waudLoaded) { callback(); return; }
+  var s = document.createElement('script');
+  s.src = 'waud.js';
+  s.onload = function() { _waudLoaded = true; callback(); };
+  s.onerror = function() { alert('单词发音加载失败，请检查网络'); };
+  document.head.appendChild(s);
 }
 
-function playEx(key) {
-  var audio = document.getElementById('audioPlayer');
-  audio.onended = null; audio.pause();
-  var parts = key.split('_ex');
-  var idx = parseInt(parts[0].substring(1));
-  var exIdx = parseInt(parts[1]);
-  var c = CARDS[idx];
-  _autoQueue = [];
-  if (c) {
-    for (var j = exIdx; j < c.examples.length; j++) {
-      _autoQueue.push({src:'ex', key:'w'+idx+'_ex'+j});
-    }
-    for (var i = idx + 1; i < CARDS.length; i++) {
-      var nc = CARDS[i];
-      if (!nc) continue;
+function _loadEaudIfNeeded(callback) {
+  if (_eaudLoaded) { callback(); return; }
+  var s = document.createElement('script');
+  s.src = 'eaud.js';
+  s.onload = function() { _eaudLoaded = true; callback(); };
+  s.onerror = function() { alert('例句发音加载失败，请检查网络'); };
+  document.head.appendChild(s);
+}
+
+function playWord(idx) {
+  _loadWaudIfNeeded(function() {
+    var audio = document.getElementById('audioPlayer');
+    audio.onended = null; audio.pause();
+    _autoQueue = [];
+    for (var i = idx; i < CARDS.length; i++) {
+      var c = CARDS[i];
+      if (!c) continue;
       _autoQueue.push({src:'word', key:'w'+i, dataIdx:i});
-      for (var j = 0; j < nc.examples.length; j++) {
+      for (var j = 0; j < c.examples.length; j++) {
         _autoQueue.push({src:'ex', key:'w'+i+'_ex'+j});
       }
     }
-  }
-  _autoIdx = 0; _loopCount = 0;
-  _playNext();
+    _autoIdx = 0; _loopCount = 0;
+    _playNext();
+    // Load eaud in background for upcoming examples
+    _loadEaudIfNeeded(function(){});
+  });
+}
+
+function playEx(key) {
+  _loadEaudIfNeeded(function() {
+    var audio = document.getElementById('audioPlayer');
+    audio.onended = null; audio.pause();
+    var parts = key.split('_ex');
+    var idx = parseInt(parts[0].substring(1));
+    var exIdx = parseInt(parts[1]);
+    var c = CARDS[idx];
+    _autoQueue = [];
+    if (c) {
+      for (var j = exIdx; j < c.examples.length; j++) {
+        _autoQueue.push({src:'ex', key:'w'+idx+'_ex'+j});
+      }
+      for (var i = idx + 1; i < CARDS.length; i++) {
+        var nc = CARDS[i];
+        if (!nc) continue;
+        _autoQueue.push({src:'word', key:'w'+i, dataIdx:i});
+        for (var j = 0; j < nc.examples.length; j++) {
+          _autoQueue.push({src:'ex', key:'w'+i+'_ex'+j});
+        }
+      }
+    }
+    _autoIdx = 0; _loopCount = 0;
+    _playNext();
+  });
 }
 
 function goPage(p) {
@@ -309,13 +350,7 @@ function onSearchChange() {
   renderCards();
 }
 
-renderCards();
-
-
-
-// === Data loading with progress ===
-var _dataLoaded = false;
-
+// === Loading Logic (progressive) ===
 function updateProgress(pct) {
   var bar = document.getElementById('loader-bar');
   var pctEl = document.getElementById('loader-pct');
@@ -331,55 +366,27 @@ function hideLoader() {
   }
 }
 
-function onDataReady() {
-  _dataLoaded = true;
+// Step 1: Load cards.js (0.1MB - instant)
+updateProgress(10);
+var cardsScript = document.createElement('script');
+cardsScript.src = 'cards.js';
+cardsScript.onload = function() {
   updateProgress(100);
+  renderCards();
+  hideLoader();
+  // Step 2: Preload waud.js in background (6.1MB)
   setTimeout(function() {
-    renderCards();
-    hideLoader();
-  }, 300);
-}
-
-// Fetch data.js as text to show progress
-updateProgress(5);
-fetch('data.js')
-  .then(function(response) {
-    if (!response.ok) throw new Error('data.js load failed');
-    var total = response.headers.get('content-length');
-    if (!total) {
-      // No content-length, just load normally
-      updateProgress(50);
-      return response.text();
-    }
-    var loaded = 0;
-    var totalNum = parseInt(total);
-    var reader = response.body.getReader();
-    var decoder = new TextDecoder();
-    var chunks = [];
-    return reader.read().then(function processChunk(result) {
-      if (result.done) {
-        updateProgress(95);
-        return chunks.join('');
-      }
-      chunks.push(decoder.decode(result.value, {stream: true}));
-      loaded += result.value.length;
-      var pct = Math.min(90, (loaded / totalNum) * 90);
-      updateProgress(pct);
-      return reader.read().then(processChunk);
-    });
-  })
-  .then(function(text) {
-    // Execute the data script
-    var script = document.createElement('script');
-    script.textContent = text;
-    document.head.appendChild(script);
-    onDataReady();
-  })
-  .catch(function(err) {
-    console.error('Failed to load data:', err);
-    document.querySelector('.loader-sub').textContent = '加载失败，请刷新重试';
-    document.querySelector('.loader-sub').style.color = '#ff6b6b';
-  });
+    var waudScript = document.createElement('script');
+    waudScript.src = 'waud.js';
+    waudScript.onload = function() { _waudLoaded = true; };
+    document.head.appendChild(waudScript);
+  }, 500);
+};
+cardsScript.onerror = function() {
+  document.querySelector('.loader-sub').textContent = '加载失败，请刷新重试';
+  document.querySelector('.loader-sub').style.color = '#ff6b6b';
+};
+document.head.appendChild(cardsScript);
 
 // === Service Worker Registration ===
 if ('serviceWorker' in navigator) {
