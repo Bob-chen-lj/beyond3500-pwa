@@ -24,7 +24,7 @@ var CARDS = [
     "definition": "n.社区，共同体",
     "episodes": "E18, E23, E24",
     "examples": [
-      "Look, you've made a very strong impressing on our community."
+      "That's an idea I like. A community center with the kinds of programs that fit everyone."
     ]
   },
   {
@@ -38,7 +38,7 @@ var CARDS = [
     "definition": "n.感恩节",
     "episodes": "E6",
     "examples": [
-      "I love parades. The Thanksgiving Day parade is always such great fun."
+      "I love parades. The Thanksgiving Day parade is always such great fun. Look at that Superman balloon! Wowee! Just floating along high above Central Par"
     ]
   },
   {
@@ -52,7 +52,7 @@ var CARDS = [
     "definition": "n.触地得分；降落",
     "episodes": "E6",
     "examples": [
-      "Remember, the Michigan football game?"
+      "Remember, the Michigan football game? And Michigan needs a touchdown."
     ]
   },
   {
@@ -66,7 +66,7 @@ var CARDS = [
     "definition": "n.猜字游戏",
     "episodes": "E8",
     "examples": [
-      "OK. Do you know how to play charades?"
+      "Frank, you've never played charades?"
     ]
   },
   {
@@ -94,7 +94,7 @@ var CARDS = [
     "definition": "n.手工艺；v.精心制作",
     "episodes": "E21",
     "examples": [
-      "The company is Craft and Craft,"
+      "The company is Craft and Craft, the biggest accounting company in the country."
     ]
   },
   {
@@ -122,7 +122,7 @@ var CARDS = [
     "definition": "n.螃蟹",
     "episodes": "E10",
     "examples": [
-      "Well, the crab salad's always a big hit."
+      "Susan, would you like the crab salad?"
     ]
   },
   {
@@ -136,7 +136,7 @@ var CARDS = [
     "definition": "n.抵押品，担保物",
     "episodes": "E11",
     "examples": [
-      "I see. Then you don't have any collateral."
+      "It all sounded so easy until they mentioned needing collateral or a guarantor."
     ]
   },
   {
@@ -150,7 +150,7 @@ var CARDS = [
     "definition": "n.担保人，保证人",
     "episodes": "E11",
     "examples": [
-      "I see. Then you don't have any collateral."
+      "I see. Then you don't have any collateral. Perhaps you could get a guarantor- someone to sign for the loan for you."
     ]
   },
   {
@@ -164,7 +164,7 @@ var CARDS = [
     "definition": "n.婴儿床",
     "episodes": "E13",
     "examples": [
-      "The house is so alive with him here."
+      "Oh, and Grandpa's baseball glove. You know, it hung over my crib, too. And it hung over Robbie's crib."
     ]
   },
   {
@@ -178,7 +178,7 @@ var CARDS = [
     "definition": "n.燕尾服，男士礼服",
     "episodes": "E19",
     "examples": [
-      "Well, you have your own tuxedo. How do you tie your bow tie?"
+      "The tuxedo rental store. Do you think they're open?"
     ]
   },
   {
@@ -206,7 +206,7 @@ var CARDS = [
     "definition": "v.伸展，延伸",
     "episodes": "E4",
     "examples": [
-      "Yeah. Yeah. Let's get in our lines."
+      "Yeah. Yeah. Let's get in our lines. We're going to take it slow first. Stretch up...and we're going to go left first...2,3,4...now stretch...OK,hold t"
     ]
   },
   {
@@ -234,7 +234,7 @@ var CARDS = [
     "definition": "v.声称，要求；n.主张",
     "episodes": "E7",
     "examples": [
-      "Why, yes. If the owners don't claim the dog in forty-eight hours,"
+      "Yes. I'm serious. If no one comes to claim Gemma, I'd like to adopt her."
     ]
   },
   {
@@ -248,7 +248,7 @@ var CARDS = [
     "definition": "v.招呼，欢呼；n.冰雹",
     "episodes": "E9",
     "examples": [
-      "\"Hail to the victors valiant,"
+      "\"Hail to the victors valiant, Hail to the conquering heroes, Hail, Hail to Michigan, The champions of the West!\""
     ]
   },
   {
@@ -290,7 +290,7 @@ var CARDS = [
     "definition": "n.夹子，剪辑；v.修剪",
     "episodes": "E19",
     "examples": [
-      "I never could tie one of those...things...bow ties."
+      "A clip-on?"
     ]
   },
   {
@@ -304,7 +304,7 @@ var CARDS = [
     "definition": "n.节目，程序；v.编程",
     "episodes": "E20, E23",
     "examples": [
-      "Like setting up a regular weekly reading program."
+      "Like setting up a regular weekly reading program. You and Dad. You and Dr.Philip Stewart-going to the children's ward once or twice a week and reading"
     ]
   },
   {
@@ -332,7 +332,7 @@ var CARDS = [
     "definition": "n.生姜",
     "episodes": "E2, E7",
     "examples": [
-      "Yes, I'd like a glass of ginger ale with ice."
+      "Ginger ale with lots of ice for me, thank you."
     ]
   },
   {
@@ -346,7 +346,7 @@ var CARDS = [
     "definition": "n.麦芽啤酒",
     "episodes": "E2, E7",
     "examples": [
-      "Yes, I'd like a glass of ginger ale with ice."
+      "Ginger ale with lots of ice for me, thank you."
     ]
   },
   {
@@ -360,7 +360,7 @@ var CARDS = [
     "definition": "n.时尚，方式",
     "episodes": "E2, E6, E22",
     "examples": [
-      "She's going to a fashion show here in the city tomorrow.S..."
+      "She's going to a fashion show here in the city tomorrow.She is sleeping here so she won't have to travel from Riverdale in the morning."
     ]
   },
   {
@@ -374,7 +374,7 @@ var CARDS = [
     "definition": "n.小马",
     "episodes": "E4",
     "examples": [
-      "5, 6, 7, go right, 1, 2, back,"
+      "5, 6, 7, go right, 1, 2, back, 3, 1, 2, 3, pony, pony...1, 2, 3, kick...1, 2, 3, kick...pony.And twist, twist."
     ]
   },
   {
@@ -388,7 +388,7 @@ var CARDS = [
     "definition": "n.数学",
     "episodes": "E6, E24",
     "examples": [
-      "I'd like to give thanks for Grandpa coming to live with us."
+      "Mom, give me a break Alexandra's coming over to help me study for my math final."
     ]
   },
   {
@@ -402,7 +402,7 @@ var CARDS = [
     "definition": "adj.负责任的，有责任的",
     "episodes": "E7, E11, E23",
     "examples": [
-      "Friends, teachers... We need to talk to some people about..."
+      "Friends, teachers... We need to talk to some people about you We want to be sure that you're responsible and that you can take good care of an animal."
     ]
   },
   {
@@ -416,7 +416,7 @@ var CARDS = [
     "definition": "n.一群，帮派",
     "episodes": "E8, E18, E20",
     "examples": [
-      "Hi, gang. Hi, everybody. Well, what's going on?"
+      "Good work, gang."
     ]
   },
   {
@@ -430,7 +430,7 @@ var CARDS = [
     "definition": "n.小丑",
     "episodes": "E8",
     "examples": [
-      "Because my birthday is tomorrow."
+      "Because my birthday is tomorrow. My mother promised me a birthday party with a clown."
     ]
   },
   {
@@ -458,7 +458,7 @@ var CARDS = [
     "definition": "n.机会，时机",
     "episodes": "E9, E21, E26",
     "examples": [
-      "I know it's sudden, Robbie, but this is an important opportunity."
+      "Let me know by the end of the week. It's a great opportunity for you, Harry. Believe me."
     ]
   },
   {
@@ -486,7 +486,7 @@ var CARDS = [
     "definition": "adj.计划的；v.plan的过去式",
     "episodes": "E10, E12, E19",
     "examples": [
-      "I planned to take you for a ride in Central Park in a hor..."
+      "I planned to take you for a ride in Central Park in a horse and carriage."
     ]
   },
   {
@@ -514,7 +514,7 @@ var CARDS = [
     "definition": "v.解决，解答",
     "episodes": "E12, E22",
     "examples": [
-      "Tell him to come and see me at ten 0'clock tomorrow morning."
+      "Sounds like a great way to solve the problem."
     ]
   },
   {
@@ -528,7 +528,7 @@ var CARDS = [
     "definition": "n.地点，网站",
     "episodes": "E12",
     "examples": [
-      "I've got and idea for you, Malcolm."
+      "I'll be right back. We'll go over to the job site together."
     ]
   },
   {
@@ -584,7 +584,7 @@ var CARDS = [
     "definition": "v.翻新，整修(现在分词)",
     "episodes": "E23",
     "examples": [
-      "That's what I came to ask you to do,"
+      "That's what I came to ask you to do, Malcolm.If you would supervise the refurbishing, I'll find the people to help do it."
     ]
   },
   {
@@ -598,7 +598,7 @@ var CARDS = [
     "definition": "n.委员会，理事会",
     "episodes": "E23",
     "examples": [
-      "OK. Now, I have...first...a couple of questions here."
+      "I've got the council to agree to open the building for us on the next four weekends."
     ]
   },
   {
@@ -612,7 +612,7 @@ var CARDS = [
     "definition": "n.游行；v.列队行进",
     "episodes": "E6",
     "examples": [
-      "I love parades. The Thanksgiving Day parade is always such great fun."
+      "I love parades. The Thanksgiving Day parade is always such great fun. Look at that Superman balloon! Wowee! Just floating along high above Central Par"
     ]
   },
   {
@@ -626,7 +626,7 @@ var CARDS = [
     "definition": "v.爬上，安装；n.山",
     "episodes": "E11",
     "examples": [
-      "Well, we have an office in Mount Kisco."
+      "We're talking about buying a two-bedroom house in Mount Kisco. Here are the financial details on the house."
     ]
   },
   {
@@ -654,7 +654,7 @@ var CARDS = [
     "definition": "n.渡船",
     "episodes": "E1, E10",
     "examples": [
-      "I'm Alexandra Pappas. How do you do?"
+      "Sure. You and Mommy used to take me on the ferryboat."
     ]
   },
   {
@@ -668,7 +668,7 @@ var CARDS = [
     "definition": "n.胃痛，肚子痛",
     "episodes": "E2",
     "examples": [
-      "I don't know.The baby-sitter says she has a stomachache,"
+      "I think she has a stomachache. He's a good father."
     ]
   },
   {
@@ -682,7 +682,7 @@ var CARDS = [
     "definition": "n.土豆(复数)",
     "episodes": "E4, E24",
     "examples": [
-      "Seven steaks.Cooking dinner for the entire family is not so easy."
+      "Well, now that you're here, you can help me with dinner. I need those potatoes peeled and sliced."
     ]
   },
   {
@@ -710,7 +710,7 @@ var CARDS = [
     "definition": "adj.冷冻的，冻结的",
     "episodes": "E5, E20",
     "examples": [
-      "Yeah, we caught lots of them. Look!"
+      "Yeah, we caught lots of them. Look! They had a special on frozen fish down at the supermarket."
     ]
   },
   {
@@ -724,7 +724,7 @@ var CARDS = [
     "definition": "n.朝圣者，清教徒(复数)",
     "episodes": "E6",
     "examples": [
-      "Thanksgiving was about the Pilgrims, the first settlers in America."
+      "Oh, we have a lot to be thankful for. For the food on this table. Just like th Pilgrims."
     ]
   },
   {
@@ -752,7 +752,7 @@ var CARDS = [
     "definition": "v.想念，错过(第三人称)",
     "episodes": "E6, E19",
     "examples": [
-      "Great Thanksgiving. Lots to be thankful for."
+      "Grandma's pearls! Oh, Grandpa will be so pleased that you're wearing them. I'm sure he misses Grandma on a day like this."
     ]
   },
   {
@@ -766,7 +766,7 @@ var CARDS = [
     "definition": "v.解决(过去式/过去分词)",
     "episodes": "E7, E12",
     "examples": [
-      "With a little help from the ASPCA,"
+      "Right. Then I've solved your problem."
     ]
   },
   {
@@ -794,7 +794,7 @@ var CARDS = [
     "definition": "n.扁桃体(复数)",
     "episodes": "E8",
     "examples": [
-      "No arguing. Save your voices."
+      "Because I don't want to be here. I don't want my tonsils out."
     ]
   },
   {
@@ -822,7 +822,7 @@ var CARDS = [
     "definition": "n./adv.同时，其间",
     "episodes": "E8, E23",
     "examples": [
-      "I know it hurts. But it'll be better tomorrow."
+      "I know it hurts. But it'll be better tomorrow. In the meantime, what would you like?"
     ]
   },
   {
@@ -836,7 +836,7 @@ var CARDS = [
     "definition": "n.晚餐时间",
     "episodes": "E9, E22",
     "examples": [
-      "Well, I've got an appointment at the hospital."
+      "Well, I've got an appointment at the hospital. I'll see you all at dinnertime."
     ]
   },
   {
@@ -850,7 +850,7 @@ var CARDS = [
     "definition": "n.剧院，电影院",
     "episodes": "E9, E12",
     "examples": [
-      "All kinds-sports, editorials, theater reviews."
+      "All kinds-sports, editorials, theater reviews. You name it, I've written it."
     ]
   },
   {
@@ -878,7 +878,7 @@ var CARDS = [
     "definition": "adv.…点钟",
     "episodes": "E10",
     "examples": [
-      "Right. Hello. Susan Stewart calling Mr."
+      "But schedule another production meeting for tomorrow. I'll be back for my six o'clock appointment with Mr. Ozawa."
     ]
   },
   {
@@ -920,7 +920,7 @@ var CARDS = [
     "definition": "n.财产，房产",
     "episodes": "E11",
     "examples": [
-      "Well, it depends. Do you own any other property?"
+      "Well, it depends. Do you own any other property? Any stocks or bonds?"
     ]
   },
   {
@@ -934,7 +934,7 @@ var CARDS = [
     "definition": "n.组织，机构",
     "episodes": "E12",
     "examples": [
-      "Sometimes there is, and sometimes there isn't."
+      "Sometimes there is, and sometimes there isn't. Well, I'm evolved with an organization, and we're trying to resolve that problem."
     ]
   },
   {
@@ -948,7 +948,7 @@ var CARDS = [
     "definition": "n.工头，领班",
     "episodes": "E12",
     "examples": [
-      "I've got and idea for you, Malcolm."
+      "He was more than helpful. He actually took me to meet his foreman."
     ]
   },
   {
@@ -962,7 +962,7 @@ var CARDS = [
     "definition": "n.家伙们(复数)",
     "episodes": "E12, E25",
     "examples": [
-      "Well, I'm glad to see you two guys getting along so well ..."
+      "You guys are like three kids."
     ]
   },
   {
@@ -976,7 +976,7 @@ var CARDS = [
     "definition": "n.婴儿摇篮",
     "episodes": "E13",
     "examples": [
-      "It's so good to have you home again...and to see Max asle..."
+      "It's so good to have you home again...and to see Max asleep in his bassinet at home with us."
     ]
   },
   {
@@ -990,7 +990,7 @@ var CARDS = [
     "definition": "adj.可爱的，讨人喜欢的",
     "episodes": "E13, E15",
     "examples": [
-      "Isn't this baby outfit adorable? With his name on it \"Max.\""
+      "Oh, he's adorable!"
     ]
   },
   {
@@ -1018,7 +1018,7 @@ var CARDS = [
     "definition": "n.金枪鱼",
     "episodes": "E14",
     "examples": [
-      "We prepared some tuna fish and cheese sandwiches for lunch."
+      "I love tuna fish. Don't you , Audrey?"
     ]
   },
   {
@@ -1046,7 +1046,7 @@ var CARDS = [
     "definition": "n.蜜月",
     "episodes": "E15, E20",
     "examples": [
-      "They have an opening. Someone just checked out,"
+      "I think you ought to take a vacation away from the family-alone. Kind of a second honeymoon."
     ]
   },
   {
@@ -1060,7 +1060,7 @@ var CARDS = [
     "definition": "n.捷径",
     "episodes": "E16",
     "examples": [
-      "About fifteen minutes. There's a shortcut-is you know it."
+      "No, I don't. Could you tell me how to use the shortcut?"
     ]
   },
   {
@@ -1074,7 +1074,7 @@ var CARDS = [
     "definition": "n.谷仓，畜棚",
     "episodes": "E16",
     "examples": [
-      "OK. Let me repeat it. I take the next left turn to the stop sign."
+      "This must be Peteps barn.Turn right to the house. Hi."
     ]
   },
   {
@@ -1088,7 +1088,7 @@ var CARDS = [
     "definition": "n.铁路",
     "episodes": "E16",
     "examples": [
-      "\"have gone to the railroad station. Back soon with a surprise."
+      "No. He left a note on the door saying he was going to the railroad station to pick up a surprise."
     ]
   },
   {
@@ -1102,7 +1102,7 @@ var CARDS = [
     "definition": "n.中心(复数)",
     "episodes": "E17",
     "examples": [
-      "In the section on culture, you've included performing arts centers,"
+      "That is a great ieda.The performing arts centers and the street performances. I'll do it."
     ]
   },
   {
@@ -1116,7 +1116,7 @@ var CARDS = [
     "definition": "n.合同；v.签约",
     "episodes": "E17, E26",
     "examples": [
-      "You do. You do. There's a book here,"
+      "On a contract."
     ]
   },
   {
@@ -1130,7 +1130,7 @@ var CARDS = [
     "definition": "adj.商业的；n.广告",
     "episodes": "E18",
     "examples": [
-      "Hey, everybody, Mrs.Greenberg is on the phone."
+      "There are, Ellen. Don't be upset by Boswell's commercial."
     ]
   },
   {
@@ -1144,7 +1144,7 @@ var CARDS = [
     "definition": "n.器具，家用电器",
     "episodes": "E18",
     "examples": [
-      "Mom is now on television in every appliance store in Riverdale,"
+      "Mom is now on television in every appliance store in Riverdale, except Hamlin's. He's a Boswell voter."
     ]
   },
   {
@@ -1158,7 +1158,7 @@ var CARDS = [
     "definition": "n.选举",
     "episodes": "E18",
     "examples": [
-      "Look, you've made a very strong impressing on our community."
+      "Look, you've made a very strong impressing on our community. You'll have another chance next election."
     ]
   },
   {
@@ -1186,7 +1186,7 @@ var CARDS = [
     "definition": "n.腕带，手环",
     "episodes": "E19",
     "examples": [
-      "Something blue. My wristband."
+      "The wristband. Something old?"
     ]
   },
   {
@@ -1200,7 +1200,7 @@ var CARDS = [
     "definition": "n.先生们(复数)",
     "episodes": "E19, E26",
     "examples": [
-      "All right, ladies and gentlemen. Please take your places."
+      "All right, ladies and gentlemen. Please take your places. The wedding ceremony is about to begin."
     ]
   },
   {
@@ -1214,7 +1214,7 @@ var CARDS = [
     "definition": "adj.已婚的；v.wed的过去式",
     "episodes": "E19",
     "examples": [
-      "Dearly beloved, we are gathered here today to join this m..."
+      "And you, Susan Stewart, do you take Harry Bennett to be your lawful, wedded husband?"
     ]
   },
   {
@@ -1228,7 +1228,7 @@ var CARDS = [
     "definition": "n.药店，杂货店",
     "episodes": "E23",
     "examples": [
-      "And this is Abe Lucas. You must remember Abe."
+      "And this is Abe Lucas. You must remember Abe. He ran the drugstore and used to play drums with the jazz band on weekends."
     ]
   },
   {
@@ -1242,7 +1242,7 @@ var CARDS = [
     "definition": "n.梯子(复数)",
     "episodes": "E23",
     "examples": [
-      "That's right. And we'll also need some ladders and some b..."
+      "That's right. And we'll also need some ladders and some brushes and some paint."
     ]
   },
   {
@@ -1256,7 +1256,7 @@ var CARDS = [
     "definition": "n.项目，物品(复数)",
     "episodes": "E23",
     "examples": [
-      "Let's see. Four desks. Eight straight-back chairs."
+      "These items shouldn't be difficult to come by once I print the article in the paper."
     ]
   },
   {
@@ -1298,7 +1298,7 @@ var CARDS = [
     "definition": "n.游行(复数)",
     "episodes": "E6",
     "examples": [
-      "I love parades. The Thanksgiving Day parade is always such great fun."
+      "I love parades. The Thanksgiving Day parade is always such great fun. Look at that Superman balloon! Wowee! Just floating along high above Central Par"
     ]
   },
   {
@@ -1312,7 +1312,7 @@ var CARDS = [
     "definition": "n.储蓄，存款",
     "episodes": "E11",
     "examples": [
-      "Yes, it does. Well, when you called,"
+      "Did you bring any savings or salary information? Last year's tax forms?"
     ]
   },
   {
@@ -1326,7 +1326,7 @@ var CARDS = [
     "definition": "adj.金融的，财务的",
     "episodes": "E11",
     "examples": [
-      "Yes, it does. Well, when you called,"
+      "We're talking about buying a two-bedroom house in Mount Kisco. Here are the financial details on the house."
     ]
   },
   {
@@ -1340,7 +1340,7 @@ var CARDS = [
     "definition": "n.口号，标语",
     "episodes": "E18",
     "examples": [
-      "...my slogan is \"I care\"."
+      "...my slogan is \"I care\". I care about people, not things, Vote for me, Ellen Stewart. I care. How was it?"
     ]
   },
   {
@@ -1354,7 +1354,7 @@ var CARDS = [
     "definition": "n.地铁",
     "episodes": "E1",
     "examples": [
-      "\"Richard Stewart, 46 Linden Street, Riverdale, New York.\""
+      "\"Richard Stewart, 46 Linden Street, Riverdale, New York.\" You should take the number 1 subway."
     ]
   },
   {
@@ -1368,7 +1368,7 @@ var CARDS = [
     "definition": "n./adv.住宅区，向住宅区",
     "episodes": "E1",
     "examples": [
-      "Anytime. Good luck. Remember, the number 1 train."
+      "Anytime. Good luck. Remember, the number 1 train. The uptown platform."
     ]
   },
   {
@@ -1382,7 +1382,7 @@ var CARDS = [
     "definition": "n.帆布，画布",
     "episodes": "E1",
     "examples": [
-      "Hello. Did anyone find a camera bag this afternoon,"
+      "Hello. Did anyone find a camera bag this afternoon, a small canvas bag, on the J. F. Kennedy Ferry? ...No? Maybe someone will find it. The name is Ste"
     ]
   },
   {
@@ -1424,7 +1424,7 @@ var CARDS = [
     "definition": "v.抱怨(现在分词)",
     "episodes": "E2",
     "examples": [
-      "You ordered enough for three or four people,"
+      "You ordered enough for three or four people, but I'm not complaining. The food delicious."
     ]
   },
   {
@@ -1494,7 +1494,7 @@ var CARDS = [
     "definition": "n.日出(复数)",
     "episodes": "E4",
     "examples": [
-      "Yeah. Yeah. Let's get in our lines."
+      "Sunrises.Stretch it out."
     ]
   },
   {
@@ -1508,7 +1508,7 @@ var CARDS = [
     "definition": "n.探戈舞",
     "episodes": "E4",
     "examples": [
-      "Yeah. Yeah. Let's get in our lines."
+      "Stretch it out .And we're going to warm down with a tango.Left, Right."
     ]
   },
   {
@@ -1522,7 +1522,7 @@ var CARDS = [
     "definition": "adj.理想的；n.理想",
     "episodes": "E4",
     "examples": [
-      "Nothing. I am in excellent health. I have ideal blood pressure."
+      "Nothing. I am in excellent health. I have ideal blood pressure. A perfect heart.In other words, I'm in wondeful condition."
     ]
   },
   {
@@ -1536,7 +1536,7 @@ var CARDS = [
     "definition": "n.番茄(复数)",
     "episodes": "E4",
     "examples": [
-      "Seven steaks.Cooking dinner for the entire family is not so easy."
+      "Seven steaks.Cooking dinner for the entire family is not so easy. The shopping：the salad：tomatoes,lettuce, cucumbers, and onions. The main course：stea"
     ]
   },
   {
@@ -1550,7 +1550,7 @@ var CARDS = [
     "definition": "n.生菜",
     "episodes": "E4",
     "examples": [
-      "Seven steaks.Cooking dinner for the entire family is not so easy."
+      "Seven steaks.Cooking dinner for the entire family is not so easy. The shopping：the salad：tomatoes,lettuce, cucumbers, and onions. The main course：stea"
     ]
   },
   {
@@ -1564,7 +1564,7 @@ var CARDS = [
     "definition": "n.黄瓜(复数)",
     "episodes": "E4",
     "examples": [
-      "Seven steaks.Cooking dinner for the entire family is not so easy."
+      "Seven steaks.Cooking dinner for the entire family is not so easy. The shopping：the salad：tomatoes,lettuce, cucumbers, and onions. The main course：stea"
     ]
   },
   {
@@ -1578,7 +1578,7 @@ var CARDS = [
     "definition": "n.西兰花",
     "episodes": "E4",
     "examples": [
-      "Seven steaks.Cooking dinner for the entire family is not so easy."
+      "Richard, how much broccoli do I need for seven people?"
     ]
   },
   {
@@ -1592,7 +1592,7 @@ var CARDS = [
     "definition": "n.慢跑",
     "episodes": "E4",
     "examples": [
-      "OK, Finish off by jogging in place. OK."
+      "OK, Finish off by jogging in place. OK. Keep those knees up. All right.That's it for today. Thank you, everyone. See you next week."
     ]
   },
   {
@@ -1620,7 +1620,7 @@ var CARDS = [
     "definition": "v.包裹；n.披肩",
     "episodes": "E5",
     "examples": [
-      "I hope so. That's it. That's the way. That's it."
+      "I hope so. That's it. That's the way. That's it. There. Oh, it's going to be all right. That's it. Wrap him in the blanket. Dad! That's it. That's it."
     ]
   },
   {
@@ -1648,7 +1648,7 @@ var CARDS = [
     "definition": "n.印第安人(复数)",
     "episodes": "E6",
     "examples": [
-      "Thanksgiving was about the Pilgrims, the first settlers in America."
+      "Thanksgiving was about the Pilgrims, the first settlers in America. They shared the first harvest with the Indians and gave thanks. Philip; All right."
     ]
   },
   {
@@ -1662,7 +1662,7 @@ var CARDS = [
     "definition": "adj.艺术的，有艺术天赋的",
     "episodes": "E6",
     "examples": [
-      "Thanks, Richard. I should thank you for encouraging me to..."
+      "Thanks, Richard. I should thank you for encouraging me to keep working on my fashion designs I'm lucky to have a husband with an artistic eye."
     ]
   },
   {
@@ -1676,7 +1676,7 @@ var CARDS = [
     "definition": "n.爪子",
     "episodes": "E7",
     "examples": [
-      "Gemma, sit. Good Gemma.Give me your paw.Good Gemma.This d..."
+      "Gemma, sit. Good Gemma.Give me your paw.Good Gemma.This dog is well trained."
     ]
   },
   {
@@ -1690,7 +1690,7 @@ var CARDS = [
     "definition": "n.预防，防止",
     "episodes": "E7",
     "examples": [
-      "With a little help from the ASPCA,"
+      "With a little help from the ASPCA, the American Society for the Prevention of Cruelty to Animals. They're the ones.We once found a cat. She was caught"
     ]
   },
   {
@@ -1704,7 +1704,7 @@ var CARDS = [
     "definition": "n.残忍，残酷",
     "episodes": "E7",
     "examples": [
-      "With a little help from the ASPCA,"
+      "With a little help from the ASPCA, the American Society for the Prevention of Cruelty to Animals. They're the ones.We once found a cat. She was caught"
     ]
   },
   {
@@ -1718,7 +1718,7 @@ var CARDS = [
     "definition": "n.学期",
     "episodes": "E7",
     "examples": [
-      "I'd like to keep her, too."
+      "I'd like to keep her, too. But I'll be going home to Greece at the end of the semester. She just wants love and affection.Come on, Robbie. Let's get h"
     ]
   },
   {
@@ -1732,7 +1732,7 @@ var CARDS = [
     "definition": "n.收养，采纳",
     "episodes": "E7",
     "examples": [
-      "Why, yes. If the owners don't claim the dog in forty-eight hours,"
+      "Why, yes. If the owners don't claim the dog in forty-eight hours, then you can apply for adoption."
     ]
   },
   {
@@ -1746,7 +1746,7 @@ var CARDS = [
     "definition": "v.拥抱，依偎；n.拥抱",
     "episodes": "E7",
     "examples": [
-      "Just to hold it and cuddle with it."
+      "Just to hold it and cuddle with it. Just to have as a pet I love animals."
     ]
   },
   {
@@ -1816,7 +1816,7 @@ var CARDS = [
     "definition": "v.娱乐，招待",
     "episodes": "E8",
     "examples": [
-      "How you all doing? Well, I'm glad you're feeling better b..."
+      "It's Carl's birthday, and we have Popo the Clown to entertain you."
     ]
   },
   {
@@ -1844,7 +1844,7 @@ var CARDS = [
     "definition": "n.胜利者(复数)",
     "episodes": "E9",
     "examples": [
-      "\"Hail to the victors valiant,"
+      "\"Hail to the victors valiant, Hail to the conquering heroes, Hail, Hail to Michigan, The champions of the West!\""
     ]
   },
   {
@@ -1858,7 +1858,7 @@ var CARDS = [
     "definition": "adj.英勇的，勇敢的",
     "episodes": "E9",
     "examples": [
-      "\"Hail to the victors valiant,"
+      "\"Hail to the victors valiant, Hail to the conquering heroes, Hail, Hail to Michigan, The champions of the West!\""
     ]
   },
   {
@@ -1872,7 +1872,7 @@ var CARDS = [
     "definition": "adj.征服的；v.conquer的现在分词",
     "episodes": "E9",
     "examples": [
-      "\"Hail to the victors valiant,"
+      "\"Hail to the victors valiant, Hail to the conquering heroes, Hail, Hail to Michigan, The champions of the West!\""
     ]
   },
   {
@@ -1886,7 +1886,7 @@ var CARDS = [
     "definition": "n.英雄(复数)",
     "episodes": "E9",
     "examples": [
-      "\"Hail to the victors valiant,"
+      "\"Hail to the victors valiant, Hail to the conquering heroes, Hail, Hail to Michigan, The champions of the West!\""
     ]
   },
   {
@@ -1900,7 +1900,7 @@ var CARDS = [
     "definition": "n.选手，玩家(复数)",
     "episodes": "E9",
     "examples": [
-      "Yes, this is my youngest son Robbie."
+      "Yes, this is my youngest son Robbie. Robbie, I want you to meet one of the best tennis players on the Michigan team-Charley Rafer."
     ]
   },
   {
@@ -1928,7 +1928,7 @@ var CARDS = [
     "definition": "n.社论(复数)",
     "episodes": "E9",
     "examples": [
-      "All kinds-sports, editorials, theater reviews."
+      "All kinds-sports, editorials, theater reviews. You name it, I've written it."
     ]
   },
   {
@@ -1942,7 +1942,7 @@ var CARDS = [
     "definition": "n.学费",
     "episodes": "E9",
     "examples": [
-      "Well, I know you and Mom have given up a lot to save mone..."
+      "Well, I know you and Mom have given up a lot to save money for my college tuition."
     ]
   },
   {
@@ -1956,7 +1956,7 @@ var CARDS = [
     "definition": "adj.复杂的",
     "episodes": "E9",
     "examples": [
-      "That's only part of it. It's complicated."
+      "That's only part of it. It's complicated. I'll try to explain. Mike and I had a hamburger this afternoon, and we talked."
     ]
   },
   {
@@ -2054,7 +2054,7 @@ var CARDS = [
     "definition": "n.细节(复数)",
     "episodes": "E11",
     "examples": [
-      "We're talking about buying a two-bedroom house in Mount Kisco."
+      "We're talking about buying a two-bedroom house in Mount Kisco. Here are the financial details on the house."
     ]
   },
   {
@@ -2068,7 +2068,7 @@ var CARDS = [
     "definition": "n.股票(复数)",
     "episodes": "E11",
     "examples": [
-      "Well, it depends. Do you own any other property?"
+      "Well, it depends. Do you own any other property? Any stocks or bonds?"
     ]
   },
   {
@@ -2082,7 +2082,7 @@ var CARDS = [
     "definition": "n.房地产，遗产",
     "episodes": "E11",
     "examples": [
-      "This has been a great learning experience for us, Marilyn."
+      "This has been a great learning experience for us, Marilyn. Talking to the real-estate agent. Looking at the houses. Talking to the loan officer at the"
     ]
   },
   {
@@ -2096,7 +2096,7 @@ var CARDS = [
     "definition": "n.素描，草图(复数)",
     "episodes": "E12",
     "examples": [
-      "You sound like something's brothering you, Susan."
+      "You sound like something's brothering you, Susan. The sketches for the cover of the new doll book?"
     ]
   },
   {
@@ -2138,7 +2138,7 @@ var CARDS = [
     "definition": "n.资产，优点",
     "episodes": "E12",
     "examples": [
-      "That is some history! You're a valuable asset, Malcolm."
+      "That is some history! You're a valuable asset, Malcolm. Very valuable."
     ]
   },
   {
@@ -2152,7 +2152,7 @@ var CARDS = [
     "definition": "n.商场(复数)",
     "episodes": "E12",
     "examples": [
-      "Thank you. Yup. Forty-three years."
+      "Thank you. Yup. Forty-three years. Half that time in my own construction company. Big jobs-factories, shopping malls. That kind of thing."
     ]
   },
   {
@@ -2166,7 +2166,7 @@ var CARDS = [
     "definition": "v.进化，发展(过去式)",
     "episodes": "E12",
     "examples": [
-      "Sometimes there is, and sometimes there isn't."
+      "Sometimes there is, and sometimes there isn't. Well, I'm evolved with an organization, and we're trying to resolve that problem."
     ]
   },
   {
@@ -2180,7 +2180,7 @@ var CARDS = [
     "definition": "v.解决，决心；n.决心",
     "episodes": "E12",
     "examples": [
-      "Sometimes there is, and sometimes there isn't."
+      "Sometimes there is, and sometimes there isn't. Well, I'm evolved with an organization, and we're trying to resolve that problem."
     ]
   },
   {
@@ -2194,7 +2194,7 @@ var CARDS = [
     "definition": "n.机会(复数)",
     "episodes": "E12",
     "examples": [
-      "I've got and idea for you, Malcolm."
+      "So I try hard to find opportunities for people like it."
     ]
   },
   {
@@ -2208,7 +2208,7 @@ var CARDS = [
     "definition": "n.智力，脑力",
     "episodes": "E12",
     "examples": [
-      "I've got and idea for you, Malcolm."
+      "Well, I can use your brainpower on the job right now."
     ]
   },
   {
@@ -2236,7 +2236,7 @@ var CARDS = [
     "definition": "n.承包商",
     "episodes": "E12",
     "examples": [
-      "My company was the contractor."
+      "My company was the contractor. I built the theater there with my own two hands, practically."
     ]
   },
   {
@@ -2264,7 +2264,7 @@ var CARDS = [
     "definition": "n.解决方案，溶液",
     "episodes": "E12",
     "examples": [
-      "I don't want to give you a final opinion without studying..."
+      "I don't want to give you a final opinion without studying these building plans more carefully. But a simple solution might be to move the air-conditio"
     ]
   },
   {
@@ -2278,7 +2278,7 @@ var CARDS = [
     "definition": "v.重新设计(现在分词)",
     "episodes": "E12",
     "examples": [
-      "I don't want to give you a final opinion without studying..."
+      "But a simple solution might be to move the air-conditioning units instead of redesigning the entire system."
     ]
   },
   {
@@ -2292,7 +2292,7 @@ var CARDS = [
     "definition": "v.包裹(现在分词)；n.包装材料",
     "episodes": "E13",
     "examples": [
-      "I'll drive you to Grand Grandpa, Robbie,"
+      "I'll drive you to Grand Grandpa, Robbie, and I can finish wrapping all these gifts."
     ]
   },
   {
@@ -2306,7 +2306,7 @@ var CARDS = [
     "definition": "n.毛巾，面巾",
     "episodes": "E13",
     "examples": [
-      "Did you see the washcloth and the towels with the teddy b..."
+      "Did you see the washcloth and the towels with the teddy bears on them? Alexandra and the Molinas sent them for max."
     ]
   },
   {
@@ -2320,7 +2320,7 @@ var CARDS = [
     "definition": "adj.令人想拥抱的，可爱的",
     "episodes": "E13",
     "examples": [
-      "The house is so alive with him here."
+      "So cuddly."
     ]
   },
   {
@@ -2348,7 +2348,7 @@ var CARDS = [
     "definition": "n.换尿布",
     "episodes": "E13",
     "examples": [
-      "Time for a feeding and time for a diapering."
+      "Time for a feeding and time for a diapering. You're a real Stewart."
     ]
   },
   {
@@ -2362,7 +2362,7 @@ var CARDS = [
     "definition": "n.水族馆，鱼缸",
     "episodes": "E14",
     "examples": [
-      "Oh, Daddy! We had such a good time at the aquarium."
+      "Oh, Daddy! We had such a good time at the aquarium. I saw a real shark. I could almost touch it."
     ]
   },
   {
@@ -2376,7 +2376,7 @@ var CARDS = [
     "definition": "n.童子军，侦察员；v.侦察",
     "episodes": "E14",
     "examples": [
-      "I remember when I used to b a Girl Scout."
+      "I remember when I used to b a Girl Scout. My mother would take us everywhere, too."
     ]
   },
   {
@@ -2390,7 +2390,7 @@ var CARDS = [
     "definition": "adj.无聊的",
     "episodes": "E14",
     "examples": [
-      "We tested it last week on twelve-to fifteen-year-olds,"
+      "We tested it last week on twelve-to fifteen-year-olds, and they found it to be too easy-in other words...boring. We think it might be just right for t"
     ]
   },
   {
@@ -2404,7 +2404,7 @@ var CARDS = [
     "definition": "v.洗牌，拖步走；n.洗牌",
     "episodes": "E14",
     "examples": [
-      "First, you shuffle the deck and lay them face down."
+      "First, you shuffle the deck and lay them face down. Then you select the leader. I'll be the leader. The leader takes the first ten cards and lays them"
     ]
   },
   {
@@ -2418,7 +2418,7 @@ var CARDS = [
     "definition": "n.一副牌，甲板",
     "episodes": "E14",
     "examples": [
-      "First, you shuffle the deck and lay them face down."
+      "First, you shuffle the deck and lay them face down. Then you select the leader. I'll be the leader. The leader takes the first ten cards and lays them"
     ]
   },
   {
@@ -2432,7 +2432,7 @@ var CARDS = [
     "definition": "adj./adv.逆时针的(地)",
     "episodes": "E14",
     "examples": [
-      "First, you shuffle the deck and lay them face down."
+      "Everyone gets a turn, going counterclockwise, left to right."
     ]
   },
   {
@@ -2474,7 +2474,7 @@ var CARDS = [
     "definition": "n.套房，套间",
     "episodes": "E15",
     "examples": [
-      "They have an opening. Someone just checked out,"
+      "They have an opening. Someone just checked out, and Mrs. Montefiore has reserved the honeymoon suite for us."
     ]
   },
   {
@@ -2502,7 +2502,7 @@ var CARDS = [
     "definition": "n.补丁，斑块(复数)",
     "episodes": "E15",
     "examples": [
-      "My great-grandmother made that quilt when Teddy Roosevelt..."
+      "My great-grandmother made that quilt when Teddy Roosevelt was President. In those day, when they made quilts, they cut patches from the old clothing o"
     ]
   },
   {
@@ -2516,7 +2516,7 @@ var CARDS = [
     "definition": "n.赞美，问候(复数)",
     "episodes": "E15",
     "examples": [
-      "Oh, I took the liberty of ordering some breakfast for you."
+      "Oh, I took the liberty of ordering some breakfast for you. Just put it over there, Charles. Thank you, Charles. Compliments of the Watermill Inn."
     ]
   },
   {
@@ -2530,7 +2530,7 @@ var CARDS = [
     "definition": "n.热饼(复数)",
     "episodes": "E15",
     "examples": [
-      "Now, this is my idea of a good time."
+      "Now, this is my idea of a good time. Let's see...Hotcakes and maple syrup, with scrambled eggs."
     ]
   },
   {
@@ -2544,7 +2544,7 @@ var CARDS = [
     "definition": "n.糖浆",
     "episodes": "E15",
     "examples": [
-      "Now, this is my idea of a good time."
+      "Now, this is my idea of a good time. Let's see...Hotcakes and maple syrup, with scrambled eggs."
     ]
   },
   {
@@ -2558,7 +2558,7 @@ var CARDS = [
     "definition": "adj.炒的(蛋)；v.炒(蛋)",
     "episodes": "E15",
     "examples": [
-      "Now, this is my idea of a good time."
+      "Now, this is my idea of a good time. Let's see...Hotcakes and maple syrup, with scrambled eggs."
     ]
   },
   {
@@ -2656,7 +2656,7 @@ var CARDS = [
     "definition": "n.路线，航线",
     "episodes": "E16",
     "examples": [
-      "Now, if you take that route, it's probably a lot simpler,"
+      "Now, if you take that route, it's probably a lot simpler, but it'll take you ten minutes longer."
     ]
   },
   {
@@ -2670,7 +2670,7 @@ var CARDS = [
     "definition": "n.清理，打扫",
     "episodes": "E16",
     "examples": [
-      "Well, that'll be eighteen dollars and seventy cent."
+      "Well, that'll be eighteen dollars and seventy cent. No charge for the cleanup. It's on the house."
     ]
   },
   {
@@ -2684,7 +2684,7 @@ var CARDS = [
     "definition": "pron.你(古英语thou的宾格)",
     "episodes": "E16",
     "examples": [
-      "Ah. OK. That's a dollar and thirty cents change."
+      "Ah. OK. That's a dollar and thirty cents change. Thee we go... will mae twenty. Thanks."
     ]
   },
   {
@@ -2698,7 +2698,7 @@ var CARDS = [
     "definition": "adv./adj.那边(的)",
     "episodes": "E16",
     "examples": [
-      "It's just over yonder. Keep along this road till you get ..."
+      "It's just over yonder. Keep along this road till you get to the end of the fence. You'll see the chicken. His house is on the left."
     ]
   },
   {
@@ -2726,7 +2726,7 @@ var CARDS = [
     "definition": "n.戏剧，戏剧性事件",
     "episodes": "E16",
     "examples": [
-      "Lillian Winters. We were together in the Thursday night d..."
+      "Lillian Winters. We were together in the Thursday night drama society."
     ]
   },
   {
@@ -2782,7 +2782,7 @@ var CARDS = [
     "definition": "n.肖像，画像",
     "episodes": "E17",
     "examples": [
-      "Well, I'd describe it as a book which is a ... a portrait..."
+      "Well, I'd describe it as a book which is a ... a portrait of the United States-the places, the people-mostly the people. The things they do, the ways "
     ]
   },
   {
@@ -2796,7 +2796,7 @@ var CARDS = [
     "definition": "n.地标(复数)",
     "episodes": "E17",
     "examples": [
-      "Well, I'd describe it as a book which is a ... a portrait..."
+      "The things they do, the ways they live, the placesd they visit, and the landmarks."
     ]
   },
   {
@@ -2810,7 +2810,7 @@ var CARDS = [
     "definition": "adj.摄影的",
     "episodes": "E17",
     "examples": [
-      "Well, I'd describe it as a book which is a ... a portrait..."
+      "A photographic journey."
     ]
   },
   {
@@ -2824,7 +2824,7 @@ var CARDS = [
     "definition": "n.哑剧演员(复数)",
     "episodes": "E17",
     "examples": [
-      "In the section on culture, you've included performing arts centers,"
+      "In the section on culture, you've included performing arts centers, but you've left out street performance.The mimes. The musicians. The dancers-in th"
     ]
   },
   {
@@ -2838,7 +2838,7 @@ var CARDS = [
     "definition": "n.舞者(复数)",
     "episodes": "E17",
     "examples": [
-      "In the section on culture, you've included performing arts centers,"
+      "In the section on culture, you've included performing arts centers, but you've left out street performance.The mimes. The musicians. The dancers-in th"
     ]
   },
   {
@@ -2866,7 +2866,7 @@ var CARDS = [
     "definition": "n.投票，民意调查(复数)",
     "episodes": "E18",
     "examples": [
-      "Yes, Miss Kim, Ellen Stewart. \"She cares.\""
+      "Yes, Miss Kim, Ellen Stewart. \"She cares.\" Oh, see you at the polls."
     ]
   },
   {
@@ -2922,7 +2922,7 @@ var CARDS = [
     "definition": "n.储物柜(复数)",
     "episodes": "E18",
     "examples": [
-      "...and if you ask what I care about, I'll tell you."
+      "...and if you ask what I care about, I'll tell you. I care about the school buildings in need of paint. I care about more lockers for the teachers. I "
     ]
   },
   {
@@ -2936,7 +2936,7 @@ var CARDS = [
     "definition": "n.固定装置(复数)",
     "episodes": "E18",
     "examples": [
-      "...and if you ask what I care about, I'll tell you."
+      "I care about new fixtures in the hallways-not music or dancing or entertainment."
     ]
   },
   {
@@ -2950,7 +2950,7 @@ var CARDS = [
     "definition": "n.走廊(复数)",
     "episodes": "E18",
     "examples": [
-      "...and if you ask what I care about, I'll tell you."
+      "I care about new fixtures in the hallways-not music or dancing or entertainment."
     ]
   },
   {
@@ -2992,7 +2992,7 @@ var CARDS = [
     "definition": "adv.可能地",
     "episodes": "E18",
     "examples": [
-      "I like it, but now what?"
+      "I like it, but now what? How can we possibly get it on so Riverdale will see it and hear it?"
     ]
   },
   {
@@ -3020,7 +3020,7 @@ var CARDS = [
     "definition": "n.选民(复数)",
     "episodes": "E18",
     "examples": [
-      "Hold it, Robbie! Just cool down."
+      "Hold it, Robbie! Just cool down. I know we're getting some attention now, but in the end the voters will have to decide."
     ]
   },
   {
@@ -3034,7 +3034,7 @@ var CARDS = [
     "definition": "adj.有争议的；v.contest的过去式",
     "episodes": "E18",
     "examples": [
-      "In the hotly contested race for the one seat on the River..."
+      "In the hotly contested race for the one seat on the Riverdale School Board, Mrs.Ellen Stewart has taken an early lead."
     ]
   },
   {
@@ -3048,7 +3048,7 @@ var CARDS = [
     "definition": "n.对手；adj.竞争的",
     "episodes": "E18",
     "examples": [
-      "Now returning to other local news...Riverdale High School..."
+      "Now returning to other local news...Riverdale High School beat its rival Horace Mann in baseball today..."
     ]
   },
   {
@@ -3062,7 +3062,7 @@ var CARDS = [
     "definition": "n.后院",
     "episodes": "E18",
     "examples": [
-      "Ellen, why don't you go out to the backyard and get some ..."
+      "Ellen, why don't you go out to the backyard and get some fresh air?"
     ]
   },
   {
@@ -3076,7 +3076,7 @@ var CARDS = [
     "definition": "n.居民(复数)",
     "episodes": "E18",
     "examples": [
-      "How are you? I just called to tell you that you are very impressive."
+      "How are you? I just called to tell you that you are very impressive. You lost the election, but you won the attention of the residents of Riverdale, o"
     ]
   },
   {
@@ -3090,7 +3090,7 @@ var CARDS = [
     "definition": "n.翻领",
     "episodes": "E19",
     "examples": [
-      "No, NO, Robbie doesn't have them."
+      "I put them in my tuxedo-but in the lapel pocket."
     ]
   },
   {
@@ -3104,7 +3104,7 @@ var CARDS = [
     "definition": "n.珍珠(复数)",
     "episodes": "E19",
     "examples": [
-      "Grandma's pearls! Oh, Grandpa will be so pleased that you..."
+      "Grandma's pearls! Oh, Grandpa will be so pleased that you're wearing them. I'm sure he misses Grandma on a day like this."
     ]
   },
   {
@@ -3118,7 +3118,7 @@ var CARDS = [
     "definition": "n.紧张不安",
     "episodes": "E19",
     "examples": [
-      "That's all right, Susan. You've got the wedding-day jitters!"
+      "That's all right, Susan. You've got the wedding-day jitters! In less than two hours, you will be Mrs.Harry Bennett."
     ]
   },
   {
@@ -3132,7 +3132,7 @@ var CARDS = [
     "definition": "adj.心爱的；n.爱人",
     "episodes": "E19",
     "examples": [
-      "Dearly beloved, we are gathered here today to join this m..."
+      "Dearly beloved, we are gathered here today to join this man and this woman in holy matrimony. Do either of you have any reason why you should not lega"
     ]
   },
   {
@@ -3146,7 +3146,7 @@ var CARDS = [
     "definition": "n.婚姻",
     "episodes": "E19",
     "examples": [
-      "Dearly beloved, we are gathered here today to join this m..."
+      "Dearly beloved, we are gathered here today to join this man and this woman in holy matrimony. Do either of you have any reason why you should not lega"
     ]
   },
   {
@@ -3160,7 +3160,7 @@ var CARDS = [
     "definition": "n.小餐馆，用餐者",
     "episodes": "E20",
     "examples": [
-      "Yeah. Mike and I had a hamburger at the diner."
+      "Yeah. Mike and I had a hamburger at the diner. I came home a little while ago. You've been working late almost every night this week, Dad. Aren't you "
     ]
   },
   {
@@ -3188,7 +3188,7 @@ var CARDS = [
     "definition": "v.提议，求婚",
     "episodes": "E20",
     "examples": [
-      "What do you propose to do about it?"
+      "What do you propose to do about it? You have that look in your eye."
     ]
   },
   {
@@ -3202,7 +3202,7 @@ var CARDS = [
     "definition": "v.解决(现在分词)",
     "episodes": "E20",
     "examples": [
-      "Well, how would it be if you took some time to work with ..."
+      "Well, how would it be if you took some time to work with Dad towards solving that problem?"
     ]
   },
   {
@@ -3216,7 +3216,7 @@ var CARDS = [
     "definition": "n.露台，天井",
     "episodes": "E20",
     "examples": [
-      "Good morning, Ellen. Yes, they do."
+      "Good morning, Ellen. Yes, they do. That's why I'm reading my paper and having my coffee on the patio this morning. Ah, it does smell sweet. How was yo"
     ]
   },
   {
@@ -3230,7 +3230,7 @@ var CARDS = [
     "definition": "n.休闲，空闲",
     "episodes": "E20",
     "examples": [
-      "Tell me about it. I work with families every day, Ellen."
+      "Tell me about it. I work with families every day, Ellen. I see how people spend their leisure time-young and old."
     ]
   },
   {
@@ -3244,7 +3244,7 @@ var CARDS = [
     "definition": "v.涉及，包含",
     "episodes": "E20",
     "examples": [
-      "The plan is a simple one."
+      "The plan is a simple one. Involve the entire family in a reading project."
     ]
   },
   {
@@ -3258,7 +3258,7 @@ var CARDS = [
     "definition": "adj.奇怪的，古怪的",
     "episodes": "E20",
     "examples": [
-      "My little horse must think it queer."
+      "My little horse must think it queer. To stop without a farmhouse near Between the woods and frozen lake. The darkest evening of the year."
     ]
   },
   {
@@ -3272,7 +3272,7 @@ var CARDS = [
     "definition": "n.农舍",
     "episodes": "E20",
     "examples": [
-      "My little horse must think it queer."
+      "My little horse must think it queer. To stop without a farmhouse near Between the woods and frozen lake. The darkest evening of the year."
     ]
   },
   {
@@ -3286,7 +3286,7 @@ var CARDS = [
     "definition": "n.马具；v.利用，套上",
     "episodes": "E20",
     "examples": [
-      "He gives his harness bells a shake To ask if there is some mistake."
+      "He gives his harness bells a shake To ask if there is some mistake. The only other sound's the sweep Of easy wind and downy flake. Ellen&"
     ]
   },
   {
@@ -3300,7 +3300,7 @@ var CARDS = [
     "definition": "adj.绒毛的，柔和的",
     "episodes": "E20",
     "examples": [
-      "He gives his harness bells a shake To ask if there is some mistake."
+      "He gives his harness bells a shake To ask if there is some mistake. The only other sound's the sweep Of easy wind and downy flake. Ellen&"
     ]
   },
   {
@@ -3314,7 +3314,7 @@ var CARDS = [
     "definition": "n.小薄片；v.剥落",
     "episodes": "E20",
     "examples": [
-      "He gives his harness bells a shake To ask if there is some mistake."
+      "He gives his harness bells a shake To ask if there is some mistake. The only other sound's the sweep Of easy wind and downy flake. Ellen&"
     ]
   },
   {
@@ -3342,7 +3342,7 @@ var CARDS = [
     "definition": "n.总统任期，主席职位",
     "episodes": "E21",
     "examples": [
-      "A vice-presidency with the biggest accounting company in ..."
+      "A vice-presidency with the biggest accounting company in th country-Craft and Craft."
     ]
   },
   {
@@ -3356,7 +3356,7 @@ var CARDS = [
     "definition": "n.心情，情绪",
     "episodes": "E21",
     "examples": [
-      "I see you're in a good mood."
+      "I see you're in a good mood. Why don't you tell us about your day."
     ]
   },
   {
@@ -3370,7 +3370,7 @@ var CARDS = [
     "definition": "n.体检",
     "episodes": "E22",
     "examples": [
-      "I took him to Philip's office yesterday for a checkup."
+      "I took him to Philip's office yesterday for a checkup. You should have seen the look on his face when Molly gave him the injection."
     ]
   },
   {
@@ -3384,7 +3384,7 @@ var CARDS = [
     "definition": "n.注射，打针",
     "episodes": "E22",
     "examples": [
-      "I took him to Philip's office yesterday for a checkup."
+      "I took him to Philip's office yesterday for a checkup. You should have seen the look on his face when Molly gave him the injection."
     ]
   },
   {
@@ -3398,7 +3398,7 @@ var CARDS = [
     "definition": "adj.全职的",
     "episodes": "E22",
     "examples": [
-      "I think I did. But when Robbie was born,"
+      "I think I did. But when Robbie was born, I decided to give fulltime attention to raising Robbie. I felt differently at that time."
     ]
   },
   {
@@ -3426,7 +3426,7 @@ var CARDS = [
     "definition": "prep.与…相对，对抗",
     "episodes": "E22",
     "examples": [
-      "My career as a fashion designer versus my career as a mot..."
+      "My career as a fashion designer versus my career as a mother."
     ]
   },
   {
@@ -3440,7 +3440,7 @@ var CARDS = [
     "definition": "v.建立，确立",
     "episodes": "E22",
     "examples": [
-      "Why can't you work at home, Marilyn? You're very talented."
+      "Why can't you work at home, Marilyn? You're very talented. Designing dresses is a career you could establish out of your home, couldn't you?"
     ]
   },
   {
@@ -3468,7 +3468,7 @@ var CARDS = [
     "definition": "n.试穿，配件(复数)",
     "episodes": "E22",
     "examples": [
-      "Why can't I design dresses for you here at home?"
+      "Why can't I design dresses for you here at home? And make them here. Have the fittings here, too."
     ]
   },
   {
@@ -3482,7 +3482,7 @@ var CARDS = [
     "definition": "v.监督，管理",
     "episodes": "E23",
     "examples": [
-      "That's what I came to ask you to do,"
+      "That's what I came to ask you to do, Malcolm.If you would supervise the refurbishing, I'll find the people to help do it."
     ]
   },
   {
@@ -3496,7 +3496,7 @@ var CARDS = [
     "definition": "adj.极其劳累的",
     "episodes": "E23",
     "examples": [
-      "We might need you to come through with your friends, Robbie."
+      "That's backbreaking work and may be too much for us."
     ]
   },
   {
@@ -3510,7 +3510,7 @@ var CARDS = [
     "definition": "n.丹麦酥皮饼",
     "episodes": "E23",
     "examples": [
-      "Sit down, sit down. Have some coffee."
+      "Sit down, sit down. Have some coffee. And I've got some delicious Danish pastry for you."
     ]
   },
   {
@@ -3524,7 +3524,7 @@ var CARDS = [
     "definition": "n.糕点，面点",
     "episodes": "E23",
     "examples": [
-      "Sit down, sit down. Have some coffee."
+      "Sit down, sit down. Have some coffee. And I've got some delicious Danish pastry for you."
     ]
   },
   {
@@ -3538,7 +3538,7 @@ var CARDS = [
     "definition": "adj.结构的",
     "episodes": "E23",
     "examples": [
-      "I wonder if you would take a look at the old library and ..."
+      "I wonder if you would take a look at the old library and make sure that it is in good condition so that we don't have to worry about any structural pr"
     ]
   },
   {
@@ -3566,7 +3566,7 @@ var CARDS = [
     "definition": "adj.代际的，不同代人之间的",
     "episodes": "E23",
     "examples": [
-      "This place can be developed with one real intergeneration..."
+      "This place can be developed with one real intergenerational program."
     ]
   },
   {
@@ -3580,7 +3580,7 @@ var CARDS = [
     "definition": "n.社论；adj.编辑的",
     "episodes": "E23",
     "examples": [
-      "Robbie and Alexandra told me what you need to fix up the old library."
+      "Robbie and Alexandra told me what you need to fix up the old library. I am planning to write an editorial that I think will help you."
     ]
   },
   {
@@ -3594,7 +3594,7 @@ var CARDS = [
     "definition": "n.检查，视察",
     "episodes": "E23",
     "examples": [
-      "OK. Now, I have...first...a couple of questions here."
+      "And have you had an engineer come in to do an inspection?"
     ]
   },
   {
@@ -3636,7 +3636,7 @@ var CARDS = [
     "definition": "n.家具，陈设(复数)",
     "episodes": "E23",
     "examples": [
-      "How about furnishings? Are there any special requirements..."
+      "How about furnishings? Are there any special requirements that I should list in the paper?"
     ]
   },
   {
@@ -3650,7 +3650,7 @@ var CARDS = [
     "definition": "n.耐力，体力",
     "episodes": "E23",
     "examples": [
-      "And without their energy and stamina,"
+      "And without their energy and stamina, there's no way we can complete this project."
     ]
   },
   {
@@ -3664,7 +3664,7 @@ var CARDS = [
     "definition": "n.资金，基金(复数)",
     "episodes": "E23",
     "examples": [
-      "It's here, Robbie. Charles Maxwell lived up to his word. ..."
+      "The original plan by the council was tabled because of lack for funds.The new plan needs you ."
     ]
   },
   {
@@ -3678,7 +3678,7 @@ var CARDS = [
     "definition": "n.团结，统一",
     "episodes": "E23",
     "examples": [
-      "It's here, Robbie. Charles Maxwell lived up to his word. ..."
+      "It's a wonderful opportunity, Richard."
     ]
   },
   {
@@ -3692,7 +3692,7 @@ var CARDS = [
     "definition": "n.集会，装配",
     "episodes": "E24",
     "examples": [
-      "Yeah, they're getting the assembly hall ready for the gra..."
+      "Yeah, they're getting the assembly hall ready for the graduation ceremony, so we all got to go homeearly. Too noisy to study."
     ]
   },
   {
@@ -3706,7 +3706,7 @@ var CARDS = [
     "definition": "adj.去皮的；v.peel的过去式",
     "episodes": "E24",
     "examples": [
-      "Well, now that you're here, you can help me with dinner."
+      "Well, now that you're here, you can help me with dinner. I need those potatoes peeled and sliced."
     ]
   },
   {
@@ -3734,7 +3734,7 @@ var CARDS = [
     "definition": "n.骨折，断裂(复数)",
     "episodes": "E24",
     "examples": [
-      "I don't see any breaks or fractures. Well, well."
+      "I don't see any breaks or fractures. Well, well. Thank you, Molly."
     ]
   },
   {
@@ -3748,7 +3748,7 @@ var CARDS = [
     "definition": "n.手表",
     "episodes": "E24",
     "examples": [
-      "Well, a wristwatch, so she'll think of me when she looks at the time."
+      "Well, a wristwatch, so she'll think of me when she looks at the time. Nothing flashy or expensive. Something simple-but a good one."
     ]
   },
   {
@@ -3762,7 +3762,7 @@ var CARDS = [
     "definition": "adj.花哨的，显眼的",
     "episodes": "E24",
     "examples": [
-      "Well, a wristwatch, so she'll think of me when she looks at the time."
+      "Well, a wristwatch, so she'll think of me when she looks at the time. Nothing flashy or expensive. Something simple-but a good one."
     ]
   },
   {
@@ -3776,7 +3776,7 @@ var CARDS = [
     "definition": "n.考试，检查(复数)",
     "episodes": "E24",
     "examples": [
-      "Wouldn't it be nice if we could skip the examinations and..."
+      "Wouldn't it be nice if we could skip the examinations and get right to the graduation party?"
     ]
   },
   {
@@ -3818,7 +3818,7 @@ var CARDS = [
     "definition": "n.桌布",
     "episodes": "E25",
     "examples": [
-      "Right here, next to the ice packs. Here."
+      "Right here, next to the ice packs. Here. Put the tablecloth on the picnic table, and I will bring the cola and the plastic cups."
     ]
   },
   {
@@ -3832,7 +3832,7 @@ var CARDS = [
     "definition": "v.向…保证，确保",
     "episodes": "E25",
     "examples": [
-      "I'm sure everything is fine."
+      "I'm sure everything is fine. My mother knows all there is to know about taking care of babies, I assure you."
     ]
   },
   {
@@ -3860,7 +3860,7 @@ var CARDS = [
     "definition": "n.故障，崩溃",
     "episodes": "E26",
     "examples": [
-      "You're right. I earned this, and I'm going to enjoy it."
+      "You're right. I earned this, and I'm going to enjoy it. As soon as I recover from my nervous breakdown."
     ]
   },
   {
@@ -3874,7 +3874,7 @@ var CARDS = [
     "definition": "n.评论家，批评者",
     "episodes": "E26",
     "examples": [
-      "Everything. A critic was there this morning."
+      "Everything. A critic was there this morning. He probably hates my work. I have to sign copies of my book for a lot of people I never met before. My ne"
     ]
   },
   {
@@ -3930,7 +3930,7 @@ var CARDS = [
     "definition": "v.打孔，用拳打；n.一拳",
     "episodes": "E26",
     "examples": [
-      "Welcome, Mr.Stewart. Well, make yourselves comfortable."
+      "Welcome, Mr.Stewart. Well, make yourselves comfortable. There are hors d'oeuvres at the table, fruit punch at the bar. Help yourselves. Can I get you "
     ]
   },
   {
@@ -3944,7 +3944,7 @@ var CARDS = [
     "definition": "adj.有资格的；v.entitle的过去式",
     "episodes": "E26",
     "examples": [
-      "\"Richard Stewart's show at the Carlson Gallery is a colle..."
+      "\"Richard Stewart's show at the Carlson Gallery is a collection of photographs from his new book entitled Family Album, U.S.A. There is power and beaut"
     ]
   },
   {
@@ -3986,7 +3986,7 @@ var CARDS = [
     "definition": "n.一集，一段经历",
     "episodes": "E26",
     "examples": [
-      "I've been looking forward to meeting your husband, Mrs."
+      "I've been looking forward to meeting your husband, Mrs. Stewart. I'm really impressed by your show. EPISODE 7 Men's Best Friend 人类最好的朋友 O'"
     ]
   },
   {
@@ -4014,7 +4014,7 @@ var CARDS = [
     "definition": "adj.受宠若惊的；v.flatter的过去式",
     "episodes": "E26",
     "examples": [
-      "The problem is that I'm a photographer, not an editor."
+      "I'm flattered, but I enjoy taking pictures, and I want to continue doing that."
     ]
   },
   {
@@ -4028,7 +4028,7 @@ var CARDS = [
     "definition": "n.银行家(复数)",
     "episodes": "E1",
     "examples": [
-      "the cities, the special places, and the people."
+      "the cities, the special places, and the people. And these are pictures of people working：steelworkers, bankers, police, street vendors, ambulance driv"
     ]
   },
   {
@@ -4042,7 +4042,7 @@ var CARDS = [
     "definition": "n.摊贩，供应商(复数)",
     "episodes": "E1",
     "examples": [
-      "the cities, the special places, and the people."
+      "the cities, the special places, and the people. And these are pictures of people working：steelworkers, bankers, police, street vendors, ambulance driv"
     ]
   },
   {
@@ -4056,7 +4056,7 @@ var CARDS = [
     "definition": "n.茶匙",
     "episodes": "E1",
     "examples": [
-      "And give her a teaspoon of the medicine after every meal."
+      "And give her a teaspoon of the medicine after every meal. Don't worry. She'll be fine. You're welcome. Good-bye."
     ]
   },
   {
@@ -4070,7 +4070,7 @@ var CARDS = [
     "definition": "n.超人",
     "episodes": "E6",
     "examples": [
-      "I love parades. The Thanksgiving Day parade is always such great fun."
+      "I love parades. The Thanksgiving Day parade is always such great fun. Look at that Superman balloon! Wowee! Just floating along high above Central Par"
     ]
   },
   {
@@ -4126,7 +4126,7 @@ var CARDS = [
     "definition": "v.制造(第三人称)；n.产品",
     "episodes": "E14",
     "examples": [
-      "Yes, I am. My company manufactures toys and games for chi..."
+      "Yes, I am. My company manufactures toys and games for children."
     ]
   }
 ];
