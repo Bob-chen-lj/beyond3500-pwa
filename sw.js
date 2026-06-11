@@ -1,4 +1,4 @@
-var CACHE_NAME = 'beyond3500-v3';
+var CACHE_NAME = 'beyond3500-v4';
 var CORE_ASSETS = [
   '/',
   '/index.html',

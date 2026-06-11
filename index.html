@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="超纲词汇">
 <link rel="manifest" href="manifest.json">
-<title>《走遍美国》超纲词汇表</title>
+<title>《走遍美国》超纲词汇表 v2.0</title>
 <style>
   :root { --primary: #4F46E5; --primary-light: #E0E7FF; --bg: #F8FAFC; --card: #FFFFFF; --text: #1E293B; --text2: #64748B; --border: #E2E8F0; --high: #EF4444; --mid: #F59E0B; --low: #3B82F6; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -28,24 +28,23 @@
   .fbtn:hover { border-color:var(--primary); color:var(--primary); }
   .fbtn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
   .container { max-width:900px; margin:0 auto; padding:0 1.5rem 1rem; display:flex; flex-direction:column; gap:1rem; }
-  .card { background:var(--card); border-radius:12px; padding:1.2rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border); transition:transform .15s; }
+  .card { background:var(--card); border-radius:12px; padding:1.2rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border); transition:transform .15s, box-shadow .3s, border-color .3s; }
   .card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.1); }
+  .card.playing-card { border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-light), 0 6px 16px rgba(79,70,229,.15); }
   .card-header { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.5rem; }
   .word-idx { font-size:1.1rem; font-weight:600; color:var(--text2); min-width:2rem; }
   .word { font-size:1.35rem; font-weight:700; color:var(--primary); cursor:pointer; }
   .phonetic { font-size:1.35rem; color:var(--text2); font-style:normal; }
   .definition { font-size:1.05rem; color:#374151; margin:0.3rem 0 0.4rem; padding-left:0.5rem; border-left:3px solid var(--primary-light); }
   .episodes { font-size:0.8rem; color:var(--text2); margin-bottom:0.5rem; }
-  .examples { display:flex; flex-direction:column; gap:0.4rem; }
-  .example { display:flex; align-items:flex-start; gap:0.5rem; background:#F1F5F9; padding:0.5rem 0.8rem; border-radius:8px; font-size:1.20rem; font-weight:500; color:#1E293B; }
-  .ex-text { flex:1; color:#1E293B; }
   .play-btn { background:var(--primary); color:#fff; border:none; border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:0.7rem; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; }
   .play-btn:hover { background:#4338CA; transform:scale(1.1); }
-  .play-btn.ex-play { width:26px; height:26px; font-size:0.6rem; background:#10B981; }
   .play-btn.word-play { width:28px; height:28px; font-size:0.65rem; background:var(--primary); flex-shrink:0; }
   .play-btn.active-play { background:#DC2626 !important; animation: pulse 0.6s infinite alternate; }
   @keyframes pulse { from{transform:scale(1)} to{transform:scale(1.15)} }
-  .play-btn.ex-play:hover { background:#059669; }
+  .pause-btn { background:transparent; color:var(--primary); border:2px solid var(--primary); border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:0.65rem; display:none; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; margin-left:2px; }
+  .pause-btn:hover { background:var(--primary-light); }
+  .pause-btn.visible { display:inline-flex; }
   .src-tag { font-size:0.7rem; padding:0.15rem 0.45rem; border-radius:4px; font-weight:500; }
   .src-tag.dict { background:#D1FAE5; color:#065F46; }
   .src-tag.tts { background:#FEF3C7; color:#92400E; }
@@ -112,17 +111,15 @@
 </div>
 
 <div class="hero">
-  <h1>📖《走遍美国》超纲词汇表</h1>
-  <p>基于高考3500词汇表筛选，共295个超纲词 · 294个词典真人发音 · 1个TTS补位 · BrianNeural例句朗读</p>
+  <h1>📖《走遍美国》超纲词汇表 v2.0</h1>
+  <p>基于高考3500词汇表筛选，共295个超纲词 · 294个词典真人发音 · 1个TTS补位 · 中文释义XiaoxiaoNeural朗读</p>
 </div>
 <div class="stats">
   <div class="stat-card stat-high"><div class="num">13</div><div class="label">高频词 (≥10次)</div></div>
   <div class="stat-card stat-mid"><div class="num">33</div><div class="label">中频词 (5-9次)</div></div>
   <div class="stat-card stat-low"><div class="num">249</div><div class="label">低频词 (&lt;5次)</div></div>
-  <div class="stat-card"><div class="num" style="color:var(--primary)">294</div><div class="label">🎤词典发音</div></div>
-  <div class="stat-card"><div class="num" style="color:var(--mid)">1</div><div class="label">🔊TTS补位</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--primary)">294</div><div class="label">词典真人发音</div></div>
 </div>
-
 <div class="controls">
   <input class="search-box" id="search" placeholder="搜索单词或中文释义…" oninput="onSearchChange()">
   <button class="fbtn active" data-filter="all" onclick="setFilter(this)">全部</button>
@@ -143,11 +140,14 @@ var curFilter = "all";
 var curSearch = "";
 var filteredCards = [];
 var waud = {};  // word audio data, loaded per-page
-var eaud = {};  // example audio data, loaded per-page
+var caud = {};  // chinese audio data, loaded per-page
 var _waudPages = {};   // track which pages' waud is loaded
-var _eaudPages = {};   // track which pages' eaud is loaded
+var _caudPages = {};   // track which pages' caud is loaded
 var _waudLoading = 0;
-var _eaudLoading = 0;
+var _caudLoading = 0;
+var _isPaused = false;
+var _pauseTimer = null;
+var _currentPlayingIdx = -1;
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
@@ -182,20 +182,20 @@ function loadWaudPage(page, callback) {
   document.head.appendChild(s);
 }
 
-// Load eaud chunk for a specific page
-function loadEaudPage(page, callback) {
-  if (_eaudPages[page]) { if (callback) callback(); return; }
-  _eaudPages[page] = true;
-  _eaudLoading++;
+// Load caud chunk for a specific page
+function loadCaudPage(page, callback) {
+  if (_caudPages[page]) { if (callback) callback(); return; }
+  _caudPages[page] = true;
+  _caudLoading++;
   var s = document.createElement('script');
-  s.src = 'eaud_p' + page + '.js';
+  s.src = 'caud_p' + page + '.js';
   s.onload = function() {
-    _eaudLoading--;
+    _caudLoading--;
     if (callback) callback();
   };
   s.onerror = function() {
-    _eaudPages[page] = false;
-    _eaudLoading--;
+    _caudPages[page] = false;
+    _caudLoading--;
   };
   document.head.appendChild(s);
 }
@@ -203,6 +203,50 @@ function loadEaudPage(page, callback) {
 // Get page number for a card index
 function pageForIdx(idx) {
   return Math.floor(idx / PER_PAGE) + 1;
+}
+
+// Scroll card to center of viewport
+function _scrollCardToCenter(idx) {
+  var cardEl = document.querySelector('.card[data-idx="' + idx + '"]');
+  if (cardEl) {
+    cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// Show/hide pause button
+function _showPauseBtn(idx) {
+  _hideAllPauseBtns();
+  var btn = document.querySelector('.pause-btn[data-idx="' + idx + '"]');
+  if (btn) btn.classList.add('visible');
+}
+function _hideAllPauseBtns() {
+  document.querySelectorAll('.pause-btn.visible').forEach(function(b){b.classList.remove('visible');});
+}
+
+// Toggle pause
+function togglePause(idx) {
+  var audio = document.getElementById('audioPlayer');
+  var btn = document.querySelector('.pause-btn[data-idx="' + idx + '"]');
+  if (_isPaused) {
+    // Resume
+    _isPaused = false;
+    audio.play().catch(function(){});
+    if (btn) btn.innerHTML = '&#9208;'; // ⏸
+  } else {
+    // Pause
+    _isPaused = true;
+    audio.pause();
+    if (btn) btn.innerHTML = '&#9654;'; // ▶
+  }
+}
+
+// Highlight playing card
+function _highlightCard(idx) {
+  document.querySelectorAll('.card.playing-card').forEach(function(c){c.classList.remove('playing-card');});
+  if (idx >= 0) {
+    var cardEl = document.querySelector('.card[data-idx="' + idx + '"]');
+    if (cardEl) cardEl.classList.add('playing-card');
+  }
 }
 
 function renderCards() {
@@ -224,24 +268,16 @@ function renderCards() {
       var origIdx = c.idx - 1;
       var srcTag = c.isDict ? '<span class="src-tag dict">词典发音</span>' : '<span class="src-tag tts">TTS</span>';
       var freqBadge = '<span class="freq-badge ' + c.freqClass + '">' + c.freqLabel + '</span>';
-      var exHtml = '';
-      for (var j = 0; j < c.examples.length; j++) {
-        var ek = 'w' + origIdx + '_ex' + j;
-        exHtml += '<div class="example"><span class="ex-text">' + escHtml(c.examples[j]) + '</span>';
-        exHtml += '<button class="play-btn ex-play" data-ek="' + ek + '" data-pidx="' + origIdx + '" onclick="playEx(this.dataset.ek,parseInt(this.dataset.pidx))">&#9654;</button></div>';
-      }
-      h += '<div class="card">';
+      h += '<div class="card" data-idx="' + origIdx + '">';
       h += '<div class="card-header">';
       h += '<span class="word-idx">' + c.idx + '</span><button class="play-btn word-play" data-idx="' + origIdx + '" onclick="playWord(parseInt(this.dataset.idx))">&#9654;</button>';
+      h += '<button class="pause-btn" data-idx="' + origIdx + '" onclick="togglePause(' + origIdx + ')">&#9208;</button>';
       h += '<span class="word">' + escHtml(c.word) + '</span>';
       h += '<span class="phonetic">' + escHtml(c.phonetic) + '</span>';
       h += freqBadge + srcTag;
       h += '</div>';
       h += '<div class="definition">' + escHtml(c.definition) + '</div>';
       h += '<div class="episodes">📍 ' + escHtml(c.episodes) + '</div>';
-      if (c.examples.length > 0) {
-        h += '<div class="examples">' + exHtml + '</div>';
-      }
       h += '</div>';
     }
     container.innerHTML = h;
@@ -283,23 +319,33 @@ var _autoQueue = [];
 var _autoIdx = 0;
 var _loopCount = 0;
 var _wordLoopMax = 5;
-var _exLoopMax = 3;
 var _wordInterval = 1000;
-var _exInterval = 2000;
 
 function _playNext() {
   var audio = document.getElementById('audioPlayer');
-  if (_autoIdx >= _autoQueue.length) { document.getElementById('stopBtn').style.display = 'none'; _highlightBtn(null); return; }
+  if (_autoIdx >= _autoQueue.length) {
+    document.getElementById('stopBtn').style.display = 'none';
+    _highlightBtn(null);
+    _highlightCard(-1);
+    _hideAllPauseBtns();
+    _currentPlayingIdx = -1;
+    return;
+  }
   var item = _autoQueue[_autoIdx];
-  var b64 = item.src === 'word' ? waud[item.key] : eaud[item.key];
+  var b64;
+  if (item.src === 'word') {
+    b64 = waud[item.key];
+  } else if (item.src === 'chinese') {
+    b64 = caud[item.key];
+  }
+
   if (!b64) {
     // Audio not loaded yet, load the page first
-    var idx = item.src === 'word' ? parseInt(item.key.substring(1)) : parseInt(item.key.split('_')[0].substring(1));
+    var idx = parseInt(item.key.substring(1));
     var pg = pageForIdx(idx);
-    var loader = item.src === 'word' ? loadWaudPage : loadEaudPage;
+    var loader = item.src === 'word' ? loadWaudPage : loadCaudPage;
     loader(pg, function() {
-      // Retry after loading
-      var b64retry = item.src === 'word' ? waud[item.key] : eaud[item.key];
+      var b64retry = item.src === 'word' ? waud[item.key] : caud[item.key];
       if (!b64retry) { _autoIdx++; _loopCount = 0; _playNext(); return; }
       _playAudio(audio, item, b64retry);
     });
@@ -311,16 +357,29 @@ function _playNext() {
 function _playAudio(audio, item, b64) {
   audio.src = 'data:audio/mp3;base64,' + b64;
   _highlightBtn(item);
+  if (item.dataIdx !== undefined && item.dataIdx !== _currentPlayingIdx) {
+    _currentPlayingIdx = item.dataIdx;
+    _highlightCard(item.dataIdx);
+    _showPauseBtn(item.dataIdx);
+    _scrollCardToCenter(item.dataIdx);
+  }
+  _isPaused = false;
+  var pauseBtn = document.querySelector('.pause-btn[data-idx="' + item.dataIdx + '"]');
+  if (pauseBtn) pauseBtn.innerHTML = '&#9208;'; // ⏸
+
   audio.onended = function() {
+    if (_isPaused) return;
     _loopCount++;
-    var maxLoop = item.src === 'word' ? _wordLoopMax : _exLoopMax;
-    var interval = item.src === 'word' ? _wordInterval : _exInterval;
-    if (_loopCount < maxLoop) {
-      setTimeout(function() { audio.currentTime = 0; audio.play(); }, interval);
+    if (item.src === 'word' && _loopCount < _wordLoopMax) {
+      setTimeout(function() {
+        if (!_isPaused) { audio.currentTime = 0; audio.play().catch(function(){}); }
+      }, _wordInterval);
     } else {
+      // word done (5 loops) or chinese done (1 loop)
       _loopCount = 0;
       _autoIdx++;
-      setTimeout(function() { _playNext(); }, 1500);
+      var delay = item.src === 'word' ? 800 : 1500;
+      setTimeout(function() { if (!_isPaused) _playNext(); }, delay);
     }
   };
   audio.play().catch(function() {});
@@ -330,9 +389,7 @@ function _playAudio(audio, item, b64) {
 function _highlightBtn(item) {
   document.querySelectorAll('.play-btn.active-play').forEach(function(b){b.classList.remove('active-play');});
   if (!item) return;
-  var sel = item.src === 'word'
-    ? '.play-btn.word-play[data-idx="' + item.dataIdx + '"]'
-    : '.play-btn.ex-play[data-ek="' + item.key + '"]';
+  var sel = '.play-btn.word-play[data-idx="' + item.dataIdx + '"]';
   var btn = document.querySelector(sel);
   if (btn) btn.classList.add('active-play');
 }
@@ -343,7 +400,11 @@ function stopPlay() {
   audio.currentTime = 0;
   _autoQueue = [];
   _autoIdx = 0; _loopCount = 0;
+  _isPaused = false;
   _highlightBtn(null);
+  _highlightCard(-1);
+  _hideAllPauseBtns();
+  _currentPlayingIdx = -1;
   document.getElementById('stopBtn').style.display = 'none';
 }
 
@@ -363,15 +424,15 @@ function _hideHint() {
 function playWord(idx) {
   var pg = pageForIdx(idx);
   var needWaud = !_waudPages[pg];
-  var needEaud = !_eaudPages[pg];
-  if (needWaud || needEaud) {
+  var needCaud = !_caudPages[pg];
+  if (needWaud || needCaud) {
     _showHint('⏳ 加载发音中，请稍候…');
     var done = 0, total = 0;
     if (needWaud) total++;
-    if (needEaud) total++;
+    if (needCaud) total++;
     function check() { done++; if (done >= total) { _hideHint(); _doPlayWord(idx); } }
     if (needWaud) loadWaudPage(pg, check);
-    if (needEaud) loadEaudPage(pg, check);
+    if (needCaud) loadCaudPage(pg, check);
     return;
   }
   _doPlayWord(idx);
@@ -380,63 +441,13 @@ function playWord(idx) {
 function _doPlayWord(idx) {
   var audio = document.getElementById('audioPlayer');
   audio.onended = null; audio.pause();
+  _isPaused = false;
   _autoQueue = [];
   for (var i = idx; i < CARDS.length; i++) {
     var c = CARDS[i];
     if (!c) continue;
     _autoQueue.push({src:'word', key:'w'+i, dataIdx:i});
-    for (var j = 0; j < c.examples.length; j++) {
-      _autoQueue.push({src:'ex', key:'w'+i+'_ex'+j});
-    }
-  }
-  _autoIdx = 0; _loopCount = 0;
-  _playNext();
-}
-
-function playEx(key, idx) {
-  var pg = pageForIdx(idx);
-  // Make sure both waud and eaud for this page are loaded
-  if (!_waudPages[pg] || !_eaudPages[pg]) {
-    var pending = [];
-    if (!_waudPages[pg]) pending.push(function(cb) { loadWaudPage(pg, cb); });
-    if (!_eaudPages[pg]) pending.push(function(cb) { loadEaudPage(pg, cb); });
-    _showHint('⏳ 加载例句发音中…');
-    var done = 0;
-    var total = pending.length;
-    pending.forEach(function(fn) {
-      fn(function() {
-        done++;
-        if (done >= total) {
-          _hideHint();
-          _doPlayEx(key);
-        }
-      });
-    });
-    return;
-  }
-  _doPlayEx(key);
-}
-
-function _doPlayEx(key) {
-  var audio = document.getElementById('audioPlayer');
-  audio.onended = null; audio.pause();
-  var parts = key.split('_ex');
-  var idx = parseInt(parts[0].substring(1));
-  var exIdx = parseInt(parts[1]);
-  var c = CARDS[idx];
-  _autoQueue = [];
-  if (c) {
-    for (var j = exIdx; j < c.examples.length; j++) {
-      _autoQueue.push({src:'ex', key:'w'+idx+'_ex'+j});
-    }
-    for (var i = idx + 1; i < CARDS.length; i++) {
-      var nc = CARDS[i];
-      if (!nc) continue;
-      _autoQueue.push({src:'word', key:'w'+i, dataIdx:i});
-      for (var j = 0; j < nc.examples.length; j++) {
-        _autoQueue.push({src:'ex', key:'w'+i+'_ex'+j});
-      }
-    }
+    _autoQueue.push({src:'chinese', key:'c'+i, dataIdx:i});
   }
   _autoIdx = 0; _loopCount = 0;
   _playNext();
