@@ -1,4 +1,4 @@
-var CACHE_NAME = 'beyond3500-v4';
+var CACHE_NAME = 'beyond3500-v5';
 var CORE_ASSETS = [
   '/',
   '/index.html',
@@ -7,6 +7,7 @@ var CORE_ASSETS = [
   '/icon-192.png',
   '/icon-512.png'
 ];
+var IMG_CACHE_NAME = 'beyond3500-imgs-v1';
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
@@ -22,7 +23,7 @@ self.addEventListener('activate', function(e) {
   e.waitUntil(
     caches.keys().then(function(names) {
       return Promise.all(
-        names.filter(function(n) { return n !== CACHE_NAME; })
+        names.filter(function(n) { return n !== CACHE_NAME && n !== IMG_CACHE_NAME; })
              .map(function(n) { return caches.delete(n); })
       );
     }).then(function() { return self.clients.claim(); })
@@ -30,6 +31,27 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(e) {
+  var url = new URL(e.request.url);
+  
+  // Cache Pollinations images separately
+  if (url.hostname === 'image.pollinations.ai') {
+    e.respondWith(
+      caches.open(IMG_CACHE_NAME).then(function(cache) {
+        return cache.match(e.request).then(function(cached) {
+          if (cached) return cached;
+          return fetch(e.request).then(function(resp) {
+            if (resp.ok) {
+              cache.put(e.request, resp.clone());
+            }
+            return resp;
+          });
+        });
+      })
+    );
+    return;
+  }
+  
+  // Default: cache-first for local assets
   e.respondWith(
     caches.match(e.request).then(function(cached) {
       return cached || fetch(e.request).then(function(resp) {

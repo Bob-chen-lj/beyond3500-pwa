@@ -35,6 +35,11 @@
   .word-idx { font-size:1.1rem; font-weight:600; color:var(--text2); min-width:2rem; }
   .word { font-size:1.35rem; font-weight:700; color:var(--primary); cursor:pointer; }
   .phonetic { font-size:1.35rem; color:var(--text2); font-style:normal; }
+  .card-body { display:flex; gap:1rem; align-items:flex-start; }
+  .card-img-wrap { width:80px; height:80px; flex-shrink:0; border-radius:10px; overflow:hidden; background:var(--primary-light); display:flex; align-items:center; justify-content:center; }
+  .card-img-wrap img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+  .card-img-wrap .img-placeholder { font-size:2rem; opacity:0.5; }
+  .card-text { flex:1; min-width:0; }
   .definition { font-size:1.05rem; color:#374151; margin:0.3rem 0 0.4rem; padding-left:0.5rem; border-left:3px solid var(--primary-light); }
   .episodes { font-size:0.8rem; color:var(--text2); margin-bottom:0.5rem; }
   .play-btn { background:var(--primary); color:#fff; border:none; border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:0.7rem; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; }
@@ -59,7 +64,7 @@
   .page-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
   .page-btn.disabled { opacity:0.4; cursor:not-allowed; pointer-events:none; }
   .page-info { font-size:0.85rem; color:var(--text2); margin:0 0.5rem; }
-  @media(max-width:600px) { .hero h1{font-size:1.4rem;} .stats{gap:0.5rem;} .stat-card{min-width:90px;padding:0.7rem;} .card{padding:1rem;} .word{font-size:1.15rem;} .phonetic{font-size:1.15rem;} }
+  @media(max-width:600px) { .hero h1{font-size:1.4rem;} .stats{gap:0.5rem;} .stat-card{min-width:90px;padding:0.7rem;} .card{padding:1rem;} .word{font-size:1.15rem;} .phonetic{font-size:1.15rem;} .card-img-wrap{width:60px;height:60px;} }
 
 /* === Loading Overlay === */
 #loader-overlay {
@@ -160,6 +165,12 @@ function getFiltered() {
 
 function escHtml(s) {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// Generate image URL for a word using Pollinations.ai
+function _getImgUrl(word, definition) {
+  var prompt = 'Simple clean illustration representing the word "' + word + '", minimalist flat design, white background, no text, educational vocabulary card';
+  return 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?width=200&height=200&nologo=true&seed=' + encodeURIComponent(word);
 }
 
 // Load waud chunk for a specific page
@@ -268,6 +279,7 @@ function renderCards() {
       var origIdx = c.idx - 1;
       var srcTag = c.isDict ? '<span class="src-tag dict">词典发音</span>' : '<span class="src-tag tts">TTS</span>';
       var freqBadge = '<span class="freq-badge ' + c.freqClass + '">' + c.freqLabel + '</span>';
+      var imgUrl = _getImgUrl(c.word, c.definition);
       h += '<div class="card" data-idx="' + origIdx + '">';
       h += '<div class="card-header">';
       h += '<span class="word-idx">' + c.idx + '</span><button class="play-btn word-play" data-idx="' + origIdx + '" onclick="playWord(parseInt(this.dataset.idx))">&#9654;</button>';
@@ -276,8 +288,12 @@ function renderCards() {
       h += '<span class="phonetic">' + escHtml(c.phonetic) + '</span>';
       h += freqBadge + srcTag;
       h += '</div>';
+      h += '<div class="card-body">';
+      h += '<div class="card-img-wrap"><img src="' + imgUrl + '" alt="' + escHtml(c.word) + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<span class=img-placeholder>🖼</span>\'"></div>';
+      h += '<div class="card-text">';
       h += '<div class="definition">' + escHtml(c.definition) + '</div>';
       h += '<div class="episodes">📍 ' + escHtml(c.episodes) + '</div>';
+      h += '</div></div>';
       h += '</div>';
     }
     container.innerHTML = h;
