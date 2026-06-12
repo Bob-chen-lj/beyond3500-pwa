@@ -327,7 +327,18 @@ function renderCards() {
       loadWaudPage(pg, function() { _hideHint(); });
     }
     if (!_imgPages[pg]) {
-      loadImgPage(pg);
+      loadImgPage(pg, function() {
+        // After img data loaded, update image elements on current page
+        for (var j = 0; j < pageCards.length; j++) {
+          var c2 = pageCards[j];
+          var oi = c2.idx - 1;
+          var ik = 'i' + oi;
+          if (IMGS[ik]) {
+            var wrap = document.querySelector('.card[data-idx="' + oi + '"] .card-img-wrap');
+            if (wrap) wrap.innerHTML = '<img src="data:image/jpeg;base64,' + IMGS[ik] + '" alt="' + escHtml(c2.word) + '">';
+          }
+        }
+      });
     }
   }
 
