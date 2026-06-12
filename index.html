@@ -302,8 +302,8 @@ function renderCards() {
       h += '<div class="card" data-idx="' + origIdx + '">';
       h += '<div class="card-header">';
       h += '<span class="word-idx">' + c.idx + '</span><button class="play-btn word-play" data-idx="' + origIdx + '" onclick="playWord(parseInt(this.dataset.idx))">&#9654;</button>';
-      h += '<button class="pause-btn" data-idx="' + origIdx + '" onclick="togglePause(' + origIdx + ')">&#9208;</button>';
       h += '<span class="word">' + escHtml(c.word) + '</span>';
+      h += '<button class="pause-btn" data-idx="' + origIdx + '" onclick="togglePause(' + origIdx + ')">&#9208;</button>';
       h += '<span class="phonetic">' + escHtml(c.phonetic) + '</span>';
       h += freqBadge + srcTag;
       h += '</div>';
