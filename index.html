@@ -117,7 +117,7 @@
 
 <div class="hero">
   <h1>📖《走遍美国》超纲词汇表 v2.0</h1>
-  <p>基于高考3500词汇表筛选，共295个超纲词 · 294个词典真人发音 · 1个TTS补位 · 中文释义XiaoxiaoNeural朗读</p>
+  <p>基于高考3500词汇表筛选，共295个超纲词 · 294个词典真人发音 · 1个TTS补位 · 中文释义XiaoxiaoNeural朗读 · AI配图</p>
 </div>
 <div class="stats">
   <div class="stat-card stat-high"><div class="num">13</div><div class="label">高频词 (≥10次)</div></div>
@@ -146,10 +146,13 @@ var curSearch = "";
 var filteredCards = [];
 var waud = {};  // word audio data, loaded per-page
 var caud = {};  // chinese audio data, loaded per-page
+var IMGS = {};  // word image data (base64), loaded per-page
 var _waudPages = {};   // track which pages' waud is loaded
 var _caudPages = {};   // track which pages' caud is loaded
+var _imgPages = {};    // track which pages' imgs is loaded
 var _waudLoading = 0;
 var _caudLoading = 0;
+var _imgLoading = 0;
 var _isPaused = false;
 var _pauseTimer = null;
 var _currentPlayingIdx = -1;
@@ -167,11 +170,7 @@ function escHtml(s) {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-// Generate image URL for a word using Pollinations.ai
-function _getImgUrl(word, definition) {
-  var prompt = 'Simple clean illustration representing the word "' + word + '", minimalist flat design, white background, no text, educational vocabulary card';
-  return 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?width=200&height=200&nologo=true&seed=' + encodeURIComponent(word);
-}
+// (Image data now loaded from img_pN.js)
 
 // Load waud chunk for a specific page
 function loadWaudPage(page, callback) {
@@ -207,6 +206,24 @@ function loadCaudPage(page, callback) {
   s.onerror = function() {
     _caudPages[page] = false;
     _caudLoading--;
+  };
+  document.head.appendChild(s);
+}
+
+// Load img chunk for a specific page
+function loadImgPage(page, callback) {
+  if (_imgPages[page]) { if (callback) callback(); return; }
+  _imgPages[page] = true;
+  _imgLoading++;
+  var s = document.createElement('script');
+  s.src = 'img_p' + page + '.js';
+  s.onload = function() {
+    _imgLoading--;
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _imgPages[page] = false;
+    _imgLoading--;
   };
   document.head.appendChild(s);
 }
@@ -279,7 +296,9 @@ function renderCards() {
       var origIdx = c.idx - 1;
       var srcTag = c.isDict ? '<span class="src-tag dict">词典发音</span>' : '<span class="src-tag tts">TTS</span>';
       var freqBadge = '<span class="freq-badge ' + c.freqClass + '">' + c.freqLabel + '</span>';
-      var imgUrl = _getImgUrl(c.word, c.definition);
+      var imgKey = 'i' + origIdx;
+      var imgSrc = IMGS[imgKey] ? ('data:image/jpeg;base64,' + IMGS[imgKey]) : '';
+      var imgHtml = imgSrc ? '<img src="' + imgSrc + '" alt="' + escHtml(c.word) + '">' : '<span class="img-placeholder">🖼</span>';
       h += '<div class="card" data-idx="' + origIdx + '">';
       h += '<div class="card-header">';
       h += '<span class="word-idx">' + c.idx + '</span><button class="play-btn word-play" data-idx="' + origIdx + '" onclick="playWord(parseInt(this.dataset.idx))">&#9654;</button>';
@@ -289,7 +308,7 @@ function renderCards() {
       h += freqBadge + srcTag;
       h += '</div>';
       h += '<div class="card-body">';
-      h += '<div class="card-img-wrap"><img src="' + imgUrl + '" alt="' + escHtml(c.word) + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<span class=img-placeholder>🖼</span>\'"></div>';
+      h += '<div class="card-img-wrap">' + imgHtml + '</div>';
       h += '<div class="card-text">';
       h += '<div class="definition">' + escHtml(c.definition) + '</div>';
       h += '<div class="episodes">📍 ' + escHtml(c.episodes) + '</div>';
@@ -299,13 +318,16 @@ function renderCards() {
     container.innerHTML = h;
   }
 
-  // Load waud for current page if not loaded
+  // Load waud & img for current page if not loaded
   if (pageCards.length > 0) {
     var firstIdx = pageCards[0].idx - 1;
     var pg = pageForIdx(firstIdx);
     if (!_waudPages[pg]) {
       _showHint('⏳ 加载发音中…');
       loadWaudPage(pg, function() { _hideHint(); });
+    }
+    if (!_imgPages[pg]) {
+      loadImgPage(pg);
     }
   }
 
