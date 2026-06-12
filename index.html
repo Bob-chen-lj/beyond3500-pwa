@@ -403,14 +403,27 @@ function _playNext() {
   _playAudio(audio, item, b64);
 }
 
+function _autoGoPage(idx) {
+  // Check if the card is on current page; if not, auto-paginate
+  var cardPage = pageForIdx(idx);
+  var firstIdx = (curPage - 1) * PER_PAGE;
+  var lastIdx = curPage * PER_PAGE - 1;
+  if (idx < firstIdx || idx > lastIdx) {
+    curPage = cardPage;
+    renderCards();
+  }
+}
+
 function _playAudio(audio, item, b64) {
   audio.src = 'data:audio/mp3;base64,' + b64;
   _highlightBtn(item);
   if (item.dataIdx !== undefined && item.dataIdx !== _currentPlayingIdx) {
     _currentPlayingIdx = item.dataIdx;
+    _autoGoPage(item.dataIdx);
     _highlightCard(item.dataIdx);
     _showPauseBtn(item.dataIdx);
-    _scrollCardToCenter(item.dataIdx);
+    // Use setTimeout to ensure DOM is ready after possible page change
+    setTimeout(function() { _scrollCardToCenter(item.dataIdx); }, 50);
   }
   _isPaused = false;
   var pauseBtn = document.querySelector('.pause-btn[data-idx="' + item.dataIdx + '"]');
