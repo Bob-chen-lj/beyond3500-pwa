@@ -156,25 +156,31 @@ var _imgLoading = 0;
 var _isPaused = false;
 var _pauseTimer = null;
 var _currentPlayingIdx = -1;
-var _keepAliveTimer = null;
+var _userNavTimer = null;
 
-// Keep-alive: periodically ensure the playing card is visible & centered
-function _startKeepAlive() {
-  _stopKeepAlive();
-  _keepAliveTimer = setInterval(function() {
-    if (_currentPlayingIdx < 0) { _stopKeepAlive(); return; }
+// When user manually navigates away during playback, return to playing card after 3s
+function _scheduleReturnToPlaying() {
+  if (_userNavTimer) { clearTimeout(_userNavTimer); _userNavTimer = null; }
+  if (_currentPlayingIdx < 0) return;
+  _userNavTimer = setTimeout(function() {
+    if (_currentPlayingIdx < 0) return;
     var cardPage = pageForIdx(_currentPlayingIdx);
     var firstIdx = (curPage - 1) * PER_PAGE;
     var lastIdx = curPage * PER_PAGE - 1;
     if (_currentPlayingIdx < firstIdx || _currentPlayingIdx > lastIdx) {
       curPage = cardPage;
+      curFilter = 'all';
+      curSearch = '';
+      document.getElementById('search').value = '';
+      document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');});
+      document.querySelector('.fbtn[data-filter="all"]').classList.add('active');
       renderCards();
     }
     setTimeout(function() { _scrollCardToCenter(_currentPlayingIdx); }, 50);
-  }, 1000);
+  }, 3000);
 }
-function _stopKeepAlive() {
-  if (_keepAliveTimer) { clearInterval(_keepAliveTimer); _keepAliveTimer = null; }
+function _cancelReturnToPlaying() {
+  if (_userNavTimer) { clearTimeout(_userNavTimer); _userNavTimer = null; }
 }
 
 function getFiltered() {
@@ -398,7 +404,7 @@ function _playNext() {
     _highlightCard(-1);
     _hideAllPauseBtns();
     _currentPlayingIdx = -1;
-    _stopKeepAlive();
+    _cancelReturnToPlaying();
     return;
   }
   var item = _autoQueue[_autoIdx];
@@ -467,7 +473,6 @@ function _playAudio(audio, item, b64) {
   };
   audio.play().catch(function() {});
   document.getElementById('stopBtn').style.display = 'inline-block';
-  _startKeepAlive();
 }
 
 function _highlightBtn(item) {
@@ -489,7 +494,7 @@ function stopPlay() {
   _highlightCard(-1);
   _hideAllPauseBtns();
   _currentPlayingIdx = -1;
-  _stopKeepAlive();
+  _cancelReturnToPlaying();
   document.getElementById('stopBtn').style.display = 'none';
 }
 
@@ -542,6 +547,7 @@ function goPage(p) {
   curPage = p;
   renderCards();
   window.scrollTo({top: document.querySelector('.container').offsetTop - 80, behavior: 'smooth'});
+  _scheduleReturnToPlaying();
 }
 
 function setFilter(btn) {
@@ -550,12 +556,14 @@ function setFilter(btn) {
   curFilter = btn.getAttribute('data-filter');
   curPage = 1;
   renderCards();
+  _scheduleReturnToPlaying();
 }
 
 function onSearchChange() {
   curSearch = document.getElementById('search').value;
   curPage = 1;
   renderCards();
+  _scheduleReturnToPlaying();
 }
 
 // === Init ===
