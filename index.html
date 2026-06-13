@@ -372,6 +372,9 @@ function renderCards() {
     if (!_waudPages[pg]) {
       loadWaudPage(pg);
     }
+    if (!_caudPages[pg]) {
+      loadCaudPage(pg);
+    }
   }
 
   var pagDiv = document.getElementById("pagination");
@@ -444,6 +447,9 @@ function _autoGoPage(idx) {
   if (idx < firstIdx || idx > lastIdx) {
     curPage = cardPage;
     renderCards();
+    // Pre-load audio for new page to prevent playback gaps
+    if (!_waudPages[cardPage]) loadWaudPage(cardPage);
+    if (!_caudPages[cardPage]) loadCaudPage(cardPage);
   }
 }
 
