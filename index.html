@@ -126,7 +126,7 @@
   <div class="stat-card"><div class="num" style="color:var(--primary)">294</div><div class="label">词典真人发音</div></div>
 </div>
 <div class="controls">
-  <input class="search-box" id="search" placeholder="搜索单词或中文释义…" oninput="onSearchChange()">
+  <input class="search-box" id="search" placeholder="搜索单词、释义或序号…" oninput="onSearchChange()">
   <button class="fbtn active" data-filter="all" onclick="setFilter(this)">全部</button>
   <button class="fbtn" data-filter="high" onclick="setFilter(this)">高频</button>
   <button class="fbtn" data-filter="mid" onclick="setFilter(this)">中频</button>
@@ -185,9 +185,15 @@ function _cancelReturnToPlaying() {
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
+  var sNum = parseInt(s);
   return CARDS.filter(function(c) {
     if (curFilter !== "all" && c.freqClass !== curFilter) return false;
-    if (s && c.word.toLowerCase().indexOf(s) === -1 && c.definition.toLowerCase().indexOf(s) === -1) return false;
+    if (s) {
+      var matchWord = c.word.toLowerCase().indexOf(s) !== -1;
+      var matchDef = c.definition.toLowerCase().indexOf(s) !== -1;
+      var matchIdx = !isNaN(sNum) && (c.idx === sNum);
+      if (!matchWord && !matchDef && !matchIdx) return false;
+    }
     return true;
   });
 }
