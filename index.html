@@ -156,6 +156,26 @@ var _imgLoading = 0;
 var _isPaused = false;
 var _pauseTimer = null;
 var _currentPlayingIdx = -1;
+var _keepAliveTimer = null;
+
+// Keep-alive: periodically ensure the playing card is visible & centered
+function _startKeepAlive() {
+  _stopKeepAlive();
+  _keepAliveTimer = setInterval(function() {
+    if (_currentPlayingIdx < 0) { _stopKeepAlive(); return; }
+    var cardPage = pageForIdx(_currentPlayingIdx);
+    var firstIdx = (curPage - 1) * PER_PAGE;
+    var lastIdx = curPage * PER_PAGE - 1;
+    if (_currentPlayingIdx < firstIdx || _currentPlayingIdx > lastIdx) {
+      curPage = cardPage;
+      renderCards();
+    }
+    setTimeout(function() { _scrollCardToCenter(_currentPlayingIdx); }, 50);
+  }, 1000);
+}
+function _stopKeepAlive() {
+  if (_keepAliveTimer) { clearInterval(_keepAliveTimer); _keepAliveTimer = null; }
+}
 
 function getFiltered() {
   var s = curSearch.toLowerCase();
@@ -378,6 +398,7 @@ function _playNext() {
     _highlightCard(-1);
     _hideAllPauseBtns();
     _currentPlayingIdx = -1;
+    _stopKeepAlive();
     return;
   }
   var item = _autoQueue[_autoIdx];
@@ -446,6 +467,7 @@ function _playAudio(audio, item, b64) {
   };
   audio.play().catch(function() {});
   document.getElementById('stopBtn').style.display = 'inline-block';
+  _startKeepAlive();
 }
 
 function _highlightBtn(item) {
@@ -467,6 +489,7 @@ function stopPlay() {
   _highlightCard(-1);
   _hideAllPauseBtns();
   _currentPlayingIdx = -1;
+  _stopKeepAlive();
   document.getElementById('stopBtn').style.display = 'none';
 }
 
