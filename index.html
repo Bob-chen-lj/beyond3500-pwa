@@ -348,13 +348,9 @@ function renderCards() {
   if (pageCards.length > 0) {
     var firstIdx = pageCards[0].idx - 1;
     var pg = pageForIdx(firstIdx);
-    if (!_waudPages[pg]) {
-      _showHint('⏳ 加载发音中…');
-      loadWaudPage(pg, function() { _hideHint(); });
-    }
+    // Load images first for instant visual feedback
     if (!_imgPages[pg]) {
       loadImgPage(pg, function() {
-        // After img data loaded, update image elements on current page
         for (var j = 0; j < pageCards.length; j++) {
           var c2 = pageCards[j];
           var oi = c2.idx - 1;
@@ -365,6 +361,10 @@ function renderCards() {
           }
         }
       });
+    }
+    // Load audio in background (no blocking hint for page switch)
+    if (!_waudPages[pg]) {
+      loadWaudPage(pg);
     }
   }
 

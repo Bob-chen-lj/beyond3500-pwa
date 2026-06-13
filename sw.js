@@ -1,11 +1,14 @@
-var CACHE_NAME = 'beyond3500-v15';
+var CACHE_NAME = 'beyond3500-v16';
 var CORE_ASSETS = [
   '/',
   '/index.html',
   '/cards.js',
   '/manifest.json',
   '/icon-192.png',
-  '/icon-512.png'
+  '/icon-512.png',
+  '/img_p1.js',
+  '/waud_p1.js',
+  '/caud_p1.js'
 ];
 
 self.addEventListener('install', function(e) {
