@@ -177,7 +177,7 @@ function _scheduleReturnToPlaying() {
       renderCards();
     }
     setTimeout(function() { _scrollCardToCenter(_currentPlayingIdx); }, 50);
-  }, 3000);
+  }, 6000);
 }
 function _cancelReturnToPlaying() {
   if (_userNavTimer) { clearTimeout(_userNavTimer); _userNavTimer = null; }
