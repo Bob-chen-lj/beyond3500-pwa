@@ -1,0 +1,160 @@
+Gimson IPA Replacement Log
+Date: 2026-06-13 19:59:59
+Total words: 295
+Changed via API: 78
+Changed via phonemizer: 72
+Unchanged: 145
+Failed: 0
+
+ Idx Word                      Old                            New                            Source
+----------------------------------------------------------------------------------------------------
+   2 community                 /kəˈmjuːnəti/                  /k(ə)ˈmjunəti/                 API
+   3 thanksgiving              /ˌθæŋksˈɡɪvɪŋ/                 /ˈθæŋksˌɡɪv.ɪŋ/                API
+   5 charades                  /ʃəˈrɑːdz/                     /ʃɐrɑːdz/                      phonemizer
+   6 loan                      /loʊn/                         /ləʊn/                         API
+   7 craft                     /kræft/                        /krɑːft/                       API
+   8 aerobics                  /ˌerˈoʊbɪks/                   /əˈrəʊbɪks/                    API
+  11 guarantor                 /ˌɡærənˈtɔːr/                  /ˈɡærəntɔː(r)/                 API
+  13 tuxedo                    /tʌkˈsiːdoʊ/                   /tʌkˈsiːdəʊ/                   API
+  15 stretch                   /stretʃ/                       /strɛtʃ/                       API
+  16 exhausted                 /ɪɡˈzɔːstɪd/                   /ɪɡˈzɑstɪd/                    API
+  19 tennis                    /ˈtenɪs/                       /ˈtɛn.ɪs/                      API
+  22 program                   /ˈpɹoʊˌɡɹæm/                   /ˈprəʊɡræm/                    API
+  29 responsible               /ɹɪˈspɒnsəbl̩/                 /rɪˈspɒnsəbl̩/                 API
+  39 programs                  /ˈpɹoʊɡɹæms/                   /ˈprəʊɡræms/                   API
+  42 refurbishing              /ˌriːˈfɜːrbɪʃɪŋ/               /rɪfɜːbɪʃɪŋ/                   phonemizer
+  44 parade                    /pəˈɹeɪd/                      /pəˈreɪd/                      API
+  46 fliers                    /ˈflaɪərz/                     /flaɪəz/                       phonemizer
+  47 ferryboat                 /ˈfɛɹiˌbəʊt/                   /ˈfɛriˌbəʊt/                   API
+  51 frozen                    /ˈfɹəʊzən/                     /ˈfrəʊzən/                     API
+  52 pilgrims                  /ˈpɪlɡɹɪmz/                    /ˈpɪlɡrɪmz/                    API
+  55 solved                    /sɑːlvd/                       /sɒlvd/                        phonemizer
+  57 tonsils                   /ˈtɑːnsəlz/                    /tɒnsəlz/                      phonemizer
+  58 flavors                   /ˈfleɪvərz/                    /fleɪvəz/                      phonemizer
+  60 dinnertime                /ˈdɪnərtaɪm/                   /dɪnətaɪm/                     phonemizer
+  61 theater                   /ˈθi(ə)tɚ/                     /ˈθiːə.tə/                     API
+  64 crabs                     /kɹæbz/                        /kræbz/                        API
+  66 property                  /ˈpɹɒp.ət.i/                   /ˈprɒp.ət.i/                   API
+  67 organization              /ˌɔɹɡənaɪˈzeɪʃən/              /ˌɔrɡənaɪˈzeɪʃən/              API
+  68 foreman                   /ˈfɔː(ɹ)mən/                   /ˈfɔː(r)mən/                   API
+  71 adorable                  /əˈdɔːɹəbəl/                   /əˈdɔːrəbəl/                   API
+  74 creep                     /kɹiːp/                        /kriːp/                        API
+  77 barn                      [baːn]                         /bɑːn/                         API
+  78 railroad                  /ˈɹeɪlɹəʊd/                    /ˈreɪlrəʊd/                    API
+  79 centers                   /ˈsentərz/                     /sɛntəz/                       phonemizer
+  80 contract                  /ˈkɒntɹækt/                    /ˈkɒntrækt/                    API
+  84 fellas                    /ˈfeləz/                       /fɛləz/                        phonemizer
+  85 wristband                 /ˈɹɪs(t)ˌbænd/                 /ˈrɪs(t)ˌbænd/                 API
+  88 drugstore                 /ˈdɹʌɡ.stɔɹ/                   /ˈdrʌɡ.stɔː(r)/                API
+  89 ladders                   /ˈlædərz/                      /ladəz/                        phonemizer
+  91 lifeguard                 /ˈlaɪfɡɑːrd/                   /laɪfɡɑːd/                     phonemizer
+  93 parades                   /pəˈɹeɪdz/                     /pəˈreɪdz/                     API
+  98 uptown                    /ˈʌptaʊn/                      /ʌptaʊn/                       phonemizer
+ 100 pediatrician              /piːdɪəˈtɹɪʃən/                /piːdɪəˈtrɪʃən/                API
+ 101 crispy                    /ˈkɹɪs.pi/                     /ˈkrɪs.pi/                     API
+ 103 neighbor                  /ˈneɪbər/                      /neɪbə/                        phonemizer
+ 106 someday                   /ˈsʌmdeɪ/                      /sʌmdeɪ/                       phonemizer
+ 107 sunrises                  /ˈsʌnraɪzɪz/                   /sʌnraɪzɪz/                    phonemizer
+ 108 tango                     /ˈtæŋɡəʊ/                      /taŋɡəʊ/                       phonemizer
+ 110 tomatoes                  /təˈmeɪtoʊz/                   /təmɑːtəʊz/                    phonemizer
+ 112 cucumbers                 /ˈkjuːkʌmbərz/                 /kjuːkʌmbəz/                   phonemizer
+ 113 broccoli                  /ˈbɹɒ.kə.li/                   /ˈbrɒ.kə.li/                   API
+ 115 lunchtime                 /ˈlʌnt͡ʃtaɪm/                  /ˈlʌntʃtaɪm/                   API
+ 116 wrap                      /ɹæp/                          /ræp/                          API
+ 118 indians                   /ˈɪndiənz/                     /ɪndiənz/                      phonemizer
+ 121 prevention                /pɹɪˈvɛnʃən/                   /prɪˈvɛnʃən/                   API
+ 122 cruelty                   /ˈkɹuː(ə)lti/                  /ˈkruː(ə)lti/                  API
+ 127 residence                 /ˈɹɛz.ɪ.dəns/                  /ˈrɛz.ɪ.dəns/                  API
+ 128 dwarfs                    /dwɔːrfz/                      /dwɔːfs/                       phonemizer
+ 131 scary                     /ˈskɛəɹi/                      /ˈskɛəri/                      API
+ 132 victors                   /ˈvɪktərz/                     /vɪktəz/                       phonemizer
+ 134 conquering                /ˈkɑːŋkərɪŋ/                   /kɒŋkərɪŋ/                     phonemizer
+ 135 heroes                    /ˈhɪəɹəʊz/                     /ˈhɪərəʊz/                     API
+ 137 transcript                /ˈtɹænskɹɪpt/                  /ˈtrænskrɪpt/                  API
+ 138 editorials                /ˌedɪˈtɔːriəlz/                /ɛdɪtɔːrɪəlz/                  phonemizer
+ 141 thirsty                   /ˈθɜː(ɹ)st.i/                  /ˈθɜː(r)st.i/                  API
+ 143 celery                    /ˈsɛl.ə.ɹi/                    /ˈsɛl.ə.ri/                    API
+ 144 ranch                     /ɹɑːntʃ/                       /rɑːntʃ/                       API
+ 146 freelance                 /ˈfɹiːlɑːns/                   /ˈfriːlɑːns/                   API
+ 154 malls                     /mɔːlz/                        /malz/                         phonemizer
+ 155 evolved                   /ɪˈvɑːlvd/                     /ɪvɒlvd/                       phonemizer
+ 156 resolve                   /ɹiːˈzɒlv/                     /riːˈzɒlv/                     API
+ 158 brainpower                /ˈbreɪnpaʊər/                  /breɪnpaʊə/                    phonemizer
+ 160 contractor                /ˈkɒnˌtɹæk.tə(ɹ)/              /ˈkɒnˌtræk.tə(r)/              API
+ 161 inspiration               /ɪnspɨˈɹeɪʃən/                 /ɪnspɨˈreɪʃən/                 API
+ 163 redesigning               /ˌriːdɪˈzaɪnɪŋ/                /riːdɪzaɪnɪŋ/                  phonemizer
+ 164 wrapping                  /ˈɹæpɪŋ/                       /ˈræpɪŋ/                       API
+ 168 diapering                 /ˈdaɪpərɪŋ/                    /daɪpərɪŋ/                     phonemizer
+ 169 aquarium                  /-ɛɹiəm/                       /-ɛriəm/                       API
+ 170 scout                     [skʌʊt]                        /skʌʊt/                        API
+ 171 boring                    /ˈbɔːɹɪŋ/                      /ˈbɔːrɪŋ/                      API
+ 174 counterclockwise          /ˌkaʊntərˈklɑːkwaɪz/           /kaʊntəklɒkwaɪz/               phonemizer
+ 176 proposal                  /pɹəˈpəʊzəl/                   /prəˈpəʊzəl/                   API
+ 178 patchwork                 /ˈpætʃwɜːrk/                   /patʃwɜːk/                     phonemizer
+ 181 hotcakes                  /ˈhɑːtkeɪks/                   /hɒtkeɪks/                     phonemizer
+ 182 syrup                     /ˈsɪ.ɹəp/                      /ˈsɪ.rəp/                      API
+ 183 scrambled                 /ˈskræmbəld/                   /skrambəld/                    phonemizer
+ 186 homemade                  /ˌhoʊmˈmeɪd/                   /həʊmmeɪd/                     phonemizer
+ 188 hood                      [hɪ̈d]                         /hɪ̈d/                         API
+ 189 whereabouts               /ˈwerəbaʊts/                   /weərɐbaʊts/                   phonemizer
+ 190 route                     /ɹʉːt/                         /ruːt/                         API
+ 191 cleanup                   [ˈkliːˌnʌp]                    /ˈkliːˌnʌp/                    API
+ 193 yonder                    /ˈjɒndə(ɹ)/                    /ˈjɒndə(r)/                    API
+ 194 rascal                    /ˈræskəl/                      /raskəl/                       phonemizer
+ 195 drama                     /ˈdɹæmə/                       /ˈdræmə/                       API
+ 199 portrait                  /ˈpɔːtɹeɪt/                    /ˈpɔːtreɪt/                    API
+ 200 landmarks                 /ˈlændmɑːrks/                  /landmɑːks/                    phonemizer
+ 201 photographic              /ˌfoʊtəˈɡɹæfɪk/                /ˌfəʊtəˈɡræfɪk/                API
+ 203 dancers                   /ˈdænsərz/                     /dansəz/                       phonemizer
+ 204 sensational               /senˈseɪʃənl/                  /sɛnseɪʃənəl/                  phonemizer
+ 205 polls                     /poʊlz/                        /pəʊlz/                        phonemizer
+ 206 enormously                /ɪˈnɔːrməsli/                  /ɪnɔːməsli/                    phonemizer
+ 209 lockers                   /ˈlɑːkərz/                     /lɒkəz/                        phonemizer
+ 210 fixtures                  /ˈfɪkstʃərz/                   /fɪkstʃəz/                     phonemizer
+ 211 hallways                  /ˈhɔːlweɪz/                    /hɔːlweɪz/                     phonemizer
+ 213 cultural                  /ˈkʌlt͡ʃəɹəl/                  /ˈkʌltʃərəl/                   API
+ 215 inherited                 /ɪnˈhɛɹɪtɪd/                   /ɪnˈhɛrɪtɪd/                   API
+ 216 voters                    /ˈvoʊtərz/                     /vəʊtəz/                       phonemizer
+ 217 contested                 /kənˈtestɪd/                   /kəntɛstɪd/                    phonemizer
+ 218 rival                     /ˈɹaɪvəl/                      /ˈraɪvəl/                      API
+ 220 residents                 /ˈrezɪdənts/                   /rɛzɪdənts/                    phonemizer
+ 223 jitters                   /ˈdʒɪtərz/                     /dʒɪtəz/                       phonemizer
+ 224 beloved                   /bɪˈlʌvɪd/                     /bɪlʌvd/                       phonemizer
+ 225 matrimony                 /ˈmatɹɪməni/                   /ˈmatrɪməni/                   API
+ 226 diner                     /ˈdaɪnə(ɹ)/                    /ˈdaɪnə(r)/                    API
+ 227 checkbook                 /ˈtʃekbʊk/                     /tʃɛkbʊk/                      phonemizer
+ 228 propose                   /pɹəˈpəʊz/                     /prəˈpəʊz/                     API
+ 229 solving                   /ˈsɑːlvɪŋ/                     /sɒlvɪŋ/                       phonemizer
+ 231 leisure                   /ˈliːʒə(ɹ)/                    /ˈliːʒə(r)/                    API
+ 235 harness                   /ˈhɑː(ɹ).nəs/                  /ˈhɑː(r).nəs/                  API
+ 239 presidency                /ˈpɹezɪdənsi/                  /ˈprezɪdənsi/                  API
+ 241 checkup                   /ˈtʃekʌp/                      /tʃɛkʌp/                       phonemizer
+ 243 fulltime                  /ˈfʊltaɪm/                     /fʊltaɪm/                      phonemizer
+ 244 careers                   /kəˈrɪrz/                      /kəriəz/                       phonemizer
+ 247 financially               /faɪˈnænʃəli/                  /faɪnanʃəli/                   phonemizer
+ 248 fittings                  /ˈfɪtɪŋz/                      /fɪtɪŋz/                       phonemizer
+ 249 supervise                 /ˈsuːpərvaɪz/                  /suːpəvaɪz/                    phonemizer
+ 250 backbreaking              /ˈbækˌbreɪkɪŋ/                 /bakbreɪkɪŋ/                   phonemizer
+ 252 pastry                    /ˈpeɪstɹi/                     /ˈpeɪstri/                     API
+ 253 structural                /ˈstrʌktʃərəl/                 /strʌktʃərəl/                  phonemizer
+ 255 intergenerational         /ˌɪntərˌdʒenəˈreɪʃənl/         /ɪntədʒɛnəreɪʃənəl/            phonemizer
+ 256 editorial                 /ˌɛdɪˈtɔːɹɪəl/                 /ˌɛdɪˈtɔːrɪəl/                 API
+ 258 scrub                     /skɹʌb/                        /skrʌb/                        API
+ 259 interior                  /ɪnˈtɪəɹɪə/                    /ɪnˈtɪərɪə/                    API
+ 260 furnishings               /ˈfɜːrnɪʃɪŋz/                  /fɜːnɪʃɪŋz/                    phonemizer
+ 267 fractures                 /ˈfræktʃərz/                   /fraktʃəz/                     phonemizer
+ 268 wristwatch                /ˈrɪswɑːtʃ/                    /rɪstwɒtʃ/                     phonemizer
+ 270 examinations              /ɪɡˌzæmɪˈneɪʃənz/              /ɛɡzamɪneɪʃənz/                phonemizer
+ 272 engraved                  /ɪnˈɡɹeɪvd/                    /ɪnˈɡreɪvd/                    API
+ 273 tablecloth                /ˈteɪbəlklɔːθ/                 /teɪbəlklɒθ/                   phonemizer
+ 276 breakdown                 /ˈbɹeɪkdaʊn/                   /ˈbreɪkdaʊn/                   API
+ 277 critic                    /ˈkɹɪt.ɪk/                     /ˈkrɪt.ɪk/                     API
+ 279 stalling                  /ˈstɔːlɪŋ/                     /stɔːlɪŋ/                      phonemizer
+ 282 entitled                  /ɪnˈtaɪtəld/                   /ɛntaɪtəld/                    phonemizer
+ 284 photography               /fəˈtɒɡɹəfi/                   /fəˈtɒɡrəfi/                   API
+ 286 autograph                 /ˈɔːtəɡræf/                    /ɔːtəɡraf/                     phonemizer
+ 287 flattered                 /ˈflætərd/                     /flatəd/                       phonemizer
+ 288 bankers                   /ˈbæŋkərz/                     /baŋkəz/                       phonemizer
+ 289 vendors                   /ˈvendərz/                     /vɛndəz/                       phonemizer
+ 290 teaspoon                  /ˈtiːspuːn/                    /tiːspuːn/                     phonemizer
+ 295 manufactures              /ˌmænjuˈfæktʃərz/              /manjuːfaktʃəz/                phonemizer
