@@ -462,6 +462,12 @@ function _playAudio(audio, item, b64) {
   var pauseBtn = document.querySelector('.pause-btn[data-idx="' + item.dataIdx + '"]');
   if (pauseBtn) pauseBtn.innerHTML = '&#9208;'; // ⏸
 
+  audio.onerror = function() {
+    // Audio decode/play error - skip this item and continue
+    _loopCount = 0;
+    _autoIdx++;
+    setTimeout(function() { if (!_isPaused) _playNext(); }, 300);
+  };
   audio.onended = function() {
     if (_isPaused) return;
     _loopCount++;
@@ -477,7 +483,12 @@ function _playAudio(audio, item, b64) {
       setTimeout(function() { if (!_isPaused) _playNext(); }, delay);
     }
   };
-  audio.play().catch(function() {});
+  audio.play().catch(function() {
+    // Play failed - skip and continue
+    _loopCount = 0;
+    _autoIdx++;
+    setTimeout(function() { if (!_isPaused) _playNext(); }, 300);
+  });
   document.getElementById('stopBtn').style.display = 'inline-block';
 }
 
