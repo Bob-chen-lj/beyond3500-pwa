@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4F46E5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="超纲词汇">
+<link rel="manifest" href="manifest.json">
+<title>《走遍美国》超纲词汇表 v2.2</title>
+<style>
+  :root { --primary: #4F46E5; --primary-light: #E0E7FF; --bg: #F8FAFC; --card: #FFFFFF; --text: #1E293B; --text2: #64748B; --border: #E2E8F0; --high: #EF4444; --mid: #F59E0B; --low: #3B82F6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .hero { background:linear-gradient(135deg,#4F46E5,#7C3AED); color:#fff; padding:2.5rem 1.5rem; text-align:center; }
+  .hero h1 { font-size:1.8rem; font-weight:700; margin-bottom:0.4rem; }
+  .hero p { font-size:0.95rem; opacity:0.9; max-width:620px; margin:0 auto; }
+  .stats { display:flex; gap:0.8rem; justify-content:center; padding:1.2rem; flex-wrap:wrap; max-width:860px; margin:-1.8rem auto 0; position:relative; z-index:1; }
+  .stat-card { background:var(--card); border-radius:10px; padding:1rem 1.2rem; box-shadow:0 4px 12px rgba(0,0,0,.08); text-align:center; flex:1; min-width:120px; }
+  .stat-card .num { font-size:1.6rem; font-weight:700; }
+  .stat-card .label { font-size:0.78rem; color:var(--text2); }
+  .stat-high .num { color:var(--high); } .stat-mid .num { color:var(--mid); } .stat-low .num { color:var(--low); }
+  .controls { max-width:900px; margin:1.5rem auto 0.8rem; padding:0 1.5rem; display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center; }
+  .search-box { flex:1; min-width:180px; padding:0.6rem 0.9rem; border:2px solid var(--border); border-radius:8px; font-size:0.9rem; outline:none; }
+  .search-box:focus { border-color:var(--primary); }
+  .fbtn { padding:0.4rem 0.9rem; border:2px solid var(--border); border-radius:8px; background:#fff; cursor:pointer; font-size:0.82rem; font-weight:500; transition:all .15s; }
+  .fbtn:hover { border-color:var(--primary); color:var(--primary); }
+  .fbtn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+  .container { max-width:900px; margin:0 auto; padding:0 1.5rem 1rem; display:flex; flex-direction:column; gap:1rem; }
+  .card { background:var(--card); border-radius:12px; padding:1.2rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border); transition:transform .15s, box-shadow .3s, border-color .3s; }
+  .card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.1); }
+  .card.playing-card { border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-light), 0 6px 16px rgba(79,70,229,.15); }
+  .card-line1 { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem; }
+  .word-idx { font-size:1.1rem; font-weight:600; color:var(--text2); min-width:2rem; }
+  .word { font-size:1.35rem; font-weight:700; color:var(--primary); cursor:pointer; }
+  .card-body { display:flex; gap:1rem; align-items:stretch; margin-top:0.3rem; }
+  .card-left { flex-shrink:0; }
+  .card-right { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.25rem; }
+  .phonetic-row { display:flex; align-items:center; gap:0.4rem; }
+  .phonetic-us, .phonetic-uk { font-size:0.95rem; color:var(--text2); font-style:normal; }
+  .card-img-wrap { width:170px; height:100%; min-height:120px; border-radius:8px; overflow:hidden; background:var(--primary-light); display:flex; align-items:center; justify-content:center; }
+  .card-img-wrap img { width:100%; height:100%; object-fit:cover; border-radius:8px; }
+  .card-img-wrap .img-placeholder { font-size:1.5rem; opacity:0.5; }
+  .definition { font-size:1rem; color:#374151; padding-left:0.5rem; border-left:3px solid var(--primary-light); }
+  .episodes { font-size:0.8rem; color:var(--text2); margin-top:0.2rem; }
+  .play-btn { background:var(--primary); color:#fff; border:none; border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:0.7rem; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; }
+  .play-btn:hover { background:#4338CA; transform:scale(1.1); }
+  .play-btn.word-play { width:36px; height:36px; font-size:0.8rem; background:var(--primary); flex-shrink:0; margin-right:4px; }
+  .play-btn.uk-play { width:32px; height:32px; font-size:0.75rem; background:#1E40AF; flex-shrink:0; margin-right:4px; }
+  .play-btn.active-play { background:#DC2626 !important; animation: pulse 0.6s infinite alternate; }
+  @keyframes pulse { from{transform:scale(1)} to{transform:scale(1.15)} }
+  .pause-btn { background:transparent; color:var(--primary); border:2px solid var(--primary); border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:0.8rem; display:none; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s; margin-left:auto; }
+  .pause-btn:hover { background:var(--primary-light); }
+  .pause-btn.visible { display:inline-flex; }
+  .src-tag { font-size:0.7rem; padding:0.15rem 0.45rem; border-radius:4px; font-weight:500; }
+  .src-tag.dict { background:#D1FAE5; color:#065F46; }
+  .src-tag.tts { background:#FEF3C7; color:#92400E; }
+  .freq-badge { font-size:0.72rem; padding:0.15rem 0.5rem; border-radius:4px; font-weight:600; }
+  .freq-badge.high { background:#FEE2E2; color:#991B1B; }
+  .freq-badge.mid { background:#FEF3C7; color:#92400E; }
+  .freq-badge.low { background:#DBEAFE; color:#1E40AF; }
+  .no-result { text-align:center; padding:3rem; color:var(--text2); font-size:1.1rem; }
+  .pagination { max-width:900px; margin:0 auto 2rem; padding:0 1.5rem; display:flex; justify-content:center; align-items:center; gap:0.4rem; flex-wrap:wrap; }
+  .page-btn { padding:0.4rem 0.75rem; border:2px solid var(--border); border-radius:8px; background:#fff; cursor:pointer; font-size:0.85rem; font-weight:500; transition:all .15s; min-width:36px; text-align:center; }
+  .page-btn:hover { border-color:var(--primary); color:var(--primary); }
+  .page-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+  .page-btn.disabled { opacity:0.4; cursor:not-allowed; pointer-events:none; }
+  .page-info { font-size:0.85rem; color:var(--text2); margin:0 0.5rem; }
+  
+.star-btn { cursor:pointer; background:none; border:none; font-size:1.2rem; padding:0.1rem 0.3rem; opacity:0.35; transition:all .2s; line-height:1; }
+.star-btn:hover { opacity:0.7; }
+.star-btn.marked { opacity:1; color:#F59E0B; filter:drop-shadow(0 0 3px rgba(245,158,11,.4)); }
+
+  @media(max-width:600px) { .hero h1{font-size:1.4rem;} .stats{gap:0.5rem;} .stat-card{min-width:90px;padding:0.7rem;} .card{padding:0.8rem;} .word{font-size:1.15rem;} .phonetic-us{font-size:0.85rem;} .phonetic-uk{font-size:0.85rem;} .card-img-wrap{width:110px;height:100%;min-height:80px;} .card-body{gap:0.6rem;} }
+
+/* === Loading Overlay === */
+#loader-overlay {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 99999; transition: opacity 0.5s;
+}
+#loader-overlay.fade-out { opacity: 0; pointer-events: none; }
+#loader-overlay .loader-title {
+  color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+#loader-overlay .loader-sub {
+  color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 2rem;
+}
+#loader-overlay .loader-bar-wrap {
+  width: 260px; height: 6px; background: rgba(255,255,255,0.2);
+  border-radius: 3px; overflow: hidden;
+}
+#loader-overlay .loader-bar {
+  width: 0%; height: 100%; background: #fff; border-radius: 3px;
+  transition: width 0.3s;
+}
+#loader-overlay .loader-pct {
+  color: rgba(255,255,255,0.9); font-size: 0.85rem; margin-top: 0.75rem;
+}
+#loader-overlay .loader-icon {
+  font-size: 3rem; margin-bottom: 1rem;
+}
+
+/* === Audio loading hint === */
+.audio-hint {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: rgba(79,70,229,0.92); color: #fff; padding: 8px 20px;
+  border-radius: 20px; font-size: 0.85rem; z-index: 9998;
+  white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+
+/* === Auth Page === */
+.auth-overlay {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  z-index: 100000; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+.auth-box {
+  background: #fff; border-radius: 16px; padding: 2.5rem 2rem;
+  width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  text-align: center;
+}
+.auth-box h2 { font-size:1.5rem; color:#1E293B; margin-bottom:0.3rem; }
+.auth-box .sub { font-size:0.9rem; color:#64748B; margin-bottom:1.5rem; }
+.auth-box input {
+  width:100%; padding:0.75rem 1rem; border:2px solid #E2E8F0; border-radius:10px;
+  font-size:1rem; margin-bottom:0.8rem; outline:none; transition:border-color .2s;
+  box-sizing:border-box;
+}
+.auth-box input:focus { border-color:#4F46E5; }
+.auth-box .auth-btn {
+  width:100%; padding:0.85rem; border:none; border-radius:10px; font-size:1rem;
+  font-weight:600; cursor:pointer; transition:all .15s; color:#fff; margin-top:0.5rem;
+}
+.auth-box .auth-btn { background:linear-gradient(135deg,#4F46E5,#7C3AED); }
+.auth-box .auth-btn:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(79,70,229,.4); }
+.auth-switch { font-size:0.85rem; color:#64748B; margin-top:1rem; }
+.auth-switch a { color:#4F46E5; cursor:pointer; text-decoration:underline; font-weight:500; }
+
+.footer-admin {
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid #E2E8F0;
+}
+.admin-link {
+  font-size: 0.85rem;
+  color: #64748B;
+  text-decoration: none;
+  cursor: pointer;
+}
+.admin-link:hover {
+  color: #4F46E5;
+  text-decoration: underline;
+}
+
+.auth-error { color:#EF4444; font-size:0.85rem; margin-top:0.5rem; min-height:1.2em; }
+.app-hidden { display:none !important; }
+
+</style>
+</head>
+<body>
+
+
+<!-- === Login Overlay === -->
+<div id="auth-overlay" class="auth-overlay app-hidden">
+  <div class="auth-box">
+    <div style="font-size:2.5rem;margin-bottom:0.5rem">📖</div>
+    <h2>《走遍美国》超纲词汇表</h2>
+    <div class="sub" id="auth-sub">登录你的账号</div>
+    <input type="text" id="auth-user" placeholder="请输入账号" autocomplete="username">
+    <input type="password" id="auth-pass" placeholder="请输入密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')authSubmit()">
+    <div id="auth-confirm-row" class="app-hidden">
+      <input type="password" id="auth-pass2" placeholder="确认密码" autocomplete="new-password" onkeydown="if(event.key==='Enter')authSubmit()">
+    </div>
+    <button class="auth-btn" id="auth-submit" onclick="authSubmit()">登 录</button>
+    <div class="auth-error" id="auth-error"></div>
+    <div class="auth-switch" id="auth-switch">
+      还没有账号？<a onclick="toggleAuthMode()">立即注册</a>
+    </div>
+  </div>
+</div>
+
+
+<div id="loader-overlay">
+  <div class="loader-icon">📖</div>
+  <div class="loader-title">《走遍美国》超纲词汇表</div>
+  <div class="loader-sub" id="loader-msg">正在加载数据…</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+  <div class="loader-pct" id="loader-pct">0%</div>
+</div>
+
+<div id="app-main">
+<div class="hero">
+  <h1>📖《走遍美国》超纲词汇表</h1>
+  <p>基于高考3500词汇框架之外的词汇 · 发音：🇺🇸美式+🇬🇧英式 · 音标：美式/英式IPA</p>
+</div>
+<div class="stats">
+  <div class="stat-card stat-high"><div class="num">13</div><div class="label">高频词 (≥10次)</div></div>
+  <div class="stat-card stat-mid"><div class="num">33</div><div class="label">中频词 (5-9次)</div></div>
+  <div class="stat-card stat-low"><div class="num">249</div><div class="label">低频词 (&lt;5次)</div></div>
+  <div class="stat-card"><div class="num" style="color:var(--primary)">294</div><div class="label">词典真人发音</div></div>
+  <div class="stat-card"><div class="num" id="diffCount" style="color:#F59E0B">0</div><div class="label">难度词</div></div>
+</div>
+<div class="controls">
+  <input class="search-box" id="search" placeholder="搜索单词、释义或序号…" oninput="onSearchChange()">
+  <button class="fbtn active" data-filter="all" onclick="setFilter(this)">全部</button>
+  <button class="fbtn" data-filter="high" onclick="setFilter(this)">高频</button>
+  <button class="fbtn" data-filter="mid" onclick="setFilter(this)">中频</button>
+  <button class="fbtn" data-filter="low" onclick="setFilter(this)">低频</button>
+  <button class="fbtn" data-filter="hard" onclick="setFilter(this)">⭐ 难度</button>
+  <button class="fbtn" id="reverseBtn" onclick="toggleReverse()" title="倒序排列">↕️ 倒序</button>
+  <button class="page-btn" id="stopBtn" onclick="stopPlay()" style="background:#EF4444;color:#fff;border-color:#EF4444;display:none">⏹ 停止</button>
+</div>
+<div class="container" id="cards"></div>
+<div class="pagination" id="pagination"></div>
+<div class="footer-admin">
+  <a href="#" onclick="openAdminPanel(); return false;" class="admin-link">后台管理</a>
+</div>
+<audio id="audioPlayer" preload="auto" playsinline></audio>
+<audio id="silentKeeper" loop playsinline preload="auto" style="display:none"></audio>
+</div><!-- /app-main -->
+
+<!-- Admin Panel Overlay -->
+<div id="admin-overlay" class="auth-overlay app-hidden" style="background:rgba(0,0,0,0.5)">
+  <div class="auth-box" style="max-width:500px">
+    <h2>后台管理</h2>
+    <div class="sub" id="admin-info">加载中...</div>
+    <div id="admin-content" style="text-align:left;margin-top:1rem;max-height:400px;overflow-y:auto"></div>
+    <button class="auth-btn" onclick="closeAdminPanel()" style="margin-top:1rem">关闭</button>
+  </div>
+</div>
+
+
+<script src="cards.js"></script>
+<script>
+var PER_PAGE = 15;
+var curPage = 1;
+var curFilter = "all";
+var curSearch = "";
+var curReverse = false;
+var filteredCards = [];
+var waud = {};  // word audio data, loaded per-page
+var caud = {};  // chinese audio data, loaded per-page
+var baud = {};  // UK audio data, loaded per-page
+var IMGS = {};  // word image data (base64), loaded per-page
+var _waudPages = {};   // track which pages' waud is loaded
+var _caudPages = {};   // track which pages' caud is loaded
+var _baudPages = {};   // track which pages' baud is loaded
+var _imgPages = {};    // track which pages' imgs is loaded
+var _isPaused = false;
+var _currentBlobUrl = null; // Track current blob URL for cleanup
+
+// iOS background audio support
+var _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+var _silentKeeperActive = false;
+
+function _startSilentKeeper() {
+  if (!_isIOS) return;
+  var keeper = document.getElementById('silentKeeper');
+  if (!keeper || _silentKeeperActive) return;
+  try {
+    keeper.src = 'silent.mp3';
+    keeper.volume = 0.01;
+    keeper.play().then(function() {
+      _silentKeeperActive = true;
+    }).catch(function(e) {
+      console.log('Silent keeper play failed:', e);
+    });
+  } catch(e) {}
+}
+
+function _stopSilentKeeper() {
+  if (!_isIOS) return;
+  var keeper = document.getElementById('silentKeeper');
+  if (!keeper) return;
+  try {
+    keeper.pause();
+    keeper.removeAttribute('src');
+    keeper.load();
+  } catch(e) {}
+  _silentKeeperActive = false;
+}
+
+// Resume playback when app becomes visible again (iOS may suspend JS)
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden && _autoQueue.length > 0 && !_isPaused) {
+    var audio = document.getElementById('audioPlayer');
+    if (audio.paused && _currentPlayingIdx >= 0) {
+      // Resume playback if it was interrupted
+      _playNext();
+    }
+    // Restart silent keeper if needed
+    if (_isIOS && _autoQueue.length > 0 && !_isPaused && !_silentKeeperActive) {
+      _startSilentKeeper();
+    }
+  }
+});
+
+var DIFF_KEY = 'beyond3500_diff';
+var _diffSet = null;
+function _loadDiff() {
+  if (_diffSet !== null) return;
+  try { _diffSet = new Set(JSON.parse(localStorage.getItem(DIFF_KEY) || '[]')); }
+  catch(e) { _diffSet = new Set(); }
+}
+function _saveDiff() {
+  localStorage.setItem(DIFF_KEY, JSON.stringify(Array.from(_diffSet)));
+}
+function toggleDiff(idx) {
+  _loadDiff();
+  var word = CARDS[idx] ? CARDS[idx].word : '';
+  if (_diffSet.has(word)) { _diffSet.delete(word); }
+  else { _diffSet.add(word); }
+  _saveDiff();
+  // Update button visual
+  var btn = document.querySelector('.star-btn[data-idx="' + idx + '"]');
+  if (btn) btn.classList.toggle('marked', _diffSet.has(word));
+  // Update hard count in filter button
+  _updateHardCount();
+  // If on hard filter, re-render to reflect changes
+  if (curFilter === 'hard') renderCards();
+}
+function isDiff(word) {
+  _loadDiff();
+  return _diffSet.has(word);
+}
+function _updateHardCount() {
+  _loadDiff();
+  var btn = document.querySelector('.fbtn[data-filter="hard"]');
+  if (btn) btn.textContent = '⭐ 难度' + (_diffSet.size ? '(' + _diffSet.size + ')' : '');
+}
+
+var _currentPlayingIdx = -1;
+var _userManualNav = false;   // user manually navigated, pause auto-follow
+var _navResumeTimer = null;    // 1-min timer to resume auto-follow
+var _NAV_RESUME_MS = 60000;   // 1 minute
+
+// Called when user manually navigates (page/filter/search)
+function _onUserNav() {
+  if (_currentPlayingIdx < 0) return;  // no playback, no need
+  _userManualNav = true;
+  // Reset the 1-minute resume timer
+  if (_navResumeTimer) clearTimeout(_navResumeTimer);
+  _navResumeTimer = setTimeout(function() {
+    _userManualNav = false;
+    _navResumeTimer = null;
+    // Auto-follow: navigate to playing card and center it
+    if (_currentPlayingIdx >= 0) {
+      _autoGoPage(_currentPlayingIdx);
+      setTimeout(function() { _scrollCardToCenter(_currentPlayingIdx); }, 80);
+    }
+  }, _NAV_RESUME_MS);
+}
+
+// Cancel auto-follow timers (called on stop/ended)
+function _clearNavTimers() {
+  _userManualNav = false;
+  if (_navResumeTimer) { clearTimeout(_navResumeTimer); _navResumeTimer = null; }
+}
+
+
+
+function getFiltered() {
+  var s = curSearch.toLowerCase();
+  var sNum = parseInt(s);
+  return CARDS.filter(function(c) {
+    if (curFilter === "hard") { if (!isDiff(c.word)) return false; }
+    else if (curFilter !== "all" && c.freqClass !== curFilter) return false;
+    if (s) {
+      var matchWord = c.word.toLowerCase().indexOf(s) !== -1;
+      var matchDef = c.definition.toLowerCase().indexOf(s) !== -1;
+      var matchIdx = !isNaN(sNum) && (c.idx === sNum);
+      if (!matchWord && !matchDef && !matchIdx) return false;
+    }
+    return true;
+  });
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// (Image data now loaded from img_pN.js)
+
+// Load waud chunk for a specific page
+function loadWaudPage(page, callback) {
+  if (_waudPages[page]) { if (callback) callback(); return; }
+  _waudPages[page] = true;
+  var s = document.createElement('script');
+  s.src = 'waud_p' + page + '.js';
+  s.onload = function() {
+   
+    _hideHint();
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _waudPages[page] = false;
+    _hideHint();
+    if (callback) callback();
+  };
+  document.head.appendChild(s);
+}
+
+// Load caud chunk for a specific page
+function loadCaudPage(page, callback) {
+  if (_caudPages[page]) { if (callback) callback(); return; }
+  _caudPages[page] = true;
+  var s = document.createElement('script');
+  s.src = 'caud_p' + page + '.js';
+  s.onload = function() {
+   
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _caudPages[page] = false;
+    _hideHint();
+    if (callback) callback();
+  };
+  document.head.appendChild(s);
+}
+
+function loadBaudPage(page, callback) {
+  if (_baudPages[page]) { if (callback) callback(); return; }
+  _baudPages[page] = true;
+  var s = document.createElement('script');
+  s.src = 'baud_p' + page + '.js';
+  s.onload = function() {
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _baudPages[page] = false;
+    _hideHint();
+    if (callback) callback();
+  };
+  document.head.appendChild(s);
+}
+
+// Load img chunk for a specific page
+function loadImgPage(page, callback) {
+  if (_imgPages[page]) { if (callback) callback(); return; }
+  _imgPages[page] = true;
+  var s = document.createElement('script');
+  s.src = 'img_p' + page + '.js';
+  s.onload = function() {
+   
+    if (callback) callback();
+  };
+  s.onerror = function() {
+    _imgPages[page] = false;
+    if (callback) callback();
+  };
+  document.head.appendChild(s);
+}
+
+// Get page number for a card index
+function pageForIdx(idx) {
+  return Math.floor(idx / PER_PAGE) + 1;
+}
+
+// Scroll card to center of viewport
+function _scrollCardToCenter(idx) {
+  var cardEl = document.querySelector('.card[data-idx="' + idx + '"]');
+  if (cardEl) {
+    cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// Show/hide pause button
+function _showPauseBtn(idx) {
+  _hideAllPauseBtns();
+  var btn = document.querySelector('.pause-btn[data-idx="' + idx + '"]');
+  if (btn) btn.classList.add('visible');
+}
+function _hideAllPauseBtns() {
+  document.querySelectorAll('.pause-btn.visible').forEach(function(b){b.classList.remove('visible');});
+}
+
+// Toggle pause
+function togglePause(idx) {
+  var audio = document.getElementById('audioPlayer');
+  var btn = document.querySelector('.pause-btn[data-idx="' + idx + '"]');
+  if (_isPaused) {
+    // Resume
+    _isPaused = false;
+    audio.play().catch(function(){});
+    if (btn) btn.innerHTML = '&#9208;'; // ⏸
+  } else {
+    // Pause
+    _isPaused = true;
+    audio.pause();
+    if (btn) btn.innerHTML = '&#9654;'; // ▶
+  }
+}
+
+// Highlight playing card
+function _highlightCard(idx) {
+  document.querySelectorAll('.card.playing-card').forEach(function(c){c.classList.remove('playing-card');});
+  if (idx >= 0) {
+    var cardEl = document.querySelector('.card[data-idx="' + idx + '"]');
+    if (cardEl) cardEl.classList.add('playing-card');
+  }
+}
+
+
+// === Auth & Payment (manual review) ===
+var _authMode = 'login';
+
+function toggleAuthMode() {
+  var sub = document.getElementById('auth-sub');
+  var sw = document.getElementById('auth-switch');
+  var btn = document.getElementById('auth-submit');
+  var confirmRow = document.getElementById('auth-confirm-row');
+  var errEl = document.getElementById('auth-error');
+  errEl.textContent = '';
+  
+  if (_authMode === 'login') {
+    _authMode = 'register';
+    sub.textContent = '注册新账号';
+    btn.textContent = '注 册';
+    sw.innerHTML = '已有账号？<a onclick="toggleAuthMode()">去登录</a>';
+    confirmRow.classList.remove('app-hidden');
+  } else {
+    _authMode = 'login';
+    sub.textContent = '登录你的账号';
+    btn.textContent = '登 录';
+    sw.innerHTML = '还没有账号？<a onclick="toggleAuthMode()">立即注册</a>';
+    confirmRow.classList.add('app-hidden');
+  }
+}
+var AUTH_KEY = 'beyond3500_auth';
+var PENDING_KEY = 'beyond3500_pending';
+var _MASTER_USER = 'bob';
+var _MASTER_PASS = 'love';
+function _isMaster(u, p) { return u === _MASTER_USER && p === _MASTER_PASS; }
+
+function _getAuth() {
+  try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch(e) { return null; }
+}
+function _isPending() { return localStorage.getItem(PENDING_KEY) === 'yes'; }
+function _setPending(v) { localStorage.setItem(PENDING_KEY, v ? 'yes' : ''); }
+
+
+
+
+function authSubmit() {
+  var user = document.getElementById('auth-user').value.trim();
+  var pass = document.getElementById('auth-pass').value;
+  var errEl = document.getElementById('auth-error');
+  errEl.textContent = '';
+
+  if (!user || !pass) { errEl.textContent = '请输入账号和密码'; return; }
+  if (user.length < 2) { errEl.textContent = '账号至少2个字符'; return; }
+  if (pass.length < 4) { errEl.textContent = '密码至少4个字符'; return; }
+
+  if (_authMode === 'register') {
+    var pass2 = document.getElementById('auth-pass2').value;
+    if (pass !== pass2) { errEl.textContent = '两次密码不一致'; return; }
+    localStorage.setItem(AUTH_KEY, JSON.stringify({user: user, pass: pass}));
+    errEl.style.color = '#10B981';
+    errEl.textContent = '注册成功！正在进入…';
+    setTimeout(function() {
+      errEl.style.color = '';
+      _setPending(false);
+      showMainApp();
+    }, 800);
+  } else {
+    // Master account bypasses everything
+    if (_isMaster(user, pass)) {
+      localStorage.setItem(AUTH_KEY, JSON.stringify({user: user, pass: pass}));
+      errEl.style.color = '#10B981';
+      errEl.textContent = '登录成功！';
+      setTimeout(function() {
+        errEl.style.color = '';
+        showMainApp();
+      }, 500);
+      return;
+    }
+    var stored = _getAuth();
+    if (!stored) { errEl.textContent = '账号不存在，请先注册'; return; }
+    if (stored.user !== user || stored.pass !== pass) { errEl.textContent = '账号或密码错误'; return; }
+    showPayOrApp();
+  }
+}
+
+function showPayOrApp() {
+  document.getElementById('auth-overlay').classList.add('app-hidden');
+  showMainApp();
+}
+
+
+
+function showMainApp() {
+  document.getElementById('auth-overlay').classList.add('app-hidden');
+  document.getElementById('app-main').classList.remove('app-hidden');
+  // Init main app on first entry
+  if (!window._appInited) {
+    window._appInited = true;
+    renderCards();
+    var overlay = document.getElementById('loader-overlay');
+    if (overlay) { overlay.classList.add('fade-out'); setTimeout(function(){ overlay.remove(); }, 500); }
+  }
+}
+
+
+
+function handleLogout() {
+  _setPending(false);
+  localStorage.removeItem(AUTH_KEY);
+  document.getElementById('auth-overlay').classList.remove('app-hidden');
+  document.getElementById('auth-user').value = '';
+  document.getElementById('auth-pass').value = '';
+  document.getElementById('auth-pass2').value = '';
+  document.getElementById('auth-error').textContent = '';
+  document.getElementById('app-main').classList.add('app-hidden');
+  _authMode = 'login';
+  toggleAuthMode();
+}
+
+function checkAuthState() {
+  var stored = _getAuth();
+  if (!stored) {
+    document.getElementById('auth-overlay').classList.remove('app-hidden');
+    document.getElementById('app-main').classList.add('app-hidden');
+    var loader = document.getElementById('loader-overlay');
+    if (loader) loader.style.display = 'none';
+    return false;
+  }
+  showMainApp();
+  var loader = document.getElementById('loader-overlay');
+  if (loader) loader.style.display = 'none';
+  return false;
+}
+
+
+function renderCards() {
+  _loadDiff();
+  var dc = document.getElementById('diffCount');
+  if (dc) dc.textContent = _diffSet.size;
+  _updateHardCount();
+  filteredCards = getFiltered();
+  if (curReverse) filteredCards = filteredCards.slice().reverse();
+  var total = filteredCards.length;
+  var totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+  if (curPage > totalPages) curPage = totalPages;
+  var start = (curPage - 1) * PER_PAGE;
+  var end = Math.min(start + PER_PAGE, total);
+  var pageCards = filteredCards.slice(start, end);
+
+  var container = document.getElementById("cards");
+  if (pageCards.length === 0) {
+    container.innerHTML = '<div class="no-result">没有找到匹配的词汇</div>';
+  } else {
+    var h = '';
+    for (var i = 0; i < pageCards.length; i++) {
+      var c = pageCards[i];
+      var origIdx = c.idx - 1;
+      var imgKey = 'i' + origIdx;
+      var imgSrc = IMGS[imgKey] ? ('data:image/jpeg;base64,' + IMGS[imgKey]) : '';
+      var imgHtml = imgSrc ? '<img src="' + imgSrc + '" alt="' + escHtml(c.word) + '">' : '<span class="img-placeholder">🖼</span>';
+      h += '<div class="card" data-idx="' + origIdx + '">';
+      h += '<div class="card-line1">';
+      h += '<span class="word-idx">' + c.idx + '</span>';
+      h += '<span class="word">' + escHtml(c.word) + '</span>';
+      h += '<button class="pause-btn" data-idx="' + origIdx + '" onclick="togglePause(' + origIdx + ')">&#9208;</button>';
+      h += '<button class="star-btn' + (isDiff(c.word) ? ' marked' : '') + '" data-idx="' + origIdx + '" onclick="toggleDiff(' + origIdx + ')" title="标记为难度词">★</button>';
+      h += '</div>';
+      h += '<div class="card-body">';
+      h += '<div class="card-left">';
+      h += '<div class="card-img-wrap">' + imgHtml + '</div>';
+      h += '</div>';
+      h += '<div class="card-right">';
+      h += '<div class="definition">' + escHtml(c.definition) + '</div>';
+      h += '<div class="episodes">📍 ' + escHtml(c.episodes) + '</div>';
+      h += '<div class="phonetic-row">';
+      h += '<button class="play-btn word-play" data-idx="' + origIdx + '" onclick="playUS(parseInt(this.dataset.idx))" title="美式发音">🇺🇸▶</button>';
+      h += '<span class="phonetic phonetic-us">' + escHtml(c.phonetic) + '</span>';
+      h += '</div>';
+      h += '<div class="phonetic-row">';
+      h += '<button class="play-btn uk-play" data-idx="' + origIdx + '" onclick="playUK(parseInt(this.dataset.idx))" title="英式发音">🇬🇧▶</button>';
+      h += '<span class="phonetic phonetic-uk">' + escHtml(c.phoneticUK || '') + '</span>';
+      h += '</div>';
+      h += '</div>';
+      h += '</div>';
+      h += '</div>';
+    }
+    container.innerHTML = h;
+  }
+
+  // Load waud & img for current page if not loaded
+  if (pageCards.length > 0) {
+    var firstIdx = pageCards[0].idx - 1;
+    var pg = pageForIdx(firstIdx);
+    // Load images first for instant visual feedback
+    if (!_imgPages[pg]) {
+      loadImgPage(pg, function() {
+        for (var j = 0; j < pageCards.length; j++) {
+          var c2 = pageCards[j];
+          var oi = c2.idx - 1;
+          var ik = 'i' + oi;
+          if (IMGS[ik]) {
+            var wrap = document.querySelector('.card[data-idx="' + oi + '"] .card-img-wrap');
+            if (wrap) wrap.innerHTML = '<img src="data:image/jpeg;base64,' + IMGS[ik] + '" alt="' + escHtml(c2.word) + '">';
+          }
+        }
+      });
+    }
+    // Load audio in background (no blocking hint for page switch)
+    if (!_waudPages[pg]) {
+      loadWaudPage(pg);
+    }
+    if (!_caudPages[pg]) {
+      loadCaudPage(pg);
+    }
+    if (!_baudPages[pg]) {
+      loadBaudPage(pg);
+    }
+  }
+
+  var pagDiv = document.getElementById("pagination");
+  var pagHtml = '';
+  pagHtml += '<button class="page-btn' + (curPage <= 1 ? ' disabled' : '') + '" onclick="goPage(' + (curPage-1) + ')">上一页</button>';
+  var pStart = Math.max(1, curPage - 3);
+  var pEnd = Math.min(totalPages, curPage + 3);
+  if (pStart > 1) {
+    pagHtml += '<button class="page-btn" onclick="goPage(1)">1</button>';
+    if (pStart > 2) pagHtml += '<span class="page-info">…</span>';
+  }
+  for (var p = pStart; p <= pEnd; p++) {
+    pagHtml += '<button class="page-btn' + (p === curPage ? ' active' : '') + '" onclick="goPage(' + p + ')">' + p + '</button>';
+  }
+  if (pEnd < totalPages) {
+    if (pEnd < totalPages - 1) pagHtml += '<span class="page-info">…</span>';
+    pagHtml += '<button class="page-btn" onclick="goPage(' + totalPages + ')">' + totalPages + '</button>';
+  }
+  pagHtml += '<button class="page-btn' + (curPage >= totalPages ? ' disabled' : '') + '" onclick="goPage(' + (curPage+1) + ')">下一页</button>';
+  pagHtml += '<span class="page-info">第 ' + (start+1) + '-' + end + ' / ' + total + ' 词</span>';
+  pagDiv.innerHTML = pagHtml;
+}
+
+// === Audio Playback ===
+var _autoQueue = [];
+var _autoIdx = 0;
+var _loopCount = 0;
+var _playMode = 'US'; // 'US' or 'UK', remembers last clicked
+var _loopMax = 5; // word & UK both loop this many times
+var _loopInterval = 1000; // ms between loops (word & UK)
+
+// Media Session API - 允许后台/锁屏播放
+function _updateMediaSession() {
+  if ('mediaSession' in navigator) {
+    var currentItem = _autoQueue[_autoIdx];
+    var wordText = '';
+    if (currentItem && currentItem.dataIdx !== undefined) {
+      var card = CARDS[currentItem.dataIdx];
+      if (card) wordText = card.word || '';
+    }
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: wordText || '超纲词发音播放',
+      artist: 'Beyond 3500',
+      album: '走遍美国超纲词'
+    });
+    
+    // 处理媒体控制
+    navigator.mediaSession.setActionHandler('play', function() {
+      var audio = document.getElementById('audioPlayer');
+      if (_isPaused) {
+        _isPaused = false;
+        _playNext();
+      } else {
+        audio.play();
+      }
+    });
+    navigator.mediaSession.setActionHandler('pause', function() {
+      _isPaused = true;
+      var audio = document.getElementById('audioPlayer');
+      audio.pause();
+    });
+    navigator.mediaSession.setActionHandler('stop', function() {
+      stopPlay();
+    });
+    navigator.mediaSession.setActionHandler('nexttrack', function() {
+      // Skip to next word
+      if (_autoIdx < _autoQueue.length - 1) {
+        _autoIdx++;
+        _playNext();
+      }
+    });
+    navigator.mediaSession.setActionHandler('previoustrack', function() {
+      // Skip to previous word
+      if (_autoIdx > 0) {
+        _autoIdx--;
+        _playNext();
+      }
+    });
+  }
+}
+
+function _playNext() {
+  var audio = document.getElementById('audioPlayer');
+  if (_autoIdx >= _autoQueue.length) {
+    document.getElementById('stopBtn').style.display = 'none';
+    _highlightBtn(null);
+    _highlightCard(-1);
+    _hideAllPauseBtns();
+    _currentPlayingIdx = -1;
+    _clearNavTimers();
+    _stopSilentKeeper(); // Stop iOS silent audio keeper when queue completes
+    return;
+  }
+  var item = _autoQueue[_autoIdx];
+  var b64;
+  if (item.src === 'word') {
+    b64 = waud[item.key];
+  } else if (item.src === 'uk') {
+    b64 = baud[item.key];
+  } else if (item.src === 'chinese') {
+    b64 = caud[item.key];
+  }
+
+  if (!b64) {
+    // Audio not loaded yet, load the page first
+    var idx = parseInt(item.key.substring(1));
+    var pg = pageForIdx(idx);
+    var loader = item.src === 'word' ? loadWaudPage : item.src === 'uk' ? loadBaudPage : loadCaudPage;
+    loader(pg, function() {
+      var b64retry = item.src === 'word' ? waud[item.key] : item.src === 'uk' ? baud[item.key] : caud[item.key];
+      if (!b64retry) { _autoIdx++; _loopCount = 0; _playNext(); return; }
+      _playAudio(audio, item, b64retry);
+    });
+    return;
+  }
+  _playAudio(audio, item, b64);
+}
+
+function _autoGoPage(idx) {
+  // If user is manually navigating, don't auto-follow
+  if (_userManualNav) return;
+  // Check if the card is already visible on current page (DOM-based)
+  var card = document.querySelector('.card[data-idx="' + idx + '"]');
+  if (card) return;
+  // Find the card's position in the current filtered (possibly reversed) list
+  var targetPage = -1;
+  for (var j = 0; j < filteredCards.length; j++) {
+    if (filteredCards[j].idx - 1 === idx) {
+      targetPage = Math.floor(j / PER_PAGE) + 1;
+      break;
+    }
+  }
+  if (targetPage < 1) {
+    // Card not in current filter view - switch to 'all'
+    targetPage = pageForIdx(idx);
+    curFilter = 'all';
+    curSearch = '';
+    curReverse = false;
+    document.getElementById('search').value = '';
+    document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');});
+    document.querySelector('.fbtn[data-filter="all"]').classList.add('active');
+    var revBtn = document.getElementById('reverseBtn');
+    if (revBtn) { revBtn.classList.remove('active'); revBtn.textContent = '↕️ 倒序'; }
+  }
+  curPage = targetPage;
+  renderCards();
+  // Pre-load audio for new page
+  if (!_waudPages[targetPage]) loadWaudPage(targetPage);
+  if (!_caudPages[targetPage]) loadCaudPage(targetPage);
+  if (!_baudPages[targetPage]) loadBaudPage(targetPage);
+}
+
+function _playAudio(audio, item, b64) {
+  // Revoke previous blob URL to prevent memory leak
+  if (_currentBlobUrl) {
+    URL.revokeObjectURL(_currentBlobUrl);
+    _currentBlobUrl = null;
+  }
+  
+  // Convert base64 to Blob URL for better media session support
+  var binary = atob(b64);
+  var bytes = new Uint8Array(binary.length);
+  for (var i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  var blob = new Blob([bytes], {type: 'audio/mp3'});
+  _currentBlobUrl = URL.createObjectURL(blob);
+  audio.src = _currentBlobUrl;
+  
+  _updateMediaSession(); // Update media session for background playback
+  _highlightBtn(item);
+  if (item.dataIdx !== undefined) {
+    if (item.dataIdx !== _currentPlayingIdx) {
+      _currentPlayingIdx = item.dataIdx;
+      _autoGoPage(item.dataIdx);
+    }
+    _highlightCard(item.dataIdx);
+    _showPauseBtn(item.dataIdx);
+    // Scroll to center if not user-manually-navigating
+    if (!_userManualNav) {
+      setTimeout(function() { _scrollCardToCenter(item.dataIdx); }, 50);
+    }
+  }
+  _isPaused = false;
+  var pauseBtn = document.querySelector('.pause-btn[data-idx="' + item.dataIdx + '"]');
+  if (pauseBtn) pauseBtn.innerHTML = '&#9208;'; // ⏸
+
+  audio.onerror = function() {
+    // Audio decode/play error - show hint and skip
+    _showHint('⚠️ 音频加载失败，请刷新页面重试');
+    setTimeout(function() { _hideHint(); }, 3000);
+    _loopCount = 0;
+    _autoIdx++;
+    setTimeout(function() { if (!_isPaused) _playNext(); }, 300);
+  };
+  audio.onended = function() {
+    if (_isPaused) return;
+    _loopCount++;
+    if ((item.src === 'word' || item.src === 'uk') && _loopCount < _loopMax) {
+      setTimeout(function() {
+        if (!_isPaused) { audio.currentTime = 0; audio.play().catch(function(){}); }
+      }, _loopInterval);
+    } else {
+      // word done (5 loops) or chinese done (1 loop)
+      _loopCount = 0;
+      _autoIdx++;
+      var delay = (item.src === 'word' || item.src === 'uk') ? 800 : 1500;
+      setTimeout(function() { if (!_isPaused) _playNext(); }, delay);
+    }
+  };
+  audio.play().catch(function() {
+    // Play failed - show hint and skip
+    _showHint('⚠️ 音频播放失败，请刷新页面重试');
+    setTimeout(function() { _hideHint(); }, 3000);
+    _loopCount = 0;
+    _autoIdx++;
+    setTimeout(function() { if (!_isPaused) _playNext(); }, 300);
+  });
+  document.getElementById('stopBtn').style.display = 'inline-block';
+}
+
+function _highlightBtn(item) {
+  document.querySelectorAll('.play-btn.active-play').forEach(function(b){b.classList.remove('active-play');});
+  if (!item) return;
+  if (item.src === 'chinese') return; // don't highlight any button during chinese playback
+  if (item.src === 'uk') {
+    var sel = '.play-btn.uk-play[data-idx="' + item.dataIdx + '"]';
+  } else {
+    var sel = '.play-btn.word-play[data-idx="' + item.dataIdx + '"]';
+  }
+  var btn = document.querySelector(sel);
+  if (btn) btn.classList.add('active-play');
+}
+
+function stopPlay() {
+  var audio = document.getElementById('audioPlayer');
+  audio.onended = null; audio.pause();
+  audio.currentTime = 0;
+  _autoQueue = [];
+  _autoIdx = 0; _loopCount = 0;
+  _isPaused = false;
+  _highlightBtn(null);
+  _highlightCard(-1);
+  _hideAllPauseBtns();
+  _currentPlayingIdx = -1;
+  _clearNavTimers();
+  document.getElementById('stopBtn').style.display = 'none';
+  // Revoke blob URL
+  if (_currentBlobUrl) {
+    URL.revokeObjectURL(_currentBlobUrl);
+    _currentBlobUrl = null;
+  }
+  _stopSilentKeeper(); // Stop iOS silent audio keeper
+}
+
+function _showHint(msg) {
+  _hideHint();
+  var d = document.createElement('div');
+  d.className = 'audio-hint';
+  d.id = 'audio-hint';
+  d.textContent = msg;
+  document.body.appendChild(d);
+}
+function _hideHint() {
+  var d = document.getElementById('audio-hint');
+  if (d) d.remove();
+}
+
+function playUS(idx) {
+  var pg = pageForIdx(idx);
+  var needWaud = !_waudPages[pg];
+  var needCaud = !_caudPages[pg];
+  if (needWaud || needCaud) {
+    _showHint('⏳ 加载发音中，请稍候…');
+    var done = 0, total = 0;
+    if (needWaud) total++;
+    if (needCaud) total++;
+    function check() { done++; if (done >= total) { _hideHint(); _doPlayWord(idx); } }
+    if (needWaud) loadWaudPage(pg, check);
+    if (needCaud) loadCaudPage(pg, check);
+    return;
+  }
+  _doPlayWord(idx);
+}
+
+function playUK(idx) {
+  var pg = pageForIdx(idx);
+  var needBaud = !_baudPages[pg];
+  var needCaud = !_caudPages[pg];
+  if (needBaud || needCaud) {
+    _showHint('⏳ 加载英式发音中，请稍候…');
+    var done = 0, total = 0;
+    if (needBaud) total++;
+    if (needCaud) total++;
+    function check() { done++; if (done >= total) { _hideHint(); _doPlayUK(idx); } }
+    if (needBaud) loadBaudPage(pg, check);
+    if (needCaud) loadCaudPage(pg, check);
+    return;
+  }
+  _doPlayUK(idx);
+}
+
+function _doPlayWord(idx) {
+  _playMode = 'US';
+  _doPlayFrom(idx);
+}
+
+function _doPlayFrom(idx) {
+  var audio = document.getElementById('audioPlayer');
+  audio.onended = null; audio.pause();
+  _isPaused = false;
+  _autoQueue = [];
+  // Find the clicked card's position in the current filtered (possibly reversed) list
+  var startPos = -1;
+  for (var j = 0; j < filteredCards.length; j++) {
+    if (filteredCards[j].idx - 1 === idx) { startPos = j; break; }
+  }
+  if (startPos >= 0) {
+    // Play from current position through the rest of filteredCards (respects filter + reverse)
+    for (var j = startPos; j < filteredCards.length; j++) {
+      var c = filteredCards[j];
+      var oi = c.idx - 1;
+      _autoQueue.push({src: _playMode === 'UK' ? 'uk' : 'word', key: (_playMode === 'UK' ? 'b' : 'w') + oi, dataIdx:oi});
+      _autoQueue.push({src:'chinese', key:'c'+oi, dataIdx:oi});
+    }
+  } else {
+    // Fallback: card not in filtered list, play from original index
+    for (var i = idx; i < CARDS.length; i++) {
+      var c = CARDS[i];
+      if (!c) continue;
+      _autoQueue.push({src: _playMode === 'UK' ? 'uk' : 'word', key: (_playMode === 'UK' ? 'b' : 'w') + i, dataIdx:i});
+      _autoQueue.push({src:'chinese', key:'c'+i, dataIdx:i});
+    }
+  }
+  _autoIdx = 0; _loopCount = 0;
+  _startSilentKeeper(); // Keep iOS audio session alive for background playback
+  _playNext();
+}
+
+function _doPlayUK(idx) {
+  _playMode = 'UK';
+  _doPlayFrom(idx);
+}
+
+function goPage(p) {
+  curPage = p;
+  renderCards();
+  window.scrollTo({top: document.querySelector('.container').offsetTop - 80, behavior: 'smooth'});
+  _onUserNav();
+}
+
+function setFilter(btn) {
+  document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  curFilter = btn.getAttribute('data-filter');
+  curPage = 1;
+  renderCards();
+  _onUserNav();
+}
+
+function toggleReverse() {
+  curReverse = !curReverse;
+  var btn = document.getElementById('reverseBtn');
+  btn.classList.toggle('active', curReverse);
+  btn.textContent = curReverse ? '↕️ 正序' : '↕️ 倒序';
+  curPage = 1;
+  renderCards();
+}
+
+function onSearchChange() {
+  curSearch = document.getElementById('search').value;
+  curPage = 1;
+  renderCards();
+  _onUserNav();
+}
+
+// === Init ===
+checkAuthState();
+
+// === Service Worker Registration ===
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      // Force update check
+      reg.update();
+      // Listen for new SW
+      reg.addEventListener('updatefound', function() {
+        var newWorker = reg.installing;
+        newWorker.addEventListener('statechange', function() {
+          if (newWorker.state === 'activated') {
+            // New SW activated - clear old caches automatically handled by SW
+          }
+        });
+      });
+    }).catch(function(e) {
+      console.log('SW registration failed:', e);
+    });
+    // If controller changed (new SW took over), reload once
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      if (!window._swReloaded) {
+        window._swReloaded = true;
+        window.location.reload();
+      }
+    });
+  });
+}
+function openAdminPanel() {
+  var auth = _getAuth();
+  if (!auth || auth.user !== _MASTER_USER) {
+    alert('仅管理员可访问');
+    return;
+  }
+  document.getElementById('admin-overlay').classList.remove('app-hidden');
+  loadAdminData();
+}
+
+function closeAdminPanel() {
+  document.getElementById('admin-overlay').classList.add('app-hidden');
+}
+
+function loadAdminData() {
+  var info = document.getElementById('admin-info');
+  var content = document.getElementById('admin-content');
+  var auth = _getAuth();
+  
+  info.innerHTML = '当前用户：<b>' + escHtml(auth.user) + '</b>';
+  
+  // 显示本地存储的统计信息
+  var hardWords = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (key && key.startsWith('hard_')) {
+      hardWords.push(key.replace('hard_', ''));
+    }
+  }
+  
+  var html = '<h3 style="margin:0.5rem 0;font-size:1rem">📊 数据统计</h3>';
+  html += '<p>⭐ 标记难度词：<b>' + hardWords.length + '</b> 个</p>';
+  
+  if (hardWords.length > 0) {
+    html += '<div style="margin-top:0.5rem;font-size:0.85rem;color:#64748B">';
+    html += hardWords.slice(0, 20).join(', ');
+    if (hardWords.length > 20) html += ' ...等' + hardWords.length + '个';
+    html += '</div>';
+  }
+  
+  html += '<hr style="margin:1rem 0;border:none;border-top:1px solid #E2E8F0">';
+  html += '<h3 style="margin:0.5rem 0;font-size:1rem">⚙️ 管理操作</h3>';
+  html += '<button class="auth-btn" onclick="clearAllHardWords()" style="background:#EF4444;margin-top:0.5rem">清除所有难度词标记</button>';
+  
+  content.innerHTML = html;
+}
+
+function clearAllHardWords() {
+  if (!confirm('确定要清除所有难度词标记吗？')) return;
+  var keys = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (key && key.startsWith('hard_')) {
+      keys.push(key);
+    }
+  }
+  keys.forEach(function(k) { localStorage.removeItem(k); });
+  alert('已清除 ' + keys.length + ' 个难度词标记');
+  loadAdminData();
+  // 刷新主页面显示
+  if (typeof renderCards === 'function') renderCards();
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+const CACHE = 'beyond3500-v91';
+const PRECACHE_URLS = [
+  './',
+  './index.html',
+  './cards.js',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './silent.mp3',
+  './waud_p1.js',
+  './waud_p2.js',
+  './waud_p3.js',
+  './waud_p4.js',
+  './waud_p5.js',
+  './waud_p6.js',
+  './waud_p7.js',
+  './waud_p8.js',
+  './waud_p9.js',
+  './waud_p10.js',
+  './waud_p11.js',
+  './waud_p12.js',
+  './waud_p13.js',
+  './waud_p14.js',
+  './waud_p15.js',
+  './waud_p16.js',
+  './waud_p17.js',
+  './waud_p18.js',
+  './waud_p19.js',
+  './waud_p20.js',
+  './baud_p1.js',
+  './baud_p2.js',
+  './baud_p3.js',
+  './baud_p4.js',
+  './baud_p5.js',
+  './baud_p6.js',
+  './baud_p7.js',
+  './baud_p8.js',
+  './baud_p9.js',
+  './baud_p10.js',
+  './baud_p11.js',
+  './baud_p12.js',
+  './baud_p13.js',
+  './baud_p14.js',
+  './baud_p15.js',
+  './baud_p16.js',
+  './baud_p17.js',
+  './baud_p18.js',
+  './baud_p19.js',
+  './baud_p20.js',
+  './caud_p1.js',
+  './caud_p2.js',
+  './caud_p3.js',
+  './caud_p4.js',
+  './caud_p5.js',
+  './caud_p6.js',
+  './caud_p7.js',
+  './caud_p8.js',
+  './caud_p9.js',
+  './caud_p10.js',
+  './caud_p11.js',
+  './caud_p12.js',
+  './caud_p13.js',
+  './caud_p14.js',
+  './caud_p15.js',
+  './caud_p16.js',
+  './caud_p17.js',
+  './caud_p18.js',
+  './caud_p19.js',
+  './caud_p20.js',
+  './img_p1.js',
+  './img_p2.js',
+  './img_p3.js',
+  './img_p4.js',
+  './img_p5.js',
+  './img_p6.js',
+  './img_p7.js',
+  './img_p8.js',
+  './img_p9.js',
+  './img_p10.js',
+  './img_p11.js',
+  './img_p12.js',
+  './img_p13.js',
+  './img_p14.js',
+  './img_p15.js',
+  './img_p16.js',
+  './img_p17.js',
+  './img_p18.js',
+  './img_p19.js',
+  './img_p20.js',
+];
+
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE_URLS)));
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))));
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./')))
+  );
+});

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超纲词汇 - 管理后台</title>
+<style>
+  :root { --primary: #4F46E5; --danger: #EF4444; --success: #10B981; --warn: #F59E0B; --bg: #F1F5F9; --card: #fff; --text: #1E293B; --text2: #64748B; --border: #E2E8F0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+
+  .login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#4F46E5,#7C3AED); }
+  .login-box { background:#fff; border-radius:16px; padding:2.5rem 2rem; width:90%; max-width:400px; box-shadow:0 20px 60px rgba(0,0,0,.25); text-align:center; }
+  .login-box h2 { font-size:1.4rem; margin-bottom:1.5rem; }
+  .login-box input { width:100%; padding:0.75rem 1rem; border:2px solid var(--border); border-radius:10px; font-size:1rem; margin-bottom:0.8rem; outline:none; }
+  .login-box input:focus { border-color:var(--primary); }
+  .login-btn { width:100%; padding:0.85rem; border:none; border-radius:10px; font-size:1rem; font-weight:600; color:#fff; background:linear-gradient(135deg,#4F46E5,#7C3AED); cursor:pointer; }
+  .login-btn:hover { opacity:0.9; }
+  .login-err { color:var(--danger); font-size:0.85rem; margin-top:0.5rem; min-height:1.2em; }
+
+  .setup-wrap { display:none; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#4F46E5,#7C3AED); }
+  .setup-box { background:#fff; border-radius:16px; padding:2.5rem 2rem; width:90%; max-width:480px; box-shadow:0 20px 60px rgba(0,0,0,.25); text-align:center; }
+  .setup-box h2 { font-size:1.3rem; margin-bottom:0.5rem; }
+  .setup-box .sub { font-size:0.9rem; color:var(--text2); margin-bottom:1.5rem; }
+  .setup-box input { width:100%; padding:0.75rem 1rem; border:2px solid var(--border); border-radius:10px; font-size:0.9rem; margin-bottom:0.8rem; outline:none; }
+  .setup-box input:focus { border-color:var(--primary); }
+  .setup-box .hint { font-size:0.78rem; color:var(--text2); text-align:left; margin-bottom:1rem; line-height:1.5; }
+  .setup-btn { width:100%; padding:0.85rem; border:none; border-radius:10px; font-size:1rem; font-weight:600; color:#fff; background:var(--success); cursor:pointer; }
+  .setup-err { color:var(--danger); font-size:0.85rem; margin-top:0.5rem; min-height:1.2em; }
+
+  .app-wrap { display:none; }
+  .topbar { background:#fff; border-bottom:1px solid var(--border); padding:0.8rem 1.5rem; display:flex; align-items:center; justify-content:space-between; }
+  .topbar h1 { font-size:1.1rem; }
+  .topbar-actions { display:flex; gap:0.5rem; align-items:center; }
+  .topbar-btn { padding:0.4rem 0.8rem; border:1px solid var(--border); border-radius:8px; background:#fff; cursor:pointer; font-size:0.82rem; }
+  .topbar-btn:hover { border-color:var(--primary); color:var(--primary); }
+  .topbar-btn.danger { color:var(--danger); border-color:var(--danger); }
+  .topbar-btn.danger:hover { background:var(--danger); color:#fff; }
+
+  .content { max-width:800px; margin:1.5rem auto; padding:0 1.5rem; }
+
+  .card { background:var(--card); border-radius:12px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border); margin-bottom:1rem; }
+  .card-title { font-size:1rem; font-weight:600; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .card-title .badge { font-size:0.72rem; padding:0.15rem 0.5rem; border-radius:10px; font-weight:600; color:#fff; }
+
+  .add-form { display:flex; gap:0.5rem; margin-bottom:1rem; }
+  .add-form input { flex:1; padding:0.6rem 0.9rem; border:2px solid var(--border); border-radius:8px; font-size:0.9rem; outline:none; }
+  .add-form input:focus { border-color:var(--primary); }
+  .add-btn { padding:0.6rem 1.2rem; border:none; border-radius:8px; background:var(--primary); color:#fff; font-weight:600; cursor:pointer; font-size:0.9rem; white-space:nowrap; }
+  .add-btn:hover { opacity:0.9; }
+
+  .user-list { list-style:none; }
+  .user-item { display:flex; align-items:center; justify-content:space-between; padding:0.6rem 0; border-bottom:1px solid var(--border); }
+  .user-item:last-child { border-bottom:none; }
+  .user-name { font-weight:500; font-size:0.95rem; }
+  .user-meta { display:flex; align-items:center; gap:0.5rem; }
+  .user-tag { font-size:0.7rem; padding:0.1rem 0.4rem; border-radius:6px; font-weight:600; }
+  .user-tag.paid { background:#DCFCE7; color:#166534; }
+  .user-tag.unpaid { background:#FEF3C7; color:#92400E; }
+  .user-actions { display:flex; gap:0.4rem; }
+  .btn-sm { padding:0.3rem 0.7rem; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; color:#fff; }
+  .btn-sm.approve { background:var(--success); }
+  .btn-sm.remove { background:var(--danger); }
+  .btn-sm:hover { opacity:0.85; }
+
+  .empty { text-align:center; color:var(--text2); padding:1.5rem; font-size:0.9rem; }
+
+  .stats-row { display:flex; gap:0.8rem; margin-bottom:1rem; }
+  .stat-box { flex:1; background:var(--card); border-radius:10px; padding:1rem; box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border); text-align:center; }
+  .stat-box .num { font-size:1.8rem; font-weight:700; }
+  .stat-box .label { font-size:0.78rem; color:var(--text2); }
+
+  .toast { position:fixed; top:20px; left:50%; transform:translateX(-50%); padding:0.7rem 1.5rem; border-radius:10px; color:#fff; font-size:0.9rem; z-index:99999; box-shadow:0 4px 12px rgba(0,0,0,.2); display:none; }
+  .toast.success { background:var(--success); }
+  .toast.error { background:var(--danger); }
+</style>
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<!-- Login Screen -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-box">
+    <div style="font-size:2.5rem;margin-bottom:0.5rem">🔐</div>
+    <h2>管理后台</h2>
+    <input type="password" id="admin-pass" placeholder="输入管理密码" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button class="login-btn" onclick="adminLogin()">进 入</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- Setup Screen (only when no saved token) -->
+<div id="setup-screen" class="setup-wrap">
+  <div class="setup-box">
+    <div style="font-size:2rem;margin-bottom:0.5rem">🔑</div>
+    <h2>配置 GitHub Token</h2>
+    <div class="sub">用于读写 approved_users.json</div>
+    <input type="text" id="github-token" placeholder="ghp_xxxxxxxxxxxx" onkeydown="if(event.key==='Enter')setupToken()">
+    <div class="hint">
+      需要 Fine-grained PAT，权限：<br>
+      • Repository permissions → Contents → Read and Write<br>
+      • 仅授权本仓库 beyond3500-pwa<br>
+      Token 将保存在本地，下次登录无需重复输入
+    </div>
+    <button class="setup-btn" onclick="setupToken()">确认连接</button>
+    <div class="setup-err" id="setup-err"></div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="app-screen" class="app-wrap">
+  <div class="topbar">
+    <h1>📖 管理后台</h1>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="refreshData()">🔄 刷新</button>
+      <button class="topbar-btn" onclick="resetToken()">🔑 换Token</button>
+      <button class="topbar-btn danger" onclick="adminLogout()">退出</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="stats-row">
+      <div class="stat-box"><div class="num" id="stat-approved" style="color:var(--success)">-</div><div class="label">已批准</div></div>
+      <div class="stat-box"><div class="num" id="stat-pending" style="color:var(--warn)">-</div><div class="label">待审核</div></div>
+      <div class="stat-box"><div class="num" id="stat-registered" style="color:var(--primary)">-</div><div class="label">已注册</div></div>
+    </div>
+
+    <!-- Pending Users -->
+    <div class="card">
+      <div class="card-title">🕐 待审核用户 <span class="badge" style="background:var(--warn)" id="pending-badge">0</span></div>
+      <div class="add-form">
+        <input type="text" id="add-pending-user" placeholder="输入用户名（手动添加待审核）" onkeydown="if(event.key==='Enter')addPending()">
+        <button class="add-btn" onclick="addPending()">添加</button>
+      </div>
+      <ul class="user-list" id="pending-list">
+        <li class="empty">暂无待审核用户</li>
+      </ul>
+    </div>
+
+    <!-- Registered Users -->
+    <div class="card">
+      <div class="card-title">📋 已注册用户 <span class="badge" style="background:var(--primary)" id="registered-badge">0</span></div>
+      <ul class="user-list" id="registered-list">
+        <li class="empty">暂无已注册用户</li>
+      </ul>
+    </div>
+
+    <!-- Approved Users -->
+    <div class="card">
+      <div class="card-title">✅ 已批准用户 <span class="badge" style="background:var(--success)" id="approved-badge">0</span></div>
+      <ul class="user-list" id="approved-list">
+        <li class="empty">加载中…</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+var ADMIN_KEY = 'beyond3500_admin_pass';
+var TOKEN_KEY = 'beyond3500_admin_token';
+var REPO = 'Bob-chen-lj/beyond3500-pwa';
+var APPROVED_FILE = 'approved_users.json';
+var _token = '';
+var _fileSha = '';
+var _data = { approved: [], registered: [], pending: [] };
+var _localPending = [];
+
+// Registered entries can be string or {user, pass} object
+function _regUser(entry) { return typeof entry === 'string' ? entry : (entry && entry.user) || ''; }
+function _regPass(entry) { return typeof entry === 'object' && entry ? (entry.pass || '') : ''; }
+
+
+// === Toast ===
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (type || 'success');
+  t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 2500);
+}
+
+// === Admin Login ===
+function adminLogin() {
+  var pass = document.getElementById('admin-pass').value.trim();
+  var errEl = document.getElementById('login-err');
+  errEl.textContent = '';
+  if (!pass) { errEl.textContent = '请输入密码'; return; }
+  var stored = localStorage.getItem(ADMIN_KEY);
+  if (!stored) {
+    localStorage.setItem(ADMIN_KEY, pass);
+    showToast('密码设置成功', 'success');
+    enterApp();
+  } else {
+    if (pass !== stored) { errEl.textContent = '密码错误'; return; }
+    enterApp();
+  }
+}
+
+function adminLogout() {
+  document.getElementById('app-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-pass').value = '';
+}
+
+function enterApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  var savedToken = localStorage.getItem(TOKEN_KEY);
+  if (savedToken) {
+    _token = savedToken;
+    validateTokenAndEnter();
+  } else {
+    document.getElementById('setup-screen').style.display = 'flex';
+  }
+}
+
+function validateTokenAndEnter() {
+  fetch('https://api.github.com/repos/' + REPO + '/contents/' + APPROVED_FILE, {
+    headers: { 'Authorization': 'token ' + _token, 'Accept': 'application/vnd.github.v3+json' }
+  }).then(function(r) {
+    if (!r.ok) throw new Error('Token失效 (HTTP ' + r.status + ')');
+    return r.json();
+  }).then(function(data) {
+    _fileSha = data.sha;
+    showDashboard();
+  }).catch(function() {
+    localStorage.removeItem(TOKEN_KEY);
+    _token = '';
+    showToast('Token已失效，请重新输入', 'error');
+    document.getElementById('setup-screen').style.display = 'flex';
+  });
+}
+
+// === GitHub Token Setup ===
+function setupToken() {
+  var token = document.getElementById('github-token').value.trim();
+  var errEl = document.getElementById('setup-err');
+  errEl.textContent = '';
+  if (!token) { errEl.textContent = '请输入 Token'; return; }
+  fetch('https://api.github.com/repos/' + REPO + '/contents/' + APPROVED_FILE, {
+    headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+  }).then(function(r) {
+    if (!r.ok) throw new Error('Token无效或无权限 (HTTP ' + r.status + ')');
+    return r.json();
+  }).then(function(data) {
+    _token = token;
+    _fileSha = data.sha;
+    localStorage.setItem(TOKEN_KEY, token);
+    showToast('连接成功', 'success');
+    showDashboard();
+  }).catch(function(e) {
+    errEl.textContent = e.message;
+  });
+}
+
+function resetToken() {
+  if (!confirm('确定要更换 GitHub Token 吗？')) return;
+  localStorage.removeItem(TOKEN_KEY);
+  _token = '';
+  document.getElementById('app-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'flex';
+  document.getElementById('github-token').value = '';
+}
+
+// === Dashboard ===
+function showDashboard() {
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('app-screen').style.display = 'block';
+  refreshData();
+}
+
+function refreshData() {
+  fetch('https://api.github.com/repos/' + REPO + '/contents/' + APPROVED_FILE, {
+    headers: { 'Authorization': 'token ' + _token, 'Accept': 'application/vnd.github.v3+json' }
+  }).then(function(r) { return r.json(); }).then(function(data) {
+    _fileSha = data.sha;
+    var content = atob(data.content.replace(/\n/g, ''));
+    var json = JSON.parse(content);
+    _data.approved = json.approved || [];
+    _data.registered = json.registered || [];
+    _data.pending = json.pending || [];
+    loadLocalPending();
+    renderAll();
+  }).catch(function(e) {
+    showToast('读取失败: ' + e.message, 'error');
+  });
+}
+
+function pushData(callback) {
+  var json = JSON.stringify(_data, null, 2);
+  var b64 = btoa(unescape(encodeURIComponent(json)));
+  fetch('https://api.github.com/repos/' + REPO + '/contents/' + APPROVED_FILE, {
+    method: 'PUT',
+    headers: { 'Authorization': 'token ' + _token, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message: 'update users: approved=' + _data.approved.length + ' pending=' + _data.pending.length + ' registered=' + _data.registered.length,
+      sha: _fileSha,
+      content: b64
+    })
+  }).then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function(data) {
+    _fileSha = data.content.sha;
+    if (callback) callback();
+    showToast('保存成功', 'success');
+  }).catch(function(e) {
+    showToast('保存失败: ' + e.message, 'error');
+  });
+}
+
+// === Local Pending ===
+var LOCAL_PENDING_KEY = 'beyond3500_admin_pending';
+
+function loadLocalPending() {
+  try { _localPending = JSON.parse(localStorage.getItem(LOCAL_PENDING_KEY)) || []; } catch(e) { _localPending = []; }
+  for (var i = 0; i < _localPending.length; i++) {
+    var u = _localPending[i];
+    if (_data.pending.indexOf(u) === -1 && _data.approved.indexOf(u) === -1) {
+      _data.pending.push(u);
+    }
+  }
+  // Normalize registered entries: convert old string format to object format
+  for (var i = 0; i < _data.registered.length; i++) {
+    if (typeof _data.registered[i] === 'string') {
+      _data.registered[i] = {user: _data.registered[i], pass: ''};
+    }
+  }
+}
+
+function saveLocalPending() {
+  localStorage.setItem(LOCAL_PENDING_KEY, JSON.stringify(_localPending));
+}
+
+// === Actions ===
+function addPending() {
+  var input = document.getElementById('add-pending-user');
+  var user = input.value.trim();
+  if (!user) return;
+  if (_data.pending.indexOf(user) !== -1) { showToast('该用户已在待审核列表', 'error'); return; }
+  if (_data.approved.indexOf(user) !== -1) { showToast('该用户已批准', 'error'); return; }
+  _data.pending.push(user);
+  _localPending.push(user);
+  saveLocalPending();
+  input.value = '';
+  pushData(function() { renderAll(); });
+}
+
+function approveUser(user) {
+  if (_data.approved.indexOf(user) !== -1) { showToast('该用户已批准', 'error'); return; }
+  _data.approved.push(user);
+  var idx = _data.pending.indexOf(user);
+  if (idx !== -1) _data.pending.splice(idx, 1);
+  // Remove from registered (supports object format)
+  for (var i = 0; i < _data.registered.length; i++) {
+    if (_regUser(_data.registered[i]) === user) { _data.registered.splice(i, 1); break; }
+  }
+  var lpidx = _localPending.indexOf(user);
+  if (lpidx !== -1) { _localPending.splice(lpidx, 1); saveLocalPending(); }
+  pushData(function() { renderAll(); });
+}
+
+function removePending(user) {
+  var idx = _data.pending.indexOf(user);
+  if (idx !== -1) _data.pending.splice(idx, 1);
+  var lpidx = _localPending.indexOf(user);
+  if (lpidx !== -1) { _localPending.splice(lpidx, 1); saveLocalPending(); }
+  pushData(function() { renderAll(); });
+}
+
+function removeRegistered(user) {
+  for (var i = 0; i < _data.registered.length; i++) {
+    if (_regUser(_data.registered[i]) === user) { _data.registered.splice(i, 1); break; }
+  }
+  pushData(function() { renderAll(); });
+}
+
+function removeApproved(user) {
+  var idx = _data.approved.indexOf(user);
+  if (idx !== -1) _data.approved.splice(idx, 1);
+  pushData(function() { renderAll(); });
+}
+
+// === Render ===
+function renderAll() {
+  renderPending();
+  renderRegistered();
+  renderApproved();
+  updateStats();
+}
+
+function renderPending() {
+  var list = document.getElementById('pending-list');
+  var pending = [];
+  for (var i = 0; i < _data.pending.length; i++) {
+    var u = _data.pending[i];
+    if (_data.approved.indexOf(u) === -1) pending.push(u);
+  }
+  if (pending.length === 0) {
+    list.innerHTML = '<li class="empty">暂无待审核用户</li>';
+  } else {
+    var h = '';
+    for (var i = 0; i < pending.length; i++) {
+      var isInReg = false;
+      for (var r = 0; r < _data.registered.length; r++) {
+        if (_regUser(_data.registered[r]) === pending[i]) { isInReg = true; break; }
+      }
+      h += '<li class="user-item"><div class="user-meta"><span class="user-name">' + escHtml(pending[i]) + '</span>';
+      h += '<span class="user-tag paid">已付款</span>';
+      if (isInReg) h += '<span class="user-tag unpaid">已注册</span>';
+      h += '</div>';
+      h += '<div class="user-actions">';
+      h += '<button class="btn-sm approve" onclick="approveUser(\'' + escAttr(pending[i]) + '\')">✓ 批准</button>';
+      h += '<button class="btn-sm remove" onclick="removePending(\'' + escAttr(pending[i]) + '\')">✕ 移除</button>';
+      h += '</div></li>';
+    }
+    list.innerHTML = h;
+  }
+  document.getElementById('pending-badge').textContent = pending.length;
+}
+
+function renderRegistered() {
+  var list = document.getElementById('registered-list');
+  var registered = [];
+  for (var i = 0; i < _data.registered.length; i++) {
+    var entry = _data.registered[i];
+    var uname = _regUser(entry);
+    if (_data.approved.indexOf(uname) === -1 && _data.pending.indexOf(uname) === -1) registered.push(entry);
+  }
+  if (registered.length === 0) {
+    list.innerHTML = '<li class="empty">暂无已注册用户</li>';
+  } else {
+    var h = '';
+    for (var i = 0; i < registered.length; i++) {
+      var uname = _regUser(registered[i]);
+      var upass = _regPass(registered[i]);
+      h += '<li class="user-item"><div class="user-meta"><span class="user-name">' + escHtml(uname) + '</span>';
+      if (upass) h += '<span class="user-tag unpaid">密码: ' + escHtml(upass) + '</span>';
+      else h += '<span class="user-tag unpaid">未付款</span>';
+      h += '</div>';
+      h += '<div class="user-actions">';
+      h += '<button class="btn-sm approve" onclick="approveUser(\'' + escAttr(uname) + '\')">✓ 批准</button>';
+      h += '<button class="btn-sm remove" onclick="removeRegistered(\'' + escAttr(uname) + '\')">✕ 移除</button>';
+      h += '</div></li>';
+    }
+    list.innerHTML = h;
+  }
+  document.getElementById('registered-badge').textContent = registered.length;
+}
+
+function renderApproved() {
+  var list = document.getElementById('approved-list');
+  if (_data.approved.length === 0) {
+    list.innerHTML = '<li class="empty">暂无已批准用户</li>';
+  } else {
+    var h = '';
+    for (var i = 0; i < _data.approved.length; i++) {
+      h += '<li class="user-item"><span class="user-name">' + escHtml(_data.approved[i]) + '</span>';
+      h += '<div class="user-actions">';
+      h += '<button class="btn-sm remove" onclick="removeApproved(\'' + escAttr(_data.approved[i]) + '\')">✕ 移除</button>';
+      h += '</div></li>';
+    }
+    list.innerHTML = h;
+  }
+  document.getElementById('approved-badge').textContent = _data.approved.length;
+}
+
+function updateStats() {
+  var pendingCount = 0;
+  for (var i = 0; i < _data.pending.length; i++) {
+    if (_data.approved.indexOf(_data.pending[i]) === -1) pendingCount++;
+  }
+  var registeredCount = 0;
+  for (var i = 0; i < _data.registered.length; i++) {
+    var u = _regUser(_data.registered[i]);
+    if (_data.approved.indexOf(u) === -1 && _data.pending.indexOf(u) === -1) registeredCount++;
+  }
+  document.getElementById('stat-approved').textContent = _data.approved.length;
+  document.getElementById('stat-pending').textContent = pendingCount;
+  document.getElementById('stat-registered').textContent = registeredCount;
+}
+
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s) { return s.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+// Init
+(function(){
+  document.getElementById('login-screen').style.display = 'flex';
+})();
+</script>
+</body>
+</html>
