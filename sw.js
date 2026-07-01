@@ -1,4 +1,4 @@
-const CACHE = 'beyond3500-v91';
+const CACHE = 'beyond3500-v92';
 const PRECACHE_URLS = [
   './',
   './index.html',
